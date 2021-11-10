@@ -4,3 +4,7 @@
   align-self: center;
   justify-content: center;
 }
+
+.widget-list-ctn > li {
+  margin: 50px 50px;
+}
