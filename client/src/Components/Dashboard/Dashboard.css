@@ -4,9 +4,16 @@
 
 #side-menu-ctn {
   width: 250px;
+  min-width: 250px;
   text-align: center;
   background-color: #167c80;
   color: white;
-  height: 100vh;
   display: flex;
+}
+
+#widgets-ctn {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  align-content: center;
 }

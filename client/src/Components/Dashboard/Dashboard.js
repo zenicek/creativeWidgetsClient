@@ -8,7 +8,7 @@ export function Dashboard() {
       <div id="side-menu-ctn">
         <SideMenu />
       </div>
-      <div id="widget-list-ctn">
+      <div id="widgets-ctn">
         <WidgetList />
       </div>
     </div>

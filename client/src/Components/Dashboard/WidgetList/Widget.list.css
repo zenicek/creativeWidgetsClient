@@ -1,0 +1,6 @@
+.widget-list-ctn {
+  display: flex;
+  flex-wrap: wrap;
+  align-self: center;
+  justify-content: center;
+}

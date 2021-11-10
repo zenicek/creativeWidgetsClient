@@ -3,13 +3,24 @@
   width: 250px;
   height: 350px;
   border-radius: 15px;
+  display: flex;
+  align-content: center;
+  align-items: center;
+  justify-content: center;
+  font-size: 100px;
+  color: #167c80;
 }
 .widget-pv-ctn {
   display: flex;
   flex-direction: column;
   align-items: center;
+  margin: 50px 50px;
 }
 
 .widget-pv-ctn > span {
   font-weight: 500;
+}
+
+.widget-pv-ctn:hover {
+  cursor: pointer;
 }
