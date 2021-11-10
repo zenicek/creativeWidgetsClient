@@ -1,0 +1,15 @@
+.img-prv-ctn {
+  border: 1px solid #167c80;
+  width: 250px;
+  height: 350px;
+  border-radius: 15px;
+}
+.widget-pv-ctn {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.widget-pv-ctn > span {
+  font-weight: 500;
+}
