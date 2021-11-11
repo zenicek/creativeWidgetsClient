@@ -1,0 +1,32 @@
+.icon-ctn {
+  display: flex;
+  align-items: center;
+  width: 250px;
+  height: 50px;
+  background-color: #167c80;
+  margin: 10px 0px;
+  color: white;
+  font-size: 21px;
+  font-weight: 400;
+  border-radius: 10px;
+}
+
+.icon-ctn > div {
+  display: flex;
+  align-items: center;
+  margin-left: 20px;
+}
+
+.option-text {
+  margin-left: 15px;
+  align-self: center;
+}
+
+.icon-img {
+  max-width: 30px;
+}
+
+.icon-ctn:hover {
+  cursor: pointer;
+  background-color: #279fa4;
+}
