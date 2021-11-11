@@ -1,6 +1,6 @@
 import './Slider.css';
 
-export function Slider() {
+export function Slider(props) {
   const marks = num => {
     const options = [];
     for (let i = 0; i <= num; i++) {

@@ -1,14 +1,17 @@
 import './Elements.list.css';
 import icons from './Icons/Icons';
+import { ListItem } from './ListItem/List.item';
 
 export function ElementsList() {
   const list = icons.map((icon, index) => {
     return (
       <li key={index} className="icon-ctn">
-        <div>
-          <img src={icon.icon} alt={icon.text} className="icon-img" />
-          <span className="option-text">{icon.text}</span>
-        </div>
+        <ListItem
+          icon={icon.icon}
+          text={icon.text}
+          element={icon.elementName}
+          renderEl={icon.element}
+        />
       </li>
     );
   });
