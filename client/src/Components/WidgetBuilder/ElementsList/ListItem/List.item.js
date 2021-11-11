@@ -2,15 +2,10 @@ import { useEffect } from 'react';
 import './List.item.css';
 import { useDrag } from 'react-dnd';
 
-export function ListItem({ icon, text, element, renderEl }) {
-  useEffect(() => {
-    console.log(element);
-  }, []);
-
+export function ListItem({ icon, text, elementName, renderEl }) {
   const [{ isDragging }, drag] = useDrag(() => ({
-    type: element,
+    type: elementName,
     item: {
-      whatEl: element,
       renderEl: renderEl,
     },
     collect: monitor => ({

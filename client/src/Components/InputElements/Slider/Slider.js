@@ -1,6 +1,19 @@
 import './Slider.css';
+import { useState } from 'react';
 
 export function Slider(props) {
+  //initials metadata
+  const initialMeta = {
+    elementType: 'Slider',
+    elmentIndex: 0,
+    elementLetter: 'A',
+    elementDescription: 'Slider',
+    value: 0,
+    min: 0,
+    max: 10,
+  };
+  const [metas, setMeta] = useState(initialMeta);
+
   const marks = num => {
     const options = [];
     for (let i = 0; i <= num; i++) {

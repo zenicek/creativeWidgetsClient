@@ -9,12 +9,9 @@ export function WidgetContainer(props) {
 
   const [{ addedProps }, drop] = useDrop({
     accept: elements,
-    drop: (item, monitor) => {
-      console.log(item);
+    drop: item => {
       setElementsList(oldState => {
-        console.log(typeof oldState[0]);
-
-        return [...oldState, React.createElement(item.renderEl)];
+        return [...oldState, <item.renderEl key={elementsList.length + 1} />];
       });
     },
     collect: monitor => ({

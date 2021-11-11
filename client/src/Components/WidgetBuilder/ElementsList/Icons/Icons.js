@@ -10,7 +10,7 @@ import { ValueInput } from '../../../InputElements/Value/Value';
 import { Slider } from '../../../InputElements/Slider/Slider';
 //import calculation from './SvgIcons/calculation-icon.svg';
 
-const icons = [
+const elems = [
   {
     icon: value,
     text: 'Value field',
@@ -61,4 +61,4 @@ const icons = [
   },
 ];
 
-export default icons;
+export default elems;
