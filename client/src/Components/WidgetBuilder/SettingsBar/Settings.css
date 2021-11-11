@@ -1,0 +1,59 @@
+.settings-bar-ctn {
+  background-color: #167c80;
+  height: 50px;
+  color: white;
+  display: flex;
+  justify-content: center;
+  font-size: 18px;
+  font-weight: 500;
+}
+
+.settings-wrapper-ctn {
+  display: flex;
+  align-items: center;
+}
+
+.settings-input {
+  width: 60px;
+  color: #167c80;
+  height: 30px;
+  border-radius: 4px;
+  outline: none;
+  border: none;
+  overflow-x: hidden;
+  font-size: 15px;
+  text-align: center;
+  font-weight: 600;
+}
+
+.settings-input::-webkit-outer-spin-button,
+.settings-input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+}
+
+.settings-option-ctn {
+  display: flex;
+  align-items: center;
+  margin-left: 18px;
+}
+.name-input {
+  margin-left: 5px;
+  width: 180px;
+}
+#save-btn {
+  background-color: #167c80;
+  border: 1px solid white;
+  color: white;
+  height: 30px;
+  width: 120px;
+  border-radius: 50px;
+}
+#save-btn:hover {
+  cursor: pointer;
+  background-color: #279fa4;
+}
+
+#save-btn:focus {
+  outline: none;
+  background-color: #279fa4;
+}
