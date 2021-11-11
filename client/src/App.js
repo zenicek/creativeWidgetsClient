@@ -5,11 +5,13 @@ import { WidgetBuilder } from './Components/WidgetBuilder/Widget.builder';
 import { DndProvider } from 'react-dnd';
 import { HTML5Backend } from 'react-dnd-html5-backend';
 import { WidgetContext } from './Contexts';
+import { useState } from 'react';
 
 function App() {
+  const [widgets, setWidgets] = useState([]);
   return (
     <DndProvider backend={HTML5Backend}>
-      <WidgetContext.Provider>
+      <WidgetContext.Provider value={widgets}>
         <div className="App">
           <Routes>
             <Route path="/" element={<Dashboard />} />
