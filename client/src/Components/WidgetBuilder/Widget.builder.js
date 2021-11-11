@@ -1,6 +1,7 @@
 import './Widget.builder.css';
 import { SettingsBar } from './SettingsBar/Settings';
 import { ElementsList } from './ElementsList/Elements.list';
+import { WidgetContainer } from './WidgetContainer/Widget.container';
 
 export function WidgetBuilder() {
   return (
@@ -10,7 +11,9 @@ export function WidgetBuilder() {
         <div id="element-list-ctn">
           <ElementsList />
         </div>
-        <div id="widget-build-ctn"> BUILD AREA HERE</div>
+        <div id="widget-build-ctn">
+          <WidgetContainer />
+        </div>
       </div>
     </div>
   );

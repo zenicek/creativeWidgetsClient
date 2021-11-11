@@ -1,0 +1,17 @@
+.widget-builder-main-ctn {
+  background-color: white;
+  width: 720px;
+  min-height: 300px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.widget-dnd-ctn {
+  height: 100%;
+}
+
+.results-ctn {
+  color: white;
+  background-color: #167c80;
+}
