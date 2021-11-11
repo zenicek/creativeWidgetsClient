@@ -1,0 +1,13 @@
+#slider {
+  width: 100%;
+  margin: none;
+}
+
+.marks-ctn {
+  width: 100%;
+}
+
+#tickmarks {
+  display: flex;
+  justify-content: space-between;
+}
