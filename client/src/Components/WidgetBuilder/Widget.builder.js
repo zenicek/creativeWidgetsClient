@@ -9,6 +9,7 @@ import { getWidget } from '../../Utils/ApiService';
 
 export function WidgetBuilder() {
   //extract id from the url and then get the context(if exists) and set the the state of settings once async operation has finished
+  const [isLoading, setIsLoading] = useState(true);
   const initialState = {
     elements: [],
     formula: '',
@@ -20,12 +21,16 @@ export function WidgetBuilder() {
 
   const [widget, setWidget] = useState(initialState);
   useEffect(() => {
-    if (id) {
-      getWidget(id).then(res => {
-        setWidget(res);
-      });
+    if (id && isLoading) {
+      getWidget(id)
+        .then(res => {
+          setWidget(res);
+        })
+        .finally(() => {
+          setIsLoading(false);
+        });
     }
-  }, [id]);
+  }, []);
 
   //TODO change the context in the widget and dispatch to the when user changes staff
 
@@ -33,6 +38,8 @@ export function WidgetBuilder() {
     <IndividualWidget.Provider value={widget}>
       <div className="widget-builder-ctn">
         {JSON.stringify(widget)}
+        {console.log(widget.name)}
+        <h1>{(widget.name, widget.width)}</h1>
         <SettingsBar name={widget.name} width={widget.width} />
         <div className="build-ctn">
           <div id="element-list-ctn">
