@@ -7,13 +7,13 @@ import { IndividualWidget } from '../../../Utils/Contexts';
 import elems from '../ElementsList/Icons/Icons';
 
 export function WidgetContainer() {
-  const { elements, width } = useContext(IndividualWidget);
+  const { widget } = useContext(IndividualWidget);
   const [elementsList, setElementsList] = useState([]);
 
   //function gets all the elements from the context, sorts them by relative position and converts to element lookup
   const getElements = () => {
     const res = [];
-    elements
+    widget.elements
       .sort((a, b) => a.elementIndex - b.elementIndex)
       .forEach(el => {
         elems.forEach(e => {
@@ -26,13 +26,19 @@ export function WidgetContainer() {
 
   useEffect(() => {
     setElementsList([...getElements()]);
-  }, [elements]);
+  }, [widget]);
 
   const [, drop] = useDrop({
     accept: elementTypes,
     drop: item => {
       setElementsList(oldState => {
-        return [...oldState, <item.renderEl key={elementsList.length} />];
+        return [
+          ...oldState,
+          <item.renderEl
+            index={elementsList.length}
+            key={elementsList.length}
+          />,
+        ];
       });
     },
     // collect: monitor => ({
@@ -40,7 +46,10 @@ export function WidgetContainer() {
     // }),
   });
   return (
-    <div className="widget-builder-main-ctn" style={{ width: `${width}px` }}>
+    <div
+      className="widget-builder-main-ctn"
+      style={{ width: `${widget.width}px` }}
+    >
       <div ref={drop} className="widget-dnd-ctn">
         {elementsList}
       </div>

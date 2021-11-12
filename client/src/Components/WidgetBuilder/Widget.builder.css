@@ -1,6 +1,5 @@
 .widget-builder-ctn {
   height: 100vh;
-  overflow-y: hidden;
 }
 .build-ctn {
   display: flex;
@@ -17,5 +16,5 @@
 #widget-build-ctn {
   display: flex;
   margin: 0 auto;
-  position: relative;
+  position: inherit;
 }

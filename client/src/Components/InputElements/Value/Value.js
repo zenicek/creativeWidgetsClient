@@ -4,7 +4,7 @@ import { useState, useEffect } from 'react';
 export function ValueInput(props) {
   const initialMeta = {
     name: 'ValueInput',
-    elementIndex: 0,
+    elementIndex: props.index,
     elementLetter: 'A', //this needs to be then changed to check last letter
     elementDescription: 'Input',
     value: '',

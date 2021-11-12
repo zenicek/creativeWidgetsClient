@@ -1,11 +1,13 @@
 import './Slider.css';
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useContext } from 'react';
+import { IndividualWidget } from '../../../Utils/Contexts';
 
 export function Slider(props) {
+  const { addElement } = useContext(IndividualWidget);
   //initials metadata
   const initialMeta = {
     elementType: 'Slider',
-    elmentIndex: 0,
+    elmentIndex: props.index,
     elementLetter: 'A',
     elementDescription: 'Slider',
     value: 0,
@@ -18,6 +20,7 @@ export function Slider(props) {
   useEffect(() => {
     if (props._id) {
       setMeta({ ...props });
+      console.log(addElement);
     }
   }, [props]);
 
