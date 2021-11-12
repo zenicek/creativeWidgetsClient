@@ -9,7 +9,7 @@ import { getWidget } from '../../Utils/ApiService';
 
 export function WidgetBuilder() {
   //extract id from the url and then get the context(if exists) and set the the state of settings once async operation has finished
-  const [isLoading, setIsLoading] = useState(true);
+
   const initialState = {
     elements: [],
     formula: '',
@@ -21,14 +21,10 @@ export function WidgetBuilder() {
 
   const [widget, setWidget] = useState(initialState);
   useEffect(() => {
-    if (id && isLoading) {
-      getWidget(id)
-        .then(res => {
-          setWidget(res);
-        })
-        .finally(() => {
-          setIsLoading(false);
-        });
+    if (id) {
+      getWidget(id).then(res => {
+        setWidget(res);
+      });
     }
   }, []);
 

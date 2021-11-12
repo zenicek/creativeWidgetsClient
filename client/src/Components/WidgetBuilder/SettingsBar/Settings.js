@@ -1,6 +1,9 @@
 import './Settings.css';
+import { useState } from 'react';
 
 export function SettingsBar({ name, width }) {
+  const [nameState, setName] = useState(name);
+  const [widthState, setWidth] = useState(width);
   return (
     <div className="settings-bar-ctn">
       <div className="settings-wrapper-ctn">
@@ -20,7 +23,7 @@ export function SettingsBar({ name, width }) {
           <input
             type="number"
             className="settings-input"
-            defaultValue={width}
+            defaultValue={widthState}
           ></input>
         </div>
         <div className="settings-option-ctn">
@@ -28,7 +31,7 @@ export function SettingsBar({ name, width }) {
           <input
             type="text"
             className="settings-input name-input"
-            defaultValue={name}
+            defaultValue={nameState}
           ></input>
         </div>
         <div className="settings-option-ctn">
