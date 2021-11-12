@@ -1,5 +1,5 @@
 import './Slider.css';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
 export function Slider(props) {
   //initials metadata
@@ -11,29 +11,40 @@ export function Slider(props) {
     value: 0,
     min: 0,
     max: 10,
+    step: 1,
   };
   const [metas, setMeta] = useState(initialMeta);
 
-  const marks = num => {
+  useEffect(() => {
+    if (props._id) {
+      setMeta({ ...props });
+    }
+  }, [props]);
+
+  const marks = () => {
     const options = [];
-    for (let i = 0; i <= num; i++) {
-      options.push(<option key={i} value={i} label={i}></option>);
+    for (let i = 0; i <= metas.max; i++) {
+      options.push(<option key={i} value={i} label={i % 2 ? '' : i}></option>);
     }
     return options;
   };
   return (
     <div className="slider-ctn">
-      <label>Slider</label>
+      <label>
+        {metas.elementDescription} - {metas.value}
+      </label>
       <div>
         <input
           type="range"
           id="slider"
-          min="0"
-          max="10"
-          step="1"
+          min={metas.min}
+          max={metas.max}
+          step={metas.step}
+          value={metas.value}
+          onChange={e => setMeta({ ...metas, value: e.target.value })}
           list="tickmarks"
         ></input>
-        <datalist id="tickmarks">{marks(10)}</datalist>
+        <datalist id="tickmarks">{marks()}</datalist>
       </div>
     </div>
   );
