@@ -1,11 +1,18 @@
 import { elements } from '../../InputElements/Elements.types';
-import { useDrop, DragPreviewImage } from 'react-dnd';
+import { useDrop } from 'react-dnd';
 import './Widget.container.css';
-import React from 'react';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
-export function WidgetContainer(props) {
+export function WidgetContainer(elems) {
   const [elementsList, setElementsList] = useState([]);
+
+  const getElements = elsArr => {
+    console.log(elems);
+  };
+
+  useEffect(() => {
+    getElements();
+  }, [elems]);
 
   const [, drop] = useDrop({
     accept: elements,

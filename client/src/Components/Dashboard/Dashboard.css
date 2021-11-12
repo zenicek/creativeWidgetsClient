@@ -1,5 +1,7 @@
 .dashboard-ctn {
   display: flex;
+  height: 100%;
+  position: absolute;
 }
 
 #side-menu-ctn {

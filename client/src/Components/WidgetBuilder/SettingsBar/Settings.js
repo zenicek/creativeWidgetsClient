@@ -1,6 +1,6 @@
 import './Settings.css';
 
-export function SettingsBar() {
+export function SettingsBar({ name, width }) {
   return (
     <div className="settings-bar-ctn">
       <div className="settings-wrapper-ctn">
@@ -17,11 +17,19 @@ export function SettingsBar() {
               <path d="M32,16.001l-6-6v4h-2.001V8h-16v6.001H6v-4l-6,6l6,6v-4h1.999V24h16v-5.999H26v4L32,16.001z M21.999,22h-12V10h12V22z" />
             </g>
           </svg>
-          <input type="number" className="settings-input"></input>
+          <input
+            type="number"
+            className="settings-input"
+            defaultValue={width}
+          ></input>
         </div>
         <div className="settings-option-ctn">
           Widget Name
-          <input type="text" className="settings-input name-input"></input>
+          <input
+            type="text"
+            className="settings-input name-input"
+            defaultValue={name}
+          ></input>
         </div>
         <div className="settings-option-ctn">
           <button id="save-btn">Save Widget</button>
@@ -30,3 +38,4 @@ export function SettingsBar() {
     </div>
   );
 }
+//TODO: Add the onchange state so you can modify the canvas and store it in DB

@@ -1,9 +1,13 @@
 import './Widget.list.css';
 import { WidgetPreview } from '../WidgetPreview/Widget.preview';
 import { Link } from 'react-router-dom';
+import { useContext, useEffect } from 'react';
+import { WidgetsContext } from '../../../Utils/Contexts';
 
 export function WidgetList() {
-  const widgets = widgetArray.map(widget => {
+  const widContext = useContext(WidgetsContext);
+
+  const widgets = widContext.map(widget => {
     return (
       <li key={widget._id}>
         <Link to={`/edit/${widget._id}`}>
@@ -23,11 +27,3 @@ export function WidgetList() {
     </ul>
   );
 }
-
-// helper test array before connecting clinet to the server it will be removed after
-const widgetArray = [
-  { name: 'Mortgage calculator', _id: 0 },
-  { name: 'insurance calc', _id: 1 },
-  { name: 'car loan', _id: 2 },
-  { name: 'electricity bill calc', _id: 3 },
-];
