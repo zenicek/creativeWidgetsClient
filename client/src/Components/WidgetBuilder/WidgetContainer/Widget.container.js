@@ -7,7 +7,7 @@ import { IndividualWidget } from '../../../Utils/Contexts';
 import elems from '../ElementsList/Icons/Icons';
 
 export function WidgetContainer() {
-  const { elements } = useContext(IndividualWidget);
+  const { elements, width } = useContext(IndividualWidget);
   const [elementsList, setElementsList] = useState([]);
 
   //function gets all the elements from the context, sorts them by relative position and converts to element lookup
@@ -40,7 +40,7 @@ export function WidgetContainer() {
     // }),
   });
   return (
-    <div className="widget-builder-main-ctn">
+    <div className="widget-builder-main-ctn" style={{ width: `${width}px` }}>
       <div ref={drop} className="widget-dnd-ctn">
         {elementsList}
       </div>

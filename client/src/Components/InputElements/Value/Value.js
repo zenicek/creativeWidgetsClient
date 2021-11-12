@@ -1,5 +1,5 @@
 import './Value.css';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 
 export function ValueInput(props) {
   const initialMeta = {
@@ -10,6 +10,12 @@ export function ValueInput(props) {
     value: '',
   };
   const [meta, setMeta] = useState(initialMeta);
+
+  useEffect(() => {
+    if (props._id) {
+      setMeta({ ...props });
+    }
+  }, [props]);
   return (
     <div className="input-ctn">
       <label className="label" htmlFor="widget-input">
