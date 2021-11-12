@@ -1,4 +1,4 @@
-export const elements = [
+export const elementTypes = [
   'Slider',
   'ValueInput',
   'List',

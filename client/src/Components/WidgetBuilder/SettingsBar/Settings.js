@@ -1,9 +1,15 @@
 import './Settings.css';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
 export function SettingsBar({ name, width }) {
   const [nameState, setName] = useState(name);
   const [widthState, setWidth] = useState(width);
+
+  useEffect(() => {
+    setName(name);
+    setWidth(width);
+  }, [name, width]);
+
   return (
     <div className="settings-bar-ctn">
       <div className="settings-wrapper-ctn">
@@ -23,7 +29,8 @@ export function SettingsBar({ name, width }) {
           <input
             type="number"
             className="settings-input"
-            defaultValue={widthState}
+            value={widthState}
+            onChange={e => setWidth(e.target.value)}
           ></input>
         </div>
         <div className="settings-option-ctn">
@@ -31,7 +38,8 @@ export function SettingsBar({ name, width }) {
           <input
             type="text"
             className="settings-input name-input"
-            defaultValue={nameState}
+            value={nameState}
+            onChange={e => setName(e.target.value)}
           ></input>
         </div>
         <div className="settings-option-ctn">

@@ -23,26 +23,23 @@ export function WidgetBuilder() {
   useEffect(() => {
     if (id) {
       getWidget(id).then(res => {
-        setWidget(res);
+        setWidget({ ...res });
       });
     }
-  }, []);
+  }, [id]);
 
-  //TODO change the context in the widget and dispatch to the when user changes staff
+  //TODO change the context in the widget and dispatch to the db when user changes staff
 
   return (
     <IndividualWidget.Provider value={widget}>
       <div className="widget-builder-ctn">
-        {JSON.stringify(widget)}
-        {console.log(widget.name)}
-        <h1>{(widget.name, widget.width)}</h1>
         <SettingsBar name={widget.name} width={widget.width} />
         <div className="build-ctn">
           <div id="element-list-ctn">
             <ElementsList />
           </div>
           <div id="widget-build-ctn">
-            <WidgetContainer elems={widget.elements} />
+            <WidgetContainer />
           </div>
         </div>
       </div>

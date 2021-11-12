@@ -1,24 +1,38 @@
-import { elements } from '../../InputElements/Elements.types';
+import { elementTypes } from '../../InputElements/Elements.types';
 import { useDrop } from 'react-dnd';
 import './Widget.container.css';
 import { useEffect, useState } from 'react';
+import { useContext } from 'react';
+import { IndividualWidget } from '../../../Utils/Contexts';
+import elems from '../ElementsList/Icons/Icons';
 
-export function WidgetContainer(elems) {
+export function WidgetContainer() {
+  const { elements } = useContext(IndividualWidget);
   const [elementsList, setElementsList] = useState([]);
 
-  const getElements = elsArr => {
-    console.log(elems);
+  //function gets all the elements from the context, sorts them by relative position and converts to element lookup
+  const getElements = () => {
+    const res = [];
+    elements
+      .sort((a, b) => a.elementIndex - b.elementIndex)
+      .forEach(el => {
+        elems.forEach(e => {
+          if (el.elementType === e.elementName)
+            res.push(<e.element {...el} key={el._id} />);
+        });
+      });
+    return res;
   };
 
   useEffect(() => {
-    getElements();
-  }, [elems]);
+    setElementsList([...getElements()]);
+  }, [elements]);
 
   const [, drop] = useDrop({
-    accept: elements,
+    accept: elementTypes,
     drop: item => {
       setElementsList(oldState => {
-        return [...oldState, <item.renderEl key={elementsList.length + 1} />];
+        return [...oldState, <item.renderEl key={elementsList.length} />];
       });
     },
     // collect: monitor => ({
