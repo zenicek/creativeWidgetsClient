@@ -10,22 +10,35 @@ import { getWidget } from '../../Utils/ApiService';
 export function WidgetBuilder() {
   //extract id from the url and then get the context(if exists) and set the the state of settings once async operation has finished
 
+  const initialState = {
+    elements: [],
+    formula: '',
+    name: 'default calculator',
+    lastLetter: 'A',
+    width: 720,
+  };
+
   const { id } = useParams();
-  const [widget, setWidget] = useState(WidgetContext);
+  const [widget, setWidget] = useState(initialState);
+  const context = { widget, setWidget };
   useEffect(() => {
     if (id) {
       getWidget(id).then(res => {
-        setWidget({ ...widget, widget: { ...res } });
+        setWidget({ ...res });
       });
     }
   }, [id]);
 
+  useEffect(() => {
+    console.log(widget);
+  }, [widget]);
   //TODO change the context in the widget and dispatch to the db when user changes stuff
 
   return (
-    <IndividualWidget.Provider value={widget}>
+    <IndividualWidget.Provider value={context}>
       <div className="widget-builder-ctn">
-        <SettingsBar name={widget.widget.name} width={widget.widget.width} />
+        {/* {JSON.stringify(widget)} */}
+        <SettingsBar name={widget.name} width={widget.width} />
         <div className="build-ctn">
           <div id="element-list-ctn">
             <ElementsList />

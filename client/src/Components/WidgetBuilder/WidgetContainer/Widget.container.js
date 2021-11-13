@@ -7,7 +7,7 @@ import { IndividualWidget } from '../../../Utils/Contexts';
 import elems from '../ElementsList/Icons/Icons';
 
 export function WidgetContainer() {
-  const { widget } = useContext(IndividualWidget);
+  const { widget, setWidget } = useContext(IndividualWidget);
   const [elementsList, setElementsList] = useState([]);
 
   //function gets all the elements from the context, sorts them by relative position and converts to element lookup
@@ -26,7 +26,9 @@ export function WidgetContainer() {
 
   useEffect(() => {
     setElementsList([...getElements()]);
-  }, [widget]);
+  }, [widget.elements]);
+
+  useEffect(() => {}, []);
 
   const [, drop] = useDrop({
     accept: elementTypes,
@@ -40,6 +42,7 @@ export function WidgetContainer() {
           />,
         ];
       });
+      setWidget({ ...widget, elements: [...elementsList] });
     },
     // collect: monitor => ({
     //   canDrop: !!monitor.canDrop(),
