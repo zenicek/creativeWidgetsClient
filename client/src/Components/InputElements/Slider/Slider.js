@@ -4,16 +4,17 @@ import { IndividualWidget } from '../../../Utils/Contexts';
 
 export function Slider({ id }) {
   const { updateElement, findElement } = useContext(IndividualWidget);
-  //initial metadata
 
   //needs to be a copy - immutability
   const element = { ...findElement(id) };
 
-  const handleSlideChange = e => {
-    element.value = Number(e.target.value);
+  //TODO once you create editable other fields - here you can update other values
+  const handleSlideChange = value => {
+    element.value = Number(value);
     updateElement(id, element);
   };
 
+  //this creates slider marks (TODO: refactor a make nice if have time)
   const marks = () => {
     const options = [];
     for (let i = 0; i <= element.max; i++) {
@@ -34,7 +35,7 @@ export function Slider({ id }) {
           max={element.max}
           step={element.step}
           value={element.value}
-          onChange={e => handleSlideChange(e)}
+          onChange={e => handleSlideChange(e.target.value)}
           list="tickmarks"
         ></input>
         <datalist id="tickmarks">{marks()}</datalist>

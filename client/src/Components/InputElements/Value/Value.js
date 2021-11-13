@@ -1,33 +1,29 @@
 import './Value.css';
-import { useState, useEffect } from 'react';
+import { useContext } from 'react';
+import { IndividualWidget } from '../../../Utils/Contexts';
 
-export function ValueInput(props) {
-  const initialMeta = {
-    name: 'ValueInput',
-    elementIndex: props.index,
-    elementLetter: 'A', //this needs to be then changed to check last letter
-    elementDescription: 'Input',
-    value: '',
+export function ValueInput({ id }) {
+  const { updateElement, findElement } = useContext(IndividualWidget);
+
+  const element = { ...findElement(id) };
+
+  const handleInputChange = value => {
+    element.value = Number(value);
+    updateElement(id, element);
   };
-  const [meta, setMeta] = useState(initialMeta);
 
-  useEffect(() => {
-    if (props._id) {
-      setMeta({ ...props });
-    }
-  }, [props]);
   return (
     <div className="input-ctn">
       <label className="label" htmlFor="widget-input">
-        {meta.elementDescription}
+        {element.elementDescription}
       </label>
       <div>
         <input
           type="number"
           id="widget-input"
           placeholder="Number"
-          value={meta.value}
-          onChange={e => setMeta(e.target.value)}
+          value={element.value}
+          onChange={e => handleInputChange(e.target.value)}
         ></input>
       </div>
     </div>
