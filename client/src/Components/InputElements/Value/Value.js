@@ -20,6 +20,7 @@ export function ValueInput({ id }) {
       <div>
         <input
           type="number"
+          className="input"
           id="widget-input"
           placeholder="Number"
           value={element.value}

@@ -36,7 +36,6 @@ export const InputMetas = {
   },
   Text: {
     elementType: 'Text',
-    elementLetter: 'A',
     elementDescription: 'Text',
   },
 };

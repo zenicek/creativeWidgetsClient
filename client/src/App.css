@@ -1,3 +1,22 @@
 .App {
   height: 100%;
 }
+
+.input {
+  width: 100%;
+  margin: 0;
+  padding: 0;
+  outline: none;
+  height: 50px;
+  padding: 20px 12px;
+  border: 1px solid #949494;
+  border-radius: 4px;
+}
+
+.input-ctn {
+  margin: 20px 0px;
+}
+
+.input-ctn:hover {
+  border: 1px solid rgb(56, 56, 56);
+}
