@@ -13,6 +13,12 @@ export function SettingsBar() {
     setWidget({ ...widget, width: width }); //need to add validations in case its too big
   };
 
+  const handleSaveClick = () => {
+    //using this as logger now
+    console.log(widget);
+  };
+
+  //TODO: add the timeout to take effect after user finished typing
   return (
     <div className="settings-bar-ctn">
       <div className="settings-wrapper-ctn">
@@ -46,7 +52,9 @@ export function SettingsBar() {
           ></input>
         </div>
         <div className="settings-option-ctn">
-          <button id="save-btn">Save Widget</button>
+          <button onClick={e => handleSaveClick()} id="save-btn">
+            Save Widget
+          </button>
         </div>
       </div>
     </div>

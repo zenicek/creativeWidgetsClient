@@ -1,7 +1,7 @@
 import './Widget.list.css';
 import { WidgetPreview } from '../WidgetPreview/Widget.preview';
 import { Link } from 'react-router-dom';
-import { useContext, useEffect } from 'react';
+import { useContext } from 'react';
 import { WidgetsContext } from '../../../Utils/Contexts';
 
 export function WidgetList() {

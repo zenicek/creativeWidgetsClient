@@ -27,6 +27,18 @@ export const InputMetas = {
     elementDescription: 'Input',
     value: '',
   },
+  List: {
+    elementType: 'List',
+    elementLetter: 'A',
+    elementDescription: 'List',
+    value: '',
+    list: [],
+  },
+  Text: {
+    elementType: 'Text',
+    elementLetter: 'A',
+    elementDescription: 'Text',
+  },
 };
 
 export const IndividualWidget = createContext();

@@ -46,10 +46,6 @@ export function WidgetBuilder() {
       });
     }
   }, [id]);
-
-  useEffect(() => {
-    console.log(widget);
-  }, [widget]);
   //TODO change the context in the widget and dispatch to the db when user changes stuff
 
   return (

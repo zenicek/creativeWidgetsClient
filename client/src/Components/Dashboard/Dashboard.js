@@ -1,7 +1,6 @@
 import './Dashboard.css';
 import { SideMenu } from './SideMenu/side.menu';
 import { WidgetList } from './WidgetList/Widget.list';
-import { useContext } from 'react';
 
 export function Dashboard() {
   return (
