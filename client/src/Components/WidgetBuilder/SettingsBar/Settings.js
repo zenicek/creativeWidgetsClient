@@ -10,7 +10,8 @@ export function SettingsBar() {
   };
 
   const handleWidthChange = width => {
-    setWidget({ ...widget, width: width }); //need to add validations in case its too big
+    setWidget({ ...widget, width: width });
+    //need to add validations in case its too big
   };
 
   const handleSaveClick = () => {
@@ -39,7 +40,7 @@ export function SettingsBar() {
             type="number"
             className="settings-input"
             value={widget.width}
-            onChange={e => handleWidthChange(e.target.value)}
+            onChange={e => handleWidthChange(Number(e.target.value))}
           ></input>
         </div>
         <div className="settings-option-ctn">
