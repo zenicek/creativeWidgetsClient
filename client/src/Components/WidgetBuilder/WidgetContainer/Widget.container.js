@@ -5,44 +5,42 @@ import { useEffect, useState } from 'react';
 import { useContext } from 'react';
 import { IndividualWidget } from '../../../Utils/Contexts';
 import elems from '../ElementsList/Icons/Icons';
+import { elements } from '../ElementsList/ElemsLookup';
 
 export function WidgetContainer() {
   const { widget, setWidget } = useContext(IndividualWidget);
-  const [elementsList, setElementsList] = useState([]);
-
+  // const [elementsList, setElementsList] = useState([]);
   //function gets all the elements from the context, sorts them by relative position and converts to element lookup
-  const getElements = () => {
-    const res = [];
-    widget.elements
-      .sort((a, b) => a.elementIndex - b.elementIndex)
-      .forEach(el => {
-        elems.forEach(e => {
-          if (el.elementType === e.elementName)
-            res.push(<e.element {...el} key={el._id} />);
-        });
-      });
-    return res;
-  };
-
-  useEffect(() => {
-    setElementsList([...getElements()]);
-  }, [widget.elements]);
-
-  useEffect(() => {}, []);
+  const elementsList = [...widget.elements]
+    .sort((a, b) => a.elementIndex - b.elementIndex)
+    .map(el => {
+      const Element = elements[el.elementType];
+      if (Element) return <Element {...el} key={el._id} />;
+      return null;
+    });
 
   const [, drop] = useDrop({
     accept: elementTypes,
     drop: item => {
-      setElementsList(oldState => {
-        return [
-          ...oldState,
-          <item.renderEl
-            index={elementsList.length}
-            key={elementsList.length}
-          />,
-        ];
-      });
-      setWidget({ ...widget, elements: [...elementsList] });
+      // setElementsList([
+      //   ...elementsList,
+      //   <item.renderEl
+      //     index={widget.elements.length}
+      //     key={widget.elements.length}
+      //   />,
+      // ]);
+      // setWidget({
+      //   ...widget,
+      //   elements: [
+      //     ...widget.elements,
+      //     <item.renderEl
+      //       index={widget.elements.length}
+      //       key={widget.elements.length}
+      //     />,
+      //   ],
+      // });
+      //setWidget({ ...widget, elements: [...elementsList] });
+      console.log('widget from drop', widget);
     },
     // collect: monitor => ({
     //   canDrop: !!monitor.canDrop(),

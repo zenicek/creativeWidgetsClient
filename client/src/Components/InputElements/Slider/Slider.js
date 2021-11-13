@@ -1,8 +1,10 @@
 import './Slider.css';
 import { useEffect, useState, useContext } from 'react';
+import { IndividualWidget } from '../../../Utils/Contexts';
 
 export function Slider(props) {
-  //initials metadata
+  const { widget, setWidget } = useContext(IndividualWidget);
+  //initial metadata
   const initialMeta = {
     elementType: 'Slider',
     elmentIndex: props.index,
@@ -14,6 +16,8 @@ export function Slider(props) {
     step: 1,
   };
   const [metas, setMeta] = useState(initialMeta);
+
+  const updateWidgetState = () => {};
 
   useEffect(() => {
     if (props._id) {

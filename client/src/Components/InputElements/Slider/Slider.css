@@ -11,3 +11,7 @@
   display: flex;
   justify-content: space-between;
 }
+
+.slider-ctn:hover {
+  border: 1px solid rgb(56, 56, 56);
+}

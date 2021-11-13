@@ -10,16 +10,8 @@ import { getWidget } from '../../Utils/ApiService';
 export function WidgetBuilder() {
   //extract id from the url and then get the context(if exists) and set the the state of settings once async operation has finished
 
-  const initialState = {
-    elements: [],
-    formula: '',
-    name: 'default calculator',
-    lastLetter: 'A',
-    width: 720,
-  };
-
   const { id } = useParams();
-  const [widget, setWidget] = useState(initialState);
+  const [widget, setWidget] = useState(WidgetContext);
   const context = { widget, setWidget };
   useEffect(() => {
     if (id) {
@@ -30,7 +22,7 @@ export function WidgetBuilder() {
   }, [id]);
 
   useEffect(() => {
-    console.log(widget);
+    console.log(context);
   }, [widget]);
   //TODO change the context in the widget and dispatch to the db when user changes stuff
 
