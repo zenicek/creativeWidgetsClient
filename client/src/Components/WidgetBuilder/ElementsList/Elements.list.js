@@ -1,6 +1,7 @@
 import './Elements.list.css';
 import elems from './Icons/Icons';
 import { ListItem } from './ListItem/List.item';
+import { elements } from './ElemsLookup';
 
 export function ElementsList() {
   const list = elems.map((el, index) => {
@@ -10,7 +11,7 @@ export function ElementsList() {
           icon={el.icon}
           text={el.text}
           elementName={el.elementName}
-          renderEl={el.element}
+          renderEl={elements[el.elementName]}
         />
       </li>
     );

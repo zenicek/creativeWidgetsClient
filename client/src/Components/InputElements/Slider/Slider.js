@@ -7,7 +7,7 @@ export function Slider(props) {
   //initial metadata
   const initialMeta = {
     elementType: 'Slider',
-    elmentIndex: props.index,
+    elementIndex: props.index,
     elementLetter: 'A',
     elementDescription: 'Slider',
     value: 0,

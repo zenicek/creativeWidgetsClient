@@ -1,11 +1,12 @@
-import { useEffect } from 'react';
 import './List.item.css';
 import { useDrag } from 'react-dnd';
+import { InputMetas } from '../../../../Utils/Contexts';
 
 export function ListItem({ icon, text, elementName, renderEl }) {
   const [{ isDragging }, drag] = useDrag(() => ({
     type: elementName,
     item: {
+      meta: InputMetas[elementName],
       renderEl: renderEl,
     },
     collect: monitor => ({

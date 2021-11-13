@@ -4,12 +4,10 @@ import './Widget.container.css';
 import { useEffect, useState } from 'react';
 import { useContext } from 'react';
 import { IndividualWidget } from '../../../Utils/Contexts';
-import elems from '../ElementsList/Icons/Icons';
 import { elements } from '../ElementsList/ElemsLookup';
 
 export function WidgetContainer() {
   const { widget, setWidget } = useContext(IndividualWidget);
-  // const [elementsList, setElementsList] = useState([]);
   //function gets all the elements from the context, sorts them by relative position and converts to element lookup
   const elementsList = [...widget.elements]
     .sort((a, b) => a.elementIndex - b.elementIndex)
@@ -22,25 +20,9 @@ export function WidgetContainer() {
   const [, drop] = useDrop({
     accept: elementTypes,
     drop: item => {
-      // setElementsList([
-      //   ...elementsList,
-      //   <item.renderEl
-      //     index={widget.elements.length}
-      //     key={widget.elements.length}
-      //   />,
-      // ]);
-      // setWidget({
-      //   ...widget,
-      //   elements: [
-      //     ...widget.elements,
-      //     <item.renderEl
-      //       index={widget.elements.length}
-      //       key={widget.elements.length}
-      //     />,
-      //   ],
-      // });
-      //setWidget({ ...widget, elements: [...elementsList] });
-      console.log('widget from drop', widget);
+      //TODO on drop add a metadata to the widget.elements array of the given element
+      console.log(item);
+      //console.log('widget from drop', widget);
     },
     // collect: monitor => ({
     //   canDrop: !!monitor.canDrop(),
