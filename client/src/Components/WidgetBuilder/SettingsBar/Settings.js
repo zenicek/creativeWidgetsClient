@@ -1,14 +1,17 @@
 import './Settings.css';
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useContext } from 'react';
+import { IndividualWidget } from '../../../Utils/Contexts';
 
-export function SettingsBar({ name, width }) {
-  const [nameState, setName] = useState(name);
-  const [widthState, setWidth] = useState(width);
+export function SettingsBar() {
+  const { widget, setWidget } = useContext(IndividualWidget);
 
-  useEffect(() => {
-    setName(name);
-    setWidth(width);
-  }, [name, width]);
+  const handleNameChange = name => {
+    setWidget({ ...widget, name: name });
+  };
+
+  const handleWidthChange = width => {
+    setWidget({ ...widget, width: width });
+  };
 
   return (
     <div className="settings-bar-ctn">
@@ -29,8 +32,8 @@ export function SettingsBar({ name, width }) {
           <input
             type="number"
             className="settings-input"
-            value={widthState}
-            onChange={e => setWidth(e.target.value)}
+            value={widget.width}
+            onChange={e => handleWidthChange(e.target.value)}
           ></input>
         </div>
         <div className="settings-option-ctn">
@@ -38,8 +41,8 @@ export function SettingsBar({ name, width }) {
           <input
             type="text"
             className="settings-input name-input"
-            value={nameState}
-            onChange={e => setName(e.target.value)}
+            value={widget.name}
+            onChange={e => handleNameChange(e.target.value)}
           ></input>
         </div>
         <div className="settings-option-ctn">

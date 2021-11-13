@@ -23,7 +23,6 @@ export function WidgetContainer() {
   const [, drop] = useDrop({
     accept: elementTypes,
     drop: item => {
-      //TODO on drop add a metadata to the widget.elements array of the given element
       setWidget({ ...widget, elements: [...widget.elements, item.meta] });
       console.log(item);
       //console.log('widget from drop', widget);

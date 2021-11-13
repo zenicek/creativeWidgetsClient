@@ -22,7 +22,7 @@ export function WidgetBuilder() {
   }, [id]);
 
   useEffect(() => {
-    console.log(context);
+    console.log(widget);
   }, [widget]);
   //TODO change the context in the widget and dispatch to the db when user changes stuff
 
@@ -30,7 +30,7 @@ export function WidgetBuilder() {
     <IndividualWidget.Provider value={context}>
       <div className="widget-builder-ctn">
         {/* {JSON.stringify(widget)} */}
-        <SettingsBar name={widget.name} width={widget.width} />
+        <SettingsBar />
         <div className="build-ctn">
           <div id="element-list-ctn">
             <ElementsList />
