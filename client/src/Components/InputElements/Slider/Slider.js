@@ -5,17 +5,8 @@ import { IndividualWidget } from '../../../Utils/Contexts';
 export function Slider(props) {
   const { widget, setWidget } = useContext(IndividualWidget);
   //initial metadata
-  const initialMeta = {
-    elementType: 'Slider',
-    elementIndex: props.index,
-    elementLetter: 'A',
-    elementDescription: 'Slider',
-    value: 0,
-    min: 0,
-    max: 10,
-    step: 1,
-  };
-  const [metas, setMeta] = useState(initialMeta);
+
+  const [metas, setMeta] = useState(props);
 
   const updateWidgetState = () => {};
 

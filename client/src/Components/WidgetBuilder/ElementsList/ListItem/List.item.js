@@ -7,7 +7,6 @@ export function ListItem({ icon, text, elementName, renderEl }) {
     type: elementName,
     item: {
       meta: InputMetas[elementName],
-      renderEl: renderEl,
     },
     collect: monitor => ({
       isDragging: !!monitor.isDragging(),
