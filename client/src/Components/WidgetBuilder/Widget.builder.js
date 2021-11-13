@@ -32,6 +32,11 @@ export function WidgetBuilder() {
       });
       setWidget({ ...widget, elements: [...updatedEls] });
     },
+    findElement: id => {
+      return widget.elements.find(el =>
+        el._id ? el._id === id : el.id === id
+      );
+    },
   };
 
   useEffect(() => {

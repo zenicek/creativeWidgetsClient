@@ -3,14 +3,11 @@ import { useContext } from 'react';
 import { IndividualWidget } from '../../../Utils/Contexts';
 
 export function Slider({ id }) {
-  const { widget, updateElement } = useContext(IndividualWidget);
+  const { updateElement, findElement } = useContext(IndividualWidget);
   //initial metadata
 
-  const findElement = () => {
-    return widget.elements.find(el => (el._id ? el._id === id : el.id === id));
-  };
   //needs to be a copy - immutability
-  const element = { ...findElement() };
+  const element = { ...findElement(id) };
 
   const handleSlideChange = e => {
     element.value = Number(e.target.value);

@@ -4,7 +4,6 @@ import './Widget.container.css';
 import { useContext } from 'react';
 import { IndividualWidget } from '../../../Utils/Contexts';
 import { elements } from '../ElementsList/ElemsLookup';
-import { nanoid } from 'nanoid';
 
 export function WidgetContainer() {
   const { widget, addElement } = useContext(IndividualWidget);
