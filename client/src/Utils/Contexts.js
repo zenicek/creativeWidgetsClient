@@ -9,7 +9,6 @@ export const WidgetContext = {
   name: 'default calculator',
   lastLetter: 'A',
   width: 720,
-  setWidget: () => {},
 };
 
 export const InputMetas = {

@@ -2,7 +2,7 @@ import './List.item.css';
 import { useDrag } from 'react-dnd';
 import { InputMetas } from '../../../../Utils/Contexts';
 
-export function ListItem({ icon, text, elementName, renderEl }) {
+export function ListItem({ icon, text, elementName }) {
   const [{ isDragging }, drag] = useDrag(() => ({
     type: elementName,
     item: {

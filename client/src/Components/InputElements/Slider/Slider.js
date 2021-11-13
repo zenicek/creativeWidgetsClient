@@ -2,23 +2,26 @@ import './Slider.css';
 import { useEffect, useState, useContext } from 'react';
 import { IndividualWidget } from '../../../Utils/Contexts';
 
-export function Slider(props) {
-  const { widget, setWidget } = useContext(IndividualWidget);
+export function Slider({ _id, id }) {
+  const { widget, updateElement } = useContext(IndividualWidget);
   //initial metadata
+  const sliderId = _id ? _id : id;
+  const findElement = () => {
+    return widget.elements.find(el =>
+      el._id ? el._id === sliderId : el.id === sliderId
+    );
+  };
+  //needs to be a copy - immutability
+  const element = { ...findElement() };
 
-  const [metas, setMeta] = useState(props);
-
-  const updateWidgetState = () => {};
-
-  useEffect(() => {
-    if (props._id) {
-      setMeta({ ...props });
-    }
-  }, [props]);
+  const handleSlideChange = e => {
+    element.value = Number(e.target.value);
+    updateElement(sliderId, element);
+  };
 
   const marks = () => {
     const options = [];
-    for (let i = 0; i <= metas.max; i++) {
+    for (let i = 0; i <= element.max; i++) {
       options.push(<option key={i} value={i} label={i % 2 ? '' : i}></option>);
     }
     return options;
@@ -26,17 +29,17 @@ export function Slider(props) {
   return (
     <div className="slider-ctn">
       <label>
-        {metas.elementDescription} - {metas.value}
+        {element.elementDescription} - {element.value}
       </label>
       <div>
         <input
           type="range"
           id="slider"
-          min={metas.min}
-          max={metas.max}
-          step={metas.step}
-          value={metas.value}
-          onChange={e => setMeta({ ...metas, value: e.target.value })}
+          min={element.min}
+          max={element.max}
+          step={element.step}
+          value={element.value}
+          onChange={e => handleSlideChange(e)}
           list="tickmarks"
         ></input>
         <datalist id="tickmarks">{marks()}</datalist>

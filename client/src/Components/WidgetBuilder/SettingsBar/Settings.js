@@ -1,5 +1,5 @@
 import './Settings.css';
-import { useEffect, useState, useContext } from 'react';
+import { useContext } from 'react';
 import { IndividualWidget } from '../../../Utils/Contexts';
 
 export function SettingsBar() {
@@ -10,7 +10,7 @@ export function SettingsBar() {
   };
 
   const handleWidthChange = width => {
-    setWidget({ ...widget, width: width });
+    setWidget({ ...widget, width: width }); //need to add validations in case its too big
   };
 
   return (
@@ -52,4 +52,3 @@ export function SettingsBar() {
     </div>
   );
 }
-//TODO: Add the onchange state so you can modify the canvas and store it in DB
