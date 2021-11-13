@@ -1,22 +1,20 @@
 import './Slider.css';
-import { useEffect, useState, useContext } from 'react';
+import { useContext } from 'react';
 import { IndividualWidget } from '../../../Utils/Contexts';
 
-export function Slider({ _id, id }) {
+export function Slider({ id }) {
   const { widget, updateElement } = useContext(IndividualWidget);
   //initial metadata
-  const sliderId = _id ? _id : id;
+
   const findElement = () => {
-    return widget.elements.find(el =>
-      el._id ? el._id === sliderId : el.id === sliderId
-    );
+    return widget.elements.find(el => (el._id ? el._id === id : el.id === id));
   };
   //needs to be a copy - immutability
   const element = { ...findElement() };
 
   const handleSlideChange = e => {
     element.value = Number(e.target.value);
-    updateElement(sliderId, element);
+    updateElement(id, element);
   };
 
   const marks = () => {

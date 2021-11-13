@@ -15,7 +15,9 @@ export function WidgetContainer() {
     .map(el => {
       const Element = elements[el.elementType];
       if (Element) {
-        return <Element {...el} key={el._id ? el._id : el.id} />;
+        return (
+          <Element id={el._id ? el._id : el.id} key={el._id ? el._id : el.id} />
+        );
       }
       return null;
     });
