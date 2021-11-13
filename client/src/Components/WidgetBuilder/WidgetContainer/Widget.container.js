@@ -11,9 +11,12 @@ export function WidgetContainer() {
   //function gets all the elements from the context, sorts them by relative position and converts to element lookup
   const elementsList = [...widget.elements]
     .sort((a, b) => a.elementIndex - b.elementIndex)
-    .map(el => {
+    .map((el, index) => {
       const Element = elements[el.elementType];
-      if (Element) return <Element {...el} key={el._id} />;
+      if (Element)
+        return (
+          <Element {...el} elementIndex={index} key={el._id ? el._id : index} />
+        );
       return null;
     });
 
@@ -21,6 +24,7 @@ export function WidgetContainer() {
     accept: elementTypes,
     drop: item => {
       //TODO on drop add a metadata to the widget.elements array of the given element
+      setWidget({ ...widget, elements: [...widget.elements, item.meta] });
       console.log(item);
       //console.log('widget from drop', widget);
     },

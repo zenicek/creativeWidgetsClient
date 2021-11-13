@@ -15,7 +15,6 @@ export const WidgetContext = {
 export const InputMetas = {
   Slider: {
     elementType: 'Slider',
-    elementIndex: 0,
     elementLetter: 'A',
     elementDescription: 'Slider',
     value: 0,
@@ -24,8 +23,7 @@ export const InputMetas = {
     step: 1,
   },
   ValueInput: {
-    name: 'ValueInput',
-    elementIndex: 0,
+    elementType: 'ValueInput',
     elementLetter: 'A', //this needs to be then changed to check last letter
     elementDescription: 'Input',
     value: '',
