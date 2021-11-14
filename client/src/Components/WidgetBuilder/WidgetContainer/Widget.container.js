@@ -4,11 +4,15 @@ import './Widget.container.css';
 import { useContext } from 'react';
 import { IndividualWidget } from '../../../Utils/Contexts';
 import { elements } from '../ElementsList/ElemsLookup';
+import { ElementSetup } from '../ResultsSetup/ElementSetup/Element.setup';
 
 export function WidgetContainer({ loadResults }) {
   const { widget, addElement } = useContext(IndividualWidget);
   //function gets all the elements from the context, sorts them by relative position and converts to element lookup
-  console.log(loadResults);
+
+  const elementSetupList = [...widget.elements].map(el => (
+    <ElementSetup id={el._id ? el._id : el.id} key={el._id ? el._id : el.id} />
+  ));
 
   const elementsList = [...widget.elements]
     .sort((a, b) => a.elementIndex - b.elementIndex)
@@ -37,7 +41,7 @@ export function WidgetContainer({ loadResults }) {
       style={{ width: `${widget.width}px` }}
     >
       <div ref={drop} className="widget-dnd-ctn">
-        {elementsList}
+        {!loadResults ? elementsList : elementSetupList}
       </div>
       <div className="results-ctn">HERE ARE RESULTS</div>
     </div>

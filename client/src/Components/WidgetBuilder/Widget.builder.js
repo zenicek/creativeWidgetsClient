@@ -44,7 +44,9 @@ export function WidgetBuilder() {
       setWidget({ ...widget, formula: formula });
     },
     //add result description
-    updateResults: () => {},
+    updateResultDesc: result => {
+      setWidget({ ...widget, result: [...widget.result, result] });
+    },
   };
 
   useEffect(() => {
