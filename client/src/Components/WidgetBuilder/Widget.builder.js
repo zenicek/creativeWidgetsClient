@@ -33,10 +33,15 @@ export function WidgetBuilder() {
       });
       setWidget({ ...widget, elements: [...updatedEls] });
     },
+    //to find element in the array
     findElement: id => {
       return widget.elements.find(el =>
         el._id ? el._id === id : el.id === id
       );
+    },
+    //update formula
+    updateFormula: formula => {
+      setWidget({ ...widget, formula: formula });
     },
   };
 

@@ -1,0 +1,15 @@
+.side-bar-ctn {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  position: absolute;
+  width: 250px;
+  height: 100%;
+  background-color: #167c80;
+  color: white;
+}
+.formula-wrapper-ctn {
+  height: 50vh;
+  padding: 0px 12px;
+  font-weight: 500;
+}
