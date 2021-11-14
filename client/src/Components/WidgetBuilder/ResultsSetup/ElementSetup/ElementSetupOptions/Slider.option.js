@@ -11,23 +11,26 @@ export function SliderOptions({ handleSliderSetup, min, max, step }) {
     handleSliderSetup(range, stepValue);
   };
   return (
-    <div>
-      <div>FROM</div>
+    <div className="slider-settings-ctn">
+      <div className="settings-desc-ctn">FROM</div>
       <input
-        type="tel"
+        className="settings-input"
+        type="num"
         pattern="[0-9]*"
         value={range[0]}
         onChange={e => handleRangeInput({ from: e.target.value })}
       ></input>
-      <div>TO</div>
+      <div className="settings-desc-ctn">TO</div>
       <input
-        type="tel"
+        className="settings-input"
+        type="num"
         pattern="[0-9]*"
         value={range[1]}
         onChange={e => handleRangeInput({ to: e.target.value })}
       ></input>
-      <div>STEP</div>
+      <div className="settings-desc-ctn">STEP</div>
       <input
+        className="settings-input"
         type="number"
         step="0.1"
         value={stepValue}

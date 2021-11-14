@@ -1,0 +1,17 @@
+.slider-settings-ctn {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.settings-desc-ctn {
+  display: flex;
+  margin: 0px 5px;
+  padding: 0px 5px;
+  height: 30px;
+  align-items: center;
+  color: white;
+  background-color: #167c80;
+  border-radius: 4px;
+  font-weight: 500;
+}

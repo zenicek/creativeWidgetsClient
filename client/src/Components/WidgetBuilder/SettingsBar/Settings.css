@@ -15,24 +15,6 @@
   align-items: center;
 }
 
-.settings-input {
-  width: 60px;
-  color: #167c80;
-  height: 30px;
-  border-radius: 4px;
-  outline: none;
-  border: none;
-  overflow-x: hidden;
-  font-size: 15px;
-  text-align: center;
-  font-weight: 600;
-}
-
-.settings-input::-webkit-outer-spin-button,
-.settings-input::-webkit-inner-spin-button {
-  -webkit-appearance: none;
-}
-
 .settings-option-ctn {
   display: flex;
   align-items: center;

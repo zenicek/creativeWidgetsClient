@@ -35,7 +35,7 @@ export function ElementSetup({ id }) {
   return (
     <div className="element-setup-ctn">
       <div id="letter-ctn">{element.elementLetter}</div>
-      <div id="description-ctn">{element.elementDescription}</div>
+      <div className="description-ctn">{element.elementDescription}</div>
       {optionElement()}
     </div>
   );
