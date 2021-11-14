@@ -17,7 +17,7 @@ export function Slider({ id }) {
   //this creates slider marks (TODO: refactor a make nice if have time)
   const marks = () => {
     const options = [];
-    for (let i = 0; i <= element.max; i++) {
+    for (let i = element.min; i <= element.max; i++) {
       options.push(<option key={i} value={i} label={i % 2 ? '' : i}></option>);
     }
     return options;

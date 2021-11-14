@@ -13,7 +13,7 @@ export function List({ id }) {
         return <option value={item.onValue}>item.optionName</option>;
       });
     } else {
-      return <option value="no-data">Currently No Options</option>;
+      return <option value="no-data">Set up your first option</option>;
     }
   };
   return (
