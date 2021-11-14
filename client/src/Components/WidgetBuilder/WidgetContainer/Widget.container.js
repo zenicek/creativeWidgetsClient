@@ -5,9 +5,10 @@ import { useContext } from 'react';
 import { IndividualWidget } from '../../../Utils/Contexts';
 import { elements } from '../ElementsList/ElemsLookup';
 
-export function WidgetContainer() {
+export function WidgetContainer({ loadResults }) {
   const { widget, addElement } = useContext(IndividualWidget);
   //function gets all the elements from the context, sorts them by relative position and converts to element lookup
+  console.log(loadResults);
 
   const elementsList = [...widget.elements]
     .sort((a, b) => a.elementIndex - b.elementIndex)

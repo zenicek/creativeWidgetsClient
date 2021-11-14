@@ -2,7 +2,7 @@ import './Settings.css';
 import { useContext } from 'react';
 import { IndividualWidget } from '../../../Utils/Contexts';
 
-export function SettingsBar() {
+export function SettingsBar({ results }) {
   const { widget, setWidget } = useContext(IndividualWidget);
 
   const handleNameChange = name => {
@@ -23,6 +23,17 @@ export function SettingsBar() {
   return (
     <div className="settings-bar-ctn">
       <div className="settings-wrapper-ctn">
+        <div className="settings-option-ctn">
+          <input
+            type="checkbox"
+            name="def-results"
+            value={results.loadResultsPage}
+            onChange={() =>
+              results.setLoadResultsPage(!results.loadResultsPage)
+            }
+          ></input>
+          <label htmlFor="def-results">Define Results</label>
+        </div>
         <div className="settings-option-ctn">
           Width(px)
           <svg
@@ -53,7 +64,7 @@ export function SettingsBar() {
           ></input>
         </div>
         <div className="settings-option-ctn">
-          <button onClick={e => handleSaveClick()} id="save-btn">
+          <button onClick={e => handleSaveClick()} id="settings-btn">
             Save Widget
           </button>
         </div>

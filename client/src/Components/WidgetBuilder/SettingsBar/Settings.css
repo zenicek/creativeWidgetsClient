@@ -42,7 +42,7 @@
   margin-left: 5px;
   width: 180px;
 }
-#save-btn {
+#settings-btn {
   background-color: #167c80;
   border: 1px solid white;
   color: white;
@@ -50,12 +50,12 @@
   width: 120px;
   border-radius: 50px;
 }
-#save-btn:hover {
+#settings-btn:hover {
   cursor: pointer;
   background-color: #279fa4;
 }
 
-#save-btn:focus {
+#settings-btn:focus {
   outline: none;
   background-color: #279fa4;
 }

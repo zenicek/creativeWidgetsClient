@@ -6,11 +6,12 @@ import { useEffect, useState } from 'react';
 import { IndividualWidget, WidgetContext } from '../../Utils/Contexts';
 import { useParams } from 'react-router';
 import { getWidget } from '../../Utils/ApiService';
+import { ResultsSiderbar } from './ResultsSetup/ResultsSidebar/Results.sidebar';
 import { nanoid } from 'nanoid';
 
 export function WidgetBuilder() {
+  const [loadResultsPage, setLoadResultsPage] = useState(false);
   //extract id from the url and then get the context(if exists) and set the the state of settings once async operation has finished
-
   const { id } = useParams();
   const [widget, setWidget] = useState(WidgetContext);
   //all context logic lives here
@@ -51,13 +52,17 @@ export function WidgetBuilder() {
   return (
     <IndividualWidget.Provider value={context}>
       <div className="widget-builder-ctn">
-        <SettingsBar />
+        <SettingsBar results={{ loadResultsPage, setLoadResultsPage }} />
         <div className="build-ctn">
-          <div id="element-list-ctn">
-            <ElementsList />
-          </div>
+          {loadResultsPage ? (
+            <ResultsSiderbar />
+          ) : (
+            <div id="element-list-ctn">
+              <ElementsList />
+            </div>
+          )}
           <div id="widget-build-ctn">
-            <WidgetContainer />
+            <WidgetContainer loadResults={loadResultsPage} />
           </div>
         </div>
       </div>
