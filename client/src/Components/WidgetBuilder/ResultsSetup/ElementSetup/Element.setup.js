@@ -2,13 +2,12 @@ import './Element.setup.css';
 import { useContext } from 'react';
 import { IndividualWidget } from '../../../../Utils/Contexts';
 import { SliderOptions } from './ElementSetupOptions/Slider.option';
+import { ListItemSetup } from './ElementSetupOptions/List.option';
 
 export function ElementSetup({ id }) {
   const { updateElement, findElement } = useContext(IndividualWidget);
 
   const element = { ...findElement(id) };
-
-  console.log(element);
 
   const handleSliderSetup = (range, step) => {
     const [min, max] = range;
@@ -27,6 +26,14 @@ export function ElementSetup({ id }) {
           step={element.step}
           handleSliderSetup={handleSliderSetup}
         />
+      );
+    }
+    if (element.elementType === 'List') {
+      return (
+        <div>
+          <button id="add-item">Add Item</button>
+          <ListItemSetup />
+        </div>
       );
     }
   };

@@ -1,6 +1,5 @@
 .element-setup-ctn {
   display: flex;
-  flex-direction: row;
   align-items: center;
   justify-content: space-between;
   background-color: #ccc;
@@ -18,4 +17,26 @@
 .description-ctn {
   width: 100%;
   margin: 0px 10px;
+}
+
+#add-item {
+  background-color: #167c80;
+  border: none;
+  color: white;
+  height: 30px;
+  border-radius: 50px;
+  margin: 5px 0px;
+}
+
+#add-item:hover {
+  cursor: pointer;
+  background-color: #279fa4;
+}
+
+.remove-icon {
+  margin: 0px 5px;
+}
+
+.remove-icon:hover {
+  cursor: pointer;
 }
