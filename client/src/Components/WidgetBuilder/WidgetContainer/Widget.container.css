@@ -15,4 +15,8 @@
 .results-ctn {
   color: white;
   background-color: #167c80;
+  min-height: 75px;
+  display: flex;
+  justify-content: flex-end;
+  padding: 5px 25px;
 }

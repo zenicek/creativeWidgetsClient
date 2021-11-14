@@ -8,6 +8,7 @@ import { useParams } from 'react-router';
 import { getWidget } from '../../Utils/ApiService';
 import { ResultsSiderbar } from './ResultsSetup/ResultsSidebar/Results.sidebar';
 import { nanoid } from 'nanoid';
+import { nextChar } from '../../Utils/Helpers';
 
 export function WidgetBuilder() {
   const [loadResultsPage, setLoadResultsPage] = useState(false);
@@ -22,7 +23,14 @@ export function WidgetBuilder() {
     addElement: meta => {
       setWidget({
         ...widget,
-        elements: [...widget.elements, { ...meta, id: nanoid() }],
+        elements: [
+          ...widget.elements,
+          {
+            ...meta,
+            id: nanoid(),
+            elementLetter: nextChar(widget.lastLetter),
+          },
+        ],
       });
     },
     //update specific element in the elements list

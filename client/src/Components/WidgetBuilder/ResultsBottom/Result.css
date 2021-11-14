@@ -1,0 +1,13 @@
+#result-display {
+  font-weight: 700;
+  margin: 5px;
+}
+
+.result-ctn {
+  max-width: 50%;
+  text-align: right;
+}
+
+#result-desc {
+  margin: 5px;
+}
