@@ -24,12 +24,16 @@ export function WidgetBuilder() {
       const element = {
         ...meta,
         id: nanoid(),
-        elementLetter: nextChar(widget.lastLetter),
+        elementLetter:
+          meta.elementType !== 'Text' ? nextChar(widget.lastLetter) : undefined,
       };
       setWidget({
         ...widget,
         elements: [...widget.elements, { ...element }],
-        lastLetter: element.elementLetter,
+        lastLetter:
+          meta.elementType !== 'Text'
+            ? element.elementLetter
+            : widget.lastLetter,
       });
     },
     //update specific element in the elements list
