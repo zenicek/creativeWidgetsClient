@@ -6,7 +6,6 @@ import { IndividualWidget } from '../../../Utils/Contexts';
 import { elements } from '../ElementsList/ElemsLookup';
 import { ElementSetup } from '../ResultsSetup/ElementSetup/Element.setup';
 import { Result } from '../ResultsBottom/Result';
-import { nextChar } from '../../../Utils/Helpers';
 
 export function WidgetContainer({ loadResults }) {
   const { widget, addElement } = useContext(IndividualWidget);
@@ -44,9 +43,11 @@ export function WidgetContainer({ loadResults }) {
       <div ref={drop} className="widget-dnd-ctn">
         {!loadResults ? elementsList : elementSetupList}
       </div>
-      <div className="results-ctn">
-        <Result />
-      </div>
+      {!loadResults && (
+        <div className="results-ctn">
+          <Result />
+        </div>
+      )}
     </div>
   );
 }

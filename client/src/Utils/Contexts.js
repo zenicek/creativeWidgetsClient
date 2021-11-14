@@ -7,7 +7,7 @@ export const WidgetContext = {
   elements: [],
   formula: '',
   name: 'default calculator',
-  lastLetter: 'A',
+  lastLetter: '@',
   width: 720,
   resultDescription: '',
   resultValueDesc: '',

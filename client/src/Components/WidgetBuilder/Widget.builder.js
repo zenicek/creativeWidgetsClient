@@ -21,16 +21,15 @@ export function WidgetBuilder() {
     setWidget,
     //add element metadata
     addElement: meta => {
+      const element = {
+        ...meta,
+        id: nanoid(),
+        elementLetter: nextChar(widget.lastLetter),
+      };
       setWidget({
         ...widget,
-        elements: [
-          ...widget.elements,
-          {
-            ...meta,
-            id: nanoid(),
-            elementLetter: nextChar(widget.lastLetter),
-          },
-        ],
+        elements: [...widget.elements, { ...element }],
+        lastLetter: element.elementLetter,
       });
     },
     //update specific element in the elements list
@@ -64,7 +63,7 @@ export function WidgetBuilder() {
       });
     }
   }, [id]);
-  //TODO change the context in the widget and dispatch to the db when user changes stuff
+  //TODO dispatch to the db when user changes stuff
 
   return (
     <IndividualWidget.Provider value={context}>
