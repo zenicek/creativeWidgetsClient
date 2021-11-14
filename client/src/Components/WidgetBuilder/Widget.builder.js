@@ -25,7 +25,7 @@ export function WidgetBuilder() {
         ...meta,
         id: nanoid(),
         elementLetter:
-          meta.elementType !== 'Text' ? nextChar(widget.lastLetter) : undefined,
+          meta.elementType !== 'Text' && nextChar(widget.lastLetter),
       };
       setWidget({
         ...widget,
