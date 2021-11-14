@@ -9,6 +9,8 @@ export const WidgetContext = {
   name: 'default calculator',
   lastLetter: 'A',
   width: 720,
+  resultDescription: '',
+  resultValueDesc: '',
   result: [],
 };
 

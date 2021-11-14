@@ -1,0 +1,15 @@
+.element-setup-ctn {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  background-color: #ccc;
+  margin: 10px 0px;
+  height: 6vh;
+  padding: 0px 10px;
+}
+
+#letter-ctn {
+  width: 25px;
+  font-size: 30px;
+  font-weight: 600;
+}
