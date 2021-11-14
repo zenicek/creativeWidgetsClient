@@ -36,7 +36,7 @@
 .settings-option-ctn {
   display: flex;
   align-items: center;
-  margin-left: 18px;
+  margin: 0px 10px;
 }
 .name-input {
   margin-left: 5px;

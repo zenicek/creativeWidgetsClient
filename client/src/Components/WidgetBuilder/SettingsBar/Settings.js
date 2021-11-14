@@ -34,6 +34,7 @@ export function SettingsBar({ results }) {
           ></input>
           <label htmlFor="def-results">Define Results</label>
         </div>
+        {'|'}
         <div className="settings-option-ctn">
           Width(px)
           <svg
@@ -54,6 +55,7 @@ export function SettingsBar({ results }) {
             onChange={e => handleWidthChange(Number(e.target.value))}
           ></input>
         </div>
+        {'|'}
         <div className="settings-option-ctn">
           Widget Name
           <input
@@ -63,8 +65,9 @@ export function SettingsBar({ results }) {
             onChange={e => handleNameChange(e.target.value)}
           ></input>
         </div>
+        {'|'}
         <div className="settings-option-ctn">
-          <button onClick={e => handleSaveClick()} id="settings-btn">
+          <button onClick={() => handleSaveClick()} id="settings-btn">
             Save Widget
           </button>
         </div>

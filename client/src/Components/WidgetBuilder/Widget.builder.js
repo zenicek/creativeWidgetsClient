@@ -43,6 +43,8 @@ export function WidgetBuilder() {
     updateFormula: formula => {
       setWidget({ ...widget, formula: formula });
     },
+    //add result description
+    updateResults: () => {},
   };
 
   useEffect(() => {
