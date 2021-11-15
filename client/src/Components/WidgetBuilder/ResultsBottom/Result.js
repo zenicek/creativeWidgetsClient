@@ -1,5 +1,5 @@
 import './Result.css';
-import { calculateResult, validateFormula } from '../../../Utils/Helpers';
+import { calculateResult } from '../../../Utils/Helpers';
 import { useContext } from 'react';
 import { IndividualWidget } from '../../../Utils/Contexts';
 
@@ -10,7 +10,7 @@ export function Result({ resultDescription, resultValDesc }) {
     try {
       return calculateResult(widget);
     } catch (e) {
-      //log for now but later append as span under the formula bar
+      //log for now but make sure validation is solid once parser is done
       return console.log(e);
     }
   };

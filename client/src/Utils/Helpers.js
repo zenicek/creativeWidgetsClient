@@ -11,7 +11,7 @@ export function calculateResult(widget) {
   if (validateFormula(widget) !== true)
     return 'Not a valid formula, please edit';
   const letters = widget.formula.match(/([A-Z])/g);
-  letters.map(letter => {
+  letters.forEach(letter => {
     let val = '';
     if (
       widget.elements.some(el => {
@@ -19,18 +19,19 @@ export function calculateResult(widget) {
           val = el.value;
           return true;
         }
+        return false;
       })
     ) {
       formula[formula.indexOf(letter)] = Number(val);
     }
   });
   //I KNOW I KNOW please dont judge, deadlines are tight
-  result = eval(formula.join(''));
+  //fixed for now, but later users will be able to define decimal points
+  result = eval(formula.join('')).toFixed(2);
   return result;
 }
 
-// TODO add the validation function to the define results screen (simple check if formula letter exists within the container) move that away from the calculate results
-
+// validation function to define results screen (simple check if formula letter exists within the container)
 export function validateFormula(widget) {
   const letters = widget.formula.match(/([A-Z])/g);
   if (!widget.formula || !letters) return true;
@@ -50,3 +51,6 @@ export function validateFormula(widget) {
   return `Elements with letter "${[...errorLetters]}" don't exist`;
   //
 }
+
+//TODO this is the function to properly handle the formula expression
+//function expressionParser(expression) {}

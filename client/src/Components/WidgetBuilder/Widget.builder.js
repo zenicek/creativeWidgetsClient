@@ -8,7 +8,7 @@ import { useParams } from 'react-router';
 import { getWidget } from '../../Utils/ApiService';
 import { ResultsSiderbar } from './ResultsSetup/ResultsSidebar/Results.sidebar';
 import { nanoid } from 'nanoid';
-import { nextChar, validateFormula } from '../../Utils/Helpers';
+import { nextChar } from '../../Utils/Helpers';
 
 export function WidgetBuilder() {
   const [loadResultsPage, setLoadResultsPage] = useState(false);
@@ -16,6 +16,7 @@ export function WidgetBuilder() {
   const { id } = useParams();
   const [widget, setWidget] = useState(WidgetContext);
   //all context logic lives here
+  //TODO move the context to the separte element within the Contexts.js and just import, can you do the API call within the context to set it initially??
   const context = {
     widget,
     setWidget,
@@ -54,9 +55,12 @@ export function WidgetBuilder() {
     updateFormula: formula => {
       setWidget({ ...widget, formula: formula });
     },
-    //add result description
-    updateResultDesc: result => {
-      setWidget({ ...widget, result: [...widget.result, result] });
+    //add result descriptions
+    updateResultDesc: resultDesc => {
+      setWidget({ ...widget, resultDescription: resultDesc });
+    },
+    updateResultValueDesc: resultValDesc => {
+      setWidget({ ...widget, resultValueDesc: resultValDesc });
     },
   };
 

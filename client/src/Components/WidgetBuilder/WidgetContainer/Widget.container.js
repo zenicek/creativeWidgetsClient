@@ -6,7 +6,6 @@ import { IndividualWidget } from '../../../Utils/Contexts';
 import { elements } from '../ElementsList/ElemsLookup';
 import { ElementSetup } from '../ResultsSetup/ElementSetup/Element.setup';
 import { Result } from '../ResultsBottom/Result';
-import { validateFormula } from '../../../Utils/Helpers';
 
 export function WidgetContainer({ loadResults }) {
   const { widget, addElement } = useContext(IndividualWidget);

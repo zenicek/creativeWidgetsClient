@@ -5,7 +5,7 @@ import { validateFormula } from '../../../../Utils/Helpers';
 import { useState, useEffect } from 'react';
 
 export function ResultsSiderbar() {
-  const { updateFormula, widget, updateResultDesc } =
+  const { updateFormula, widget, updateResultDesc, updateResultValueDesc } =
     useContext(IndividualWidget);
 
   const [formulaError, setformulaError] = useState(validateFormula(widget));
@@ -23,11 +23,12 @@ export function ResultsSiderbar() {
 
   const handleResDescription = e => {
     results.description = e.target.value;
-    updateResultDesc(results);
+    console.log(e.target.innerText);
+    // updateResultDesc(results.description);
   };
   const handleResValueDesc = e => {
     results.valueDesc = e.target.value;
-    updateResultDesc(results);
+    updateResultValueDesc(results.valueDesc);
   };
   const handleFormula = formula => {
     //TODO add validation for special characters for security
@@ -36,7 +37,13 @@ export function ResultsSiderbar() {
   return (
     <div className="side-bar-ctn">
       <div className="formula-wrapper-ctn">
-        <p>{results.description}</p>
+        <p
+          onDoubleClick={e => {
+            handleResDescription(e);
+          }}
+        >
+          {results.description}
+        </p>
         {'='}
         <textarea
           type="text"
