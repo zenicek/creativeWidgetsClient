@@ -8,7 +8,7 @@ export function List({ id }) {
   const element = { ...findElement(id) };
 
   const options = () => {
-    if (element.list.length > 0) {
+    if (element.list) {
       return element.list.map(item => {
         return <option value={item.onValue}>item.optionName</option>;
       });

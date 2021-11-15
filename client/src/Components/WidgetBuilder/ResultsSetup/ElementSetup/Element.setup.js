@@ -47,7 +47,9 @@ export function ElementSetup({ id }) {
 
   return (
     <div className="element-setup-ctn">
-      <div id="letter-ctn">{element.elementLetter}</div>
+      <div id="letter-ctn">
+        {element.elementLetter !== 'false' ? element.elementLetter : ''}
+      </div>
       <div className="description-ctn">
         {' '}
         <InputToggle

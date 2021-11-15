@@ -67,8 +67,13 @@ export function WidgetBuilder() {
   useEffect(() => {
     if (id) {
       getWidget(id).then(res => {
-        setWidget({ ...res });
+        setWidget(oldState => {
+          console.log('get widget', res);
+          return { ...res };
+        });
       });
+    } else {
+      setWidget(WidgetContext);
     }
   }, [id]);
   //TODO dispatch to the db when user changes stuff

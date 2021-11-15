@@ -8,7 +8,7 @@ export function ValueInput({ id }) {
   const element = { ...findElement(id) };
 
   const handleInputChange = value => {
-    element.value = Number(value);
+    element.value = value;
     updateElement(id, element);
   };
 
@@ -19,11 +19,12 @@ export function ValueInput({ id }) {
       </label>
       <div>
         <input
-          type="number"
+          type="text"
+          pattern="[0-9]*"
           className="input"
           id="widget-input"
           placeholder="Number"
-          value={element.value}
+          value={element.value === null ? '' : element.value}
           onChange={e => handleInputChange(e.target.value)}
         ></input>
       </div>

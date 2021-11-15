@@ -12,3 +12,11 @@ export function getAllWidgets() {
 export function getWidget(id) {
   return fetchApi('/widget/' + id);
 }
+
+export function createWidget(widget) {
+  return fetchApi('/widget', {
+    method: 'POST',
+    headers: { 'Content-type': 'application/json' },
+    body: JSON.stringify(widget),
+  });
+}

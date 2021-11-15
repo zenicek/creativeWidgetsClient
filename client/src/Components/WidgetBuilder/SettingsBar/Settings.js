@@ -1,22 +1,48 @@
 import './Settings.css';
 import { useContext } from 'react';
 import { IndividualWidget } from '../../../Utils/Contexts';
+import { createWidget } from '../../../Utils/ApiService';
+import { useNavigate, useParams } from 'react-router-dom';
 
 export function SettingsBar({ results }) {
   const { widget, setWidget } = useContext(IndividualWidget);
-
+  const { id } = useParams();
   const handleNameChange = name => {
     setWidget({ ...widget, name: name });
   };
 
   const handleWidthChange = width => {
     setWidget({ ...widget, width: width });
-    //need to add validations in case its too big
+    //TODO need to add validations in case its too big
   };
 
+  const navigation = useNavigate();
+
   const handleSaveClick = () => {
-    //using this as logger now
-    console.log(widget);
+    if (!id) {
+      //I am assigning the nanoid on the front end which is being replaced on the backend the below is removing any front end IDs
+      const cleanWidget = {
+        ...widget,
+        elements: widget.elements.map(el => {
+          const elCopy = { ...el };
+          if (elCopy.id) {
+            delete elCopy.id;
+          }
+          return elCopy;
+        }),
+      };
+      createWidget(cleanWidget).then(res => {
+        navigation('/edit/' + res[0]._id);
+        // setWidget(oldState => {
+        //   console.log('post widget', res[0]);
+        //   return { ...res[0] };
+        // });
+      });
+    } else {
+      console.log(id);
+      console.log(widget);
+      //TODO update existing widget with given ID
+    }
   };
 
   //TODO: add the timeout to take effect after user finished typing
