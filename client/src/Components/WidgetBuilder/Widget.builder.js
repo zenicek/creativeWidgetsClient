@@ -67,16 +67,13 @@ export function WidgetBuilder() {
   useEffect(() => {
     if (id) {
       getWidget(id).then(res => {
-        setWidget(oldState => {
-          console.log('get widget', res);
-          return { ...res };
-        });
+        setWidget({ ...res });
       });
     } else {
       setWidget(WidgetContext);
     }
   }, [id]);
-  //TODO dispatch to the db when user changes stuff
+  //TODO dispatch to the db dynamically every XX seconds when user changes stuff
 
   return (
     <IndividualWidget.Provider value={context}>
