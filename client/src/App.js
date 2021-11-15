@@ -18,7 +18,7 @@ function App() {
 
   return (
     <DndProvider backend={HTML5Backend}>
-      <WidgetsContext.Provider value={widgets}>
+      <WidgetsContext.Provider value={{ widgets, setWidgets }}>
         <div className="App">
           <Routes>
             <Route path="/" element={<Dashboard />} />

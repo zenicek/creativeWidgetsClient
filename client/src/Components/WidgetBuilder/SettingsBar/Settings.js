@@ -1,12 +1,18 @@
 import './Settings.css';
 import { useContext } from 'react';
-import { IndividualWidget } from '../../../Utils/Contexts';
+import { IndividualWidget, WidgetsContext } from '../../../Utils/Contexts';
 import { createWidget } from '../../../Utils/ApiService';
-import { useNavigate, useParams } from 'react-router-dom';
+import { useNavigate, useParams, Navigate } from 'react-router-dom';
+import { ReactComponent as RemoveIcon } from '../ElementsList/Icons/SvgIcons/remove.svg';
+import { removeWidget } from '../../../Utils/ApiService';
 
 export function SettingsBar({ results }) {
   const { widget, setWidget } = useContext(IndividualWidget);
+  const { widgets, setWidgets } = useContext(WidgetsContext);
+
+  console.log(widgets);
   const { id } = useParams();
+  const navigation = useNavigate();
   const handleNameChange = name => {
     setWidget({ ...widget, name: name });
   };
@@ -16,7 +22,12 @@ export function SettingsBar({ results }) {
     //TODO need to add validations in case its too big
   };
 
-  const navigation = useNavigate();
+  const handleRemove = id => {
+    removeWidget(id).then(() => {
+      navigation('/');
+      setWidgets([...widgets.filter(widget => widget._id !== id)]);
+    });
+  };
 
   const handleSaveClick = () => {
     if (!id) {
@@ -33,10 +44,6 @@ export function SettingsBar({ results }) {
       };
       createWidget(cleanWidget).then(res => {
         navigation('/edit/' + res[0]._id);
-        // setWidget(oldState => {
-        //   console.log('post widget', res[0]);
-        //   return { ...res[0] };
-        // });
       });
     } else {
       console.log(id);
@@ -96,6 +103,10 @@ export function SettingsBar({ results }) {
           <button onClick={() => handleSaveClick()} id="settings-btn">
             Save Widget
           </button>
+        </div>
+        {'|'}
+        <div className="settings-option-ctn">
+          <RemoveIcon onClick={() => handleRemove(id)} />
         </div>
       </div>
     </div>

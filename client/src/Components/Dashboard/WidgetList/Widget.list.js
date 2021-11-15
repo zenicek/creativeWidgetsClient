@@ -5,9 +5,9 @@ import { useContext } from 'react';
 import { WidgetsContext } from '../../../Utils/Contexts';
 
 export function WidgetList() {
-  const widContext = useContext(WidgetsContext);
+  const { widgets } = useContext(WidgetsContext);
 
-  const widgets = widContext.map(widget => {
+  const widgetsList = widgets.map(widget => {
     return (
       <li key={widget._id}>
         <Link to={`/edit/${widget._id}`}>
@@ -23,7 +23,7 @@ export function WidgetList() {
           <WidgetPreview />
         </Link>
       </li>
-      {widgets}
+      {widgetsList}
     </ul>
   );
 }

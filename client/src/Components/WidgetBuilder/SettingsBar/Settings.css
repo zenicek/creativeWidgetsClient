@@ -41,3 +41,12 @@
   outline: none;
   background-color: #279fa4;
 }
+
+.remove-widget-icon {
+  fill: white;
+}
+
+.remove-widget-icon:hover {
+  cursor: pointer;
+  fill: rgb(241, 179, 177);
+}

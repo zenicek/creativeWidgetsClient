@@ -20,3 +20,9 @@ export function createWidget(widget) {
     body: JSON.stringify(widget),
   });
 }
+
+export function removeWidget(id) {
+  return fetchApi('/widget/' + id, {
+    method: 'DELETE',
+  });
+}
