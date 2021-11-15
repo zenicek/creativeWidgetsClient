@@ -2,7 +2,7 @@ import './Settings.css';
 import { useContext } from 'react';
 import { IndividualWidget, WidgetsContext } from '../../../Utils/Contexts';
 import { createWidget } from '../../../Utils/ApiService';
-import { useNavigate, useParams, Navigate } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import { ReactComponent as RemoveIcon } from '../ElementsList/Icons/SvgIcons/remove.svg';
 import { removeWidget } from '../../../Utils/ApiService';
 
