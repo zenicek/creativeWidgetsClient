@@ -1,10 +1,19 @@
 import './Results.sidebar.css';
 import { useContext } from 'react';
 import { IndividualWidget } from '../../../../Utils/Contexts';
+import { validateFormula } from '../../../../Utils/Helpers';
+import { useState, useEffect } from 'react';
 
 export function ResultsSiderbar() {
   const { updateFormula, widget, updateResultDesc } =
     useContext(IndividualWidget);
+
+  const [formulaError, setformulaError] = useState(validateFormula(widget));
+
+  useEffect(() => {
+    setformulaError(validateFormula(widget));
+  }, [widget]);
+
   //TODO formula to the results array since users should be able to display multiple results
   const results = {
     formula: '',
@@ -37,6 +46,7 @@ export function ResultsSiderbar() {
           value={widget.formula}
           onChange={e => handleFormula(e.target.value)}
         ></textarea>
+        <p>{formulaError}</p>
         <p>{results.valueDesc}</p>
       </div>
     </div>

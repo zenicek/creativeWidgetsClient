@@ -1,12 +1,20 @@
 import './Result.css';
-import { useState } from 'react';
-import { calculateResult } from '../../../Utils/Helpers';
+import { calculateResult, validateFormula } from '../../../Utils/Helpers';
 import { useContext } from 'react';
 import { IndividualWidget } from '../../../Utils/Contexts';
 
 export function Result({ resultDescription, resultValDesc }) {
   const { widget } = useContext(IndividualWidget);
-  const result = calculateResult(widget);
+
+  const getResults = () => {
+    try {
+      return calculateResult(widget);
+    } catch (e) {
+      //log for now but later append as span under the formula bar
+      return console.log(e);
+    }
+  };
+  const result = getResults();
 
   //TODO update once you have a calculation parser created
   return (

@@ -8,7 +8,7 @@ import { useParams } from 'react-router';
 import { getWidget } from '../../Utils/ApiService';
 import { ResultsSiderbar } from './ResultsSetup/ResultsSidebar/Results.sidebar';
 import { nanoid } from 'nanoid';
-import { nextChar } from '../../Utils/Helpers';
+import { nextChar, validateFormula } from '../../Utils/Helpers';
 
 export function WidgetBuilder() {
   const [loadResultsPage, setLoadResultsPage] = useState(false);
