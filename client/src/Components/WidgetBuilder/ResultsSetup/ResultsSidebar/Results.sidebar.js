@@ -41,12 +41,13 @@ export function ResultsSiderbar() {
         <textarea
           type="text"
           className="input"
+          pattern="[\d][A-Za-z][()*-+/]*" //edit this later for validation
           rows="2"
           id="formula-input"
           value={widget.formula}
           onChange={e => handleFormula(e.target.value)}
         ></textarea>
-        <p>{formulaError}</p>
+        <p className="error">{formulaError}</p>
         <p>{results.valueDesc}</p>
       </div>
     </div>

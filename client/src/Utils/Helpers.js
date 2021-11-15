@@ -1,17 +1,17 @@
-//function creates a next alphabetical number for elements
+//function creates a next alphabetical identifier for elements
 export function nextChar(char) {
   return String.fromCharCode(char.charCodeAt(0) + 1);
 }
 
 //function will replace all letters with values from relevant elements and then evaluates the expression and gets the result of the calculation - Due to time constrains I will use eval() and later on I will create a proper parser to make sure it handles everything correctly
 export function calculateResult(widget) {
-  const result = 0;
-  let formula = widget.formula;
+  let result = 0;
+  let formula = widget.formula.split('');
   if (formula.length === 0) return result;
   if (validateFormula(widget) !== true)
     return 'Not a valid formula, please edit';
-  const letters = formula.match(/([A-Z])/g);
-  const values = letters.map(letter => {
+  const letters = widget.formula.match(/([A-Z])/g);
+  letters.map(letter => {
     let val = '';
     if (
       widget.elements.some(el => {
@@ -21,11 +21,11 @@ export function calculateResult(widget) {
         }
       })
     ) {
-      return { elementLetter: letter, value: Number(val) };
+      formula[formula.indexOf(letter)] = Number(val);
     }
   });
-
-  console.log(values);
+  //I KNOW I KNOW please dont judge, deadlines are tight
+  result = eval(formula.join(''));
   return result;
 }
 
@@ -33,10 +33,10 @@ export function calculateResult(widget) {
 
 export function validateFormula(widget) {
   const letters = widget.formula.match(/([A-Z])/g);
-  if (!widget.formula) return true;
+  if (!widget.formula || !letters) return true;
   let result;
   const errorLetters = [];
-  if (widget) {
+  if (letters && widget) {
     result = letters
       .map(letter => {
         if (!widget.elements.some(el => el.elementLetter === letter)) {

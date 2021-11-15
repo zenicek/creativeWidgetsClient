@@ -19,3 +19,9 @@
   font-size: 16px;
   padding: 5px;
 }
+
+.error {
+  font-size: 16px;
+  font-weight: 400;
+  color: #fab8ad;
+}
