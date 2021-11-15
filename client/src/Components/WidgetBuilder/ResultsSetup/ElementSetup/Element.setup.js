@@ -3,6 +3,7 @@ import { useContext } from 'react';
 import { IndividualWidget } from '../../../../Utils/Contexts';
 import { SliderOptions } from './ElementSetupOptions/Slider.option';
 import { ListItemSetup } from './ElementSetupOptions/List.option';
+import { InputToggle } from './ElementSetupOptions/Input.toggle';
 
 export function ElementSetup({ id }) {
   const { updateElement, findElement } = useContext(IndividualWidget);
@@ -14,6 +15,11 @@ export function ElementSetup({ id }) {
     element.min = min;
     element.max = max;
     element.step = step;
+    updateElement(id, element);
+  };
+
+  const updateElementDescription = value => {
+    element.elementDescription = value;
     updateElement(id, element);
   };
 
@@ -42,7 +48,13 @@ export function ElementSetup({ id }) {
   return (
     <div className="element-setup-ctn">
       <div id="letter-ctn">{element.elementLetter}</div>
-      <div className="description-ctn">{element.elementDescription}</div>
+      <div className="description-ctn">
+        {' '}
+        <InputToggle
+          description={element.elementDescription}
+          updateWidget={updateElementDescription}
+        />
+      </div>
       {optionElement()}
     </div>
   );

@@ -9,7 +9,7 @@ export const WidgetContext = {
   name: 'default calculator',
   lastLetter: '@',
   width: 720,
-  resultDescription: '',
+  resultDescription: 'Result placeholder - please edit',
   resultValueDesc: '',
   result: [],
 };

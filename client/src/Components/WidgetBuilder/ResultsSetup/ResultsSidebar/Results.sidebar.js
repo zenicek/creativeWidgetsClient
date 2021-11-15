@@ -3,6 +3,7 @@ import { useContext } from 'react';
 import { IndividualWidget } from '../../../../Utils/Contexts';
 import { validateFormula } from '../../../../Utils/Helpers';
 import { useState, useEffect } from 'react';
+import { InputToggle } from '../ElementSetup/ElementSetupOptions/Input.toggle';
 
 export function ResultsSiderbar() {
   const { updateFormula, widget, updateResultDesc, updateResultValueDesc } =
@@ -14,17 +15,11 @@ export function ResultsSiderbar() {
     setformulaError(validateFormula(widget));
   }, [widget]);
 
-  //TODO formula to the results array since users should be able to display multiple results
+  //TODO formula to the results array since users should be able to display multiple results - after the mvp presentation
   const results = {
     formula: '',
     description: 'Results description, double click to edit',
     valueDesc: 'USD',
-  };
-
-  const handleResDescription = e => {
-    results.description = e.target.value;
-    console.log(e.target.innerText);
-    // updateResultDesc(results.description);
   };
   const handleResValueDesc = e => {
     results.valueDesc = e.target.value;
@@ -37,13 +32,14 @@ export function ResultsSiderbar() {
   return (
     <div className="side-bar-ctn">
       <div className="formula-wrapper-ctn">
-        <p
-          onDoubleClick={e => {
-            handleResDescription(e);
-          }}
-        >
-          {results.description}
-        </p>
+        <InputToggle
+          description={
+            widget.resultDescription
+              ? widget.resultDescription
+              : 'Double tap to update'
+          }
+          updateWidget={updateResultDesc}
+        />
         {'='}
         <textarea
           type="text"
@@ -55,7 +51,14 @@ export function ResultsSiderbar() {
           onChange={e => handleFormula(e.target.value)}
         ></textarea>
         <p className="error">{formulaError}</p>
-        <p>{results.valueDesc}</p>
+        <InputToggle
+          description={
+            widget.resultValueDesc
+              ? widget.resultValueDesc
+              : 'Update value description'
+          }
+          updateWidget={updateResultValueDesc}
+        />
       </div>
     </div>
   );
