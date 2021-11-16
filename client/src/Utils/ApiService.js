@@ -26,3 +26,11 @@ export function removeWidget(id) {
     method: 'DELETE',
   });
 }
+
+export function updateWidget(id, widget) {
+  return fetchApi('/widget/' + id, {
+    method: 'POST',
+    headers: { 'Content-type': 'application/json' },
+    body: JSON.stringify(widget),
+  });
+}

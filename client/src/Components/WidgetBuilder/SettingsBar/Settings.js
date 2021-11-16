@@ -1,7 +1,7 @@
 import './Settings.css';
 import { useContext } from 'react';
 import { IndividualWidget, WidgetsContext } from '../../../Utils/Contexts';
-import { createWidget } from '../../../Utils/ApiService';
+import { createWidget, updateWidget } from '../../../Utils/ApiService';
 import { useNavigate, useParams } from 'react-router-dom';
 import { ReactComponent as RemoveIcon } from '../ElementsList/Icons/SvgIcons/remove.svg';
 import { removeWidget } from '../../../Utils/ApiService';
@@ -30,25 +30,24 @@ export function SettingsBar({ results }) {
   };
 
   const handleSaveClick = () => {
+    //I am assigning the nanoid on the front end which is being replaced on the backend the below is removing any front end IDs
+    const cleanWidget = {
+      ...widget,
+      elements: widget.elements.map(el => {
+        const elCopy = { ...el };
+        if (elCopy.id) {
+          delete elCopy.id;
+        }
+        return elCopy;
+      }),
+    };
+    //TODO handle if user modifies the widget URL and ID is invalid
     if (!id) {
-      //I am assigning the nanoid on the front end which is being replaced on the backend the below is removing any front end IDs
-      const cleanWidget = {
-        ...widget,
-        elements: widget.elements.map(el => {
-          const elCopy = { ...el };
-          if (elCopy.id) {
-            delete elCopy.id;
-          }
-          return elCopy;
-        }),
-      };
       createWidget(cleanWidget).then(res => {
         navigation('/edit/' + res[0]._id);
       });
     } else {
-      console.log(id);
-      console.log(widget);
-      //TODO update existing widget with given ID
+      updateWidget(cleanWidget._id, cleanWidget);
     }
   };
 

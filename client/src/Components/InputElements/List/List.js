@@ -3,12 +3,12 @@ import { IndividualWidget } from '../../../Utils/Contexts';
 import './List.css';
 
 export function List({ id }) {
-  const { updateElement, findElement } = useContext(IndividualWidget);
+  const { findElement } = useContext(IndividualWidget);
 
   const element = { ...findElement(id) };
 
   const options = () => {
-    if (element.list) {
+    if (element.list && element.list.length > 0) {
       return element.list.map(item => {
         return <option value={item.onValue}>item.optionName</option>;
       });
