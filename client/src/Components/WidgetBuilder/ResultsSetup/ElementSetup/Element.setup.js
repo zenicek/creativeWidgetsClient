@@ -1,5 +1,5 @@
 import './Element.setup.css';
-import { useContext, useState } from 'react';
+import { useContext } from 'react';
 import { IndividualWidget } from '../../../../Utils/Contexts';
 import { SliderOptions } from './ElementSetupOptions/Slider.option';
 import { ListItemSetup } from './ElementSetupOptions/List.option';

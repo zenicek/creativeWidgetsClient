@@ -16,15 +16,6 @@ export function ResultsSiderbar() {
   }, [widget]);
 
   //TODO formula to the results array since users should be able to display multiple results - after the mvp presentation
-  const results = {
-    formula: '',
-    description: 'Results description, double click to edit',
-    valueDesc: 'USD',
-  };
-  const handleResValueDesc = e => {
-    results.valueDesc = e.target.value;
-    updateResultValueDesc(results.valueDesc);
-  };
   const handleFormula = formula => {
     //TODO add validation for special characters for security
     updateFormula(formula.toUpperCase());

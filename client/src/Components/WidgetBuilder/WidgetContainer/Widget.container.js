@@ -9,22 +9,20 @@ import { Result } from '../ResultsBottom/Result';
 
 export function WidgetContainer({ loadResults }) {
   const { widget, addElement } = useContext(IndividualWidget);
-  //function gets all the elements from the context, sorts them by relative position and converts to element lookup
+  //function gets all the elements from the context and converts to element lookup
   const elementSetupList = [...widget.elements].map(el => (
     <ElementSetup id={el._id ? el._id : el.id} key={el._id ? el._id : el.id} />
   ));
 
-  const elementsList = [...widget.elements]
-    .sort((a, b) => a.elementIndex - b.elementIndex)
-    .map(el => {
-      const Element = elements[el.elementType];
-      if (Element) {
-        return (
-          <Element id={el._id ? el._id : el.id} key={el._id ? el._id : el.id} />
-        );
-      }
-      return null;
-    });
+  const elementsList = [...widget.elements].map(el => {
+    const Element = elements[el.elementType];
+    if (Element) {
+      return (
+        <Element id={el._id ? el._id : el.id} key={el._id ? el._id : el.id} />
+      );
+    }
+    return null;
+  });
 
   const [, drop] = useDrop({
     accept: elementTypes,

@@ -3,7 +3,7 @@ import { ReactComponent as RemoveIcon } from './remove.svg';
 
 export function ListItemSetup({ listItem, handleListSetup, removeOption }) {
   const option = { ...listItem };
-
+  //TODO adapt this to use with radios and checkboxes as well
   const handleOptionName = name => {
     option.label = name;
     handleListSetup(option);
