@@ -1,24 +1,45 @@
 import { elementTypes } from '../../InputElements/Elements.types';
 import { useDrop } from 'react-dnd';
 import './Widget.container.css';
-import { useContext } from 'react';
+import { useCallback, useContext } from 'react';
 import { IndividualWidget } from '../../../Utils/Contexts';
 import { elements } from '../ElementsList/ElemsLookup';
 import { ElementSetup } from '../ResultsSetup/ElementSetup/Element.setup';
 import { Result } from '../ResultsBottom/Result';
+import update from 'immutability-helper';
 
 export function WidgetContainer({ loadResults }) {
-  const { widget, addElement } = useContext(IndividualWidget);
+  const { widget, addElement, arrangeElements } = useContext(IndividualWidget);
   //function gets all the elements from the context and converts to element lookup
   const elementSetupList = [...widget.elements].map(el => (
     <ElementSetup id={el._id ? el._id : el.id} key={el._id ? el._id : el.id} />
   ));
 
-  const elementsList = [...widget.elements].map(el => {
+  const moveElement = useCallback(
+    (dragIndex, hoverIndex) => {
+      const dragElement = widget.elements[dragIndex];
+      arrangeElements(
+        update(widget.elements, {
+          $splice: [
+            [dragIndex, 1],
+            [hoverIndex, 0, dragElement],
+          ],
+        })
+      );
+    },
+    [widget.elements, arrangeElements]
+  );
+
+  const elementsList = [...widget.elements].map((el, index) => {
     const Element = elements[el.elementType];
     if (Element) {
       return (
-        <Element id={el._id ? el._id : el.id} key={el._id ? el._id : el.id} />
+        <Element
+          id={el._id ? el._id : el.id}
+          index={index}
+          key={el._id ? el._id : el.id}
+          moveElement={moveElement}
+        />
       );
     }
     return null;
@@ -27,11 +48,8 @@ export function WidgetContainer({ loadResults }) {
   const [, drop] = useDrop({
     accept: elementTypes,
     drop: item => {
-      addElement(item.meta);
+      if (item.meta) addElement(item.meta);
     },
-    // collect: monitor => ({
-    //   canDrop: !!monitor.canDrop(),
-    // }),
   });
   return (
     <div

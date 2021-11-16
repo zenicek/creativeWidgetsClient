@@ -45,6 +45,10 @@ export function WidgetBuilder() {
       });
       setWidget({ ...widget, elements: [...updatedEls] });
     },
+    //function to rearrange elements on the dnd within the container
+    arrangeElements: elements => {
+      setWidget({ ...widget, elements: [...elements] });
+    },
     //to find element in the array
     findElement: id => {
       return widget.elements.find(el =>

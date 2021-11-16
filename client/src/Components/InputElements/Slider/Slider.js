@@ -1,8 +1,10 @@
 import './Slider.css';
-import { useContext } from 'react';
+import { useContext, useRef } from 'react';
 import { IndividualWidget } from '../../../Utils/Contexts';
+import { elementTypes } from '../Elements.types';
+import { useDrag, useDrop } from 'react-dnd';
 
-export function Slider({ id }) {
+export function Slider({ id, index, moveElement }) {
   const { updateElement, findElement } = useContext(IndividualWidget);
 
   //needs to be a copy - immutability
@@ -22,8 +24,58 @@ export function Slider({ id }) {
     }
     return options;
   };
+
+  //DND within the elements (need to check if this can be placed outside of the element)
+  const ref = useRef(null);
+  const [{ handlerId }, drop] = useDrop({
+    accept: elementTypes,
+    collect(monitor) {
+      return {
+        handlerId: monitor.getHandlerId(),
+      };
+    },
+    hover(item, monitor) {
+      if (!ref.current) {
+        return;
+      }
+      const dragIndex = item.index;
+      const hoverIndex = index;
+      if (dragIndex === hoverIndex) {
+        return;
+      }
+      const hoverBoundingRect = ref.current?.getBoundingClientRect();
+      const hoverMiddleY =
+        (hoverBoundingRect.bottom - hoverBoundingRect.top) / 2;
+      const clientOffset = monitor.getClientOffset();
+      const hoverClientY = clientOffset.y - hoverBoundingRect.top;
+      if (dragIndex < hoverIndex && hoverClientY < hoverMiddleY) {
+        return;
+      }
+      if (dragIndex > hoverIndex && hoverClientY > hoverMiddleY) {
+        return;
+      }
+      moveElement(dragIndex, hoverIndex);
+      item.index = hoverIndex;
+    },
+  });
+
+  const [{ isDragging }, drag] = useDrag({
+    type: 'Slider',
+    item: () => {
+      return { id, index };
+    },
+    collect: monitor => ({
+      isDragging: monitor.isDragging(),
+    }),
+  });
+  drag(drop(ref));
   return (
-    <div className="slider-ctn">
+    <div
+      className="slider-ctn"
+      ref={ref}
+      style={{ opacity: isDragging ? 0.5 : 1 }}
+      data-handler-id={handlerId}
+    >
       <label>
         {element.elementDescription} - {element.value}
       </label>
