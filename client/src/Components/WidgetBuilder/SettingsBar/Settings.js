@@ -9,8 +9,6 @@ import { removeWidget } from '../../../Utils/ApiService';
 export function SettingsBar({ results }) {
   const { widget, setWidget } = useContext(IndividualWidget);
   const { widgets, setWidgets } = useContext(WidgetsContext);
-
-  console.log(widgets);
   const { id } = useParams();
   const navigation = useNavigate();
   const handleNameChange = name => {

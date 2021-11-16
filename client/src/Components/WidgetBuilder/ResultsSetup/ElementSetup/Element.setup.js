@@ -1,9 +1,10 @@
 import './Element.setup.css';
-import { useContext } from 'react';
+import { useContext, useState } from 'react';
 import { IndividualWidget } from '../../../../Utils/Contexts';
 import { SliderOptions } from './ElementSetupOptions/Slider.option';
 import { ListItemSetup } from './ElementSetupOptions/List.option';
 import { InputToggle } from './ElementSetupOptions/Input.toggle';
+import { nanoid } from 'nanoid';
 
 export function ElementSetup({ id }) {
   const { updateElement, findElement } = useContext(IndividualWidget);
@@ -17,9 +18,33 @@ export function ElementSetup({ id }) {
     element.step = step;
     updateElement(id, element);
   };
+  const handleListSetup = option => {
+    const updatedOptionList = [
+      ...element.list.map(el => {
+        if (el.id === option.id) {
+          return { ...option };
+        } else {
+          return el;
+        }
+      }),
+    ];
+    element.list = [...updatedOptionList];
+    updateElement(id, element);
+    console.log(element.list);
+  };
 
   const updateElementDescription = value => {
     element.elementDescription = value;
+    updateElement(id, element);
+  };
+
+  const addListOption = () => {
+    const option = {
+      id: nanoid(),
+      label: '',
+      value: '',
+    };
+    element.list.push({ ...option });
     updateElement(id, element);
   };
 
@@ -35,15 +60,26 @@ export function ElementSetup({ id }) {
       );
     }
     if (element.elementType === 'List') {
+      const list = element.list.map(option => {
+        return (
+          <ListItemSetup
+            key={option.id}
+            listItem={option}
+            handleListSetup={handleListSetup}
+          />
+        );
+      });
+      //TODO on button append the new list item setup field
       return (
         <div>
-          <button id="add-item">Add Item</button>
-          <ListItemSetup />
+          <button id="add-item" onClick={() => addListOption()}>
+            Add Item
+          </button>
+          {list}
         </div>
       );
     }
   };
-  const handleListSetup = optionsList => {};
 
   return (
     <div className="element-setup-ctn">

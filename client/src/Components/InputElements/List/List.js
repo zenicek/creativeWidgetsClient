@@ -1,28 +1,28 @@
-import { useContext } from 'react';
+import { useContext, useState } from 'react';
 import { IndividualWidget } from '../../../Utils/Contexts';
 import './List.css';
+import Select from 'react-select';
 
 export function List({ id }) {
-  const { findElement } = useContext(IndividualWidget);
-
+  const { findElement, updateElement } = useContext(IndividualWidget);
   const element = { ...findElement(id) };
+  const [selectedOption, setSelectedOption] = useState(element.value);
 
-  const options = () => {
-    if (element.list && element.list.length > 0) {
-      return element.list.map(item => {
-        return <option value={item.onValue}>item.optionName</option>;
-      });
-    } else {
-      return <option value="no-data">Set up your first option</option>;
-    }
+  const handleChange = e => {
+    element.value = e.value;
+    setSelectedOption(e.value);
+    updateElement(id, element);
   };
+
   return (
     <div className="input-ctn">
-      <label htmlFor="widget-list">List</label>
+      <label htmlFor="widget-list">{element.elementDescription}</label>
       <div>
-        <select className="input" id="widget-list">
-          {options()}
-        </select>
+        <Select
+          options={element.list}
+          onChange={e => handleChange(e)}
+          value={element.list.filter(option => option.value === selectedOption)}
+        />
       </div>
     </div>
   );
