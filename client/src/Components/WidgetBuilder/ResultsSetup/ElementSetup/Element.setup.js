@@ -30,7 +30,6 @@ export function ElementSetup({ id }) {
     ];
     element.list = [...updatedOptionList];
     updateElement(id, element);
-    console.log(element.list);
   };
 
   const updateElementDescription = value => {
@@ -45,6 +44,11 @@ export function ElementSetup({ id }) {
       value: '',
     };
     element.list.push({ ...option });
+    updateElement(id, element);
+  };
+
+  const removeListOption = optionId => {
+    element.list = element.list.filter(el => el.id !== optionId);
     updateElement(id, element);
   };
 
@@ -66,10 +70,10 @@ export function ElementSetup({ id }) {
             key={option.id}
             listItem={option}
             handleListSetup={handleListSetup}
+            removeOption={removeListOption}
           />
         );
       });
-      //TODO on button append the new list item setup field
       return (
         <div>
           <button id="add-item" onClick={() => addListOption()}>

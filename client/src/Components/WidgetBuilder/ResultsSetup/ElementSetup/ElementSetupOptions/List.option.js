@@ -1,7 +1,7 @@
 import './List.option.css';
 import { ReactComponent as RemoveIcon } from './remove.svg';
 
-export function ListItemSetup({ listItem, handleListSetup }) {
+export function ListItemSetup({ listItem, handleListSetup, removeOption }) {
   const option = { ...listItem };
 
   const handleOptionName = name => {
@@ -15,7 +15,10 @@ export function ListItemSetup({ listItem, handleListSetup }) {
   };
   return (
     <div className="list-option-ctn">
-      <RemoveIcon className="remove-icon" />
+      <RemoveIcon
+        className="remove-icon"
+        onClick={() => removeOption(option.id)}
+      />
       <input
         type="text"
         className="settings-input"
