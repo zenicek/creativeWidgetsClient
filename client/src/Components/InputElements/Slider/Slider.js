@@ -1,8 +1,7 @@
 import './Slider.css';
 import { useContext, useRef } from 'react';
 import { IndividualWidget } from '../../../Utils/Contexts';
-import { ElementArranger } from '../Elements.types';
-import { useDrag, useDrop } from 'react-dnd';
+import { useArrangeElement } from '../../../Utils/CustomHooks';
 
 export function Slider({ id, index, moveElement }) {
   const { updateElement, findElement } = useContext(IndividualWidget);
@@ -25,50 +24,15 @@ export function Slider({ id, index, moveElement }) {
     return options;
   };
 
-  //DND within the elements (need to check if this can be placed outside of the element)
+  //DND
   const ref = useRef(null);
-  const [{ handlerId }, drop] = useDrop({
-    accept: ElementArranger,
-    collect(monitor) {
-      return {
-        handlerId: monitor.getHandlerId(),
-      };
-    },
-    hover(item, monitor) {
-      if (!ref.current) {
-        return;
-      }
-      const dragIndex = item.index;
-      const hoverIndex = index;
-      if (dragIndex === hoverIndex) {
-        return;
-      }
-      const hoverBoundingRect = ref.current?.getBoundingClientRect();
-      const hoverMiddleY =
-        (hoverBoundingRect.bottom - hoverBoundingRect.top) / 2;
-      const clientOffset = monitor.getClientOffset();
-      const hoverClientY = clientOffset.y - hoverBoundingRect.top;
-      if (dragIndex < hoverIndex && hoverClientY < hoverMiddleY) {
-        return;
-      }
-      if (dragIndex > hoverIndex && hoverClientY > hoverMiddleY) {
-        return;
-      }
-      moveElement(dragIndex, hoverIndex);
-      item.index = hoverIndex;
-    },
-  });
-
-  const [{ isDragging }, drag] = useDrag({
-    type: 'ElementArranger',
-    item: () => {
-      return { id, index };
-    },
-    collect: monitor => ({
-      isDragging: monitor.isDragging(),
-    }),
-  });
-  // drag(drop(ref));
+  const { drag, drop, isDragging, handlerId } = useArrangeElement(
+    ref,
+    id,
+    index,
+    moveElement
+  );
+  drag(drop(ref));
   //TODO Slider rearranges but doesnt slide in the edit. need to redo or target it differently
   return (
     <div
