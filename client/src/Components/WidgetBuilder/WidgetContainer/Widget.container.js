@@ -11,7 +11,6 @@ import update from 'immutability-helper';
 export function WidgetContainer({ loadResults }) {
   const { widget, addElement, arrangeElements } = useContext(IndividualWidget);
   //function gets all the elements from the context and converts to element lookup
-  console.log(widget);
   const elementSetupList = [...widget.elements].map(el => (
     <ElementSetup id={el._id ? el._id : el.id} key={el._id ? el._id : el.id} />
   ));
@@ -49,7 +48,6 @@ export function WidgetContainer({ loadResults }) {
   const [, drop] = useDrop({
     accept: elementTypes,
     drop: item => {
-      console.log(item);
       if (item.meta) addElement(item.meta);
     },
   });

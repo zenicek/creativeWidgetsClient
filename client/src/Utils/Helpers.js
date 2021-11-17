@@ -4,6 +4,8 @@ export function nextChar(char) {
 }
 
 //function will replace all letters with values from relevant elements and then evaluates the expression and gets the result of the calculation - Due to time constrains I will use eval() and later on I will create a proper parser to make sure it handles everything correctly
+//TODO currently function will take and replace only first index.. but the element might be refered to multiple times in a formula.. this needs to be handled.
+
 export function calculateResult(widget) {
   let result = 0;
   let formula = widget.formula.split('');
@@ -26,12 +28,13 @@ export function calculateResult(widget) {
     }
   });
   //I KNOW I KNOW please dont judge, deadlines are tight
-  //fixed for now, but later users will be able to define decimal points
+  //TODO fixed float for now, but later users will be able to define decimal points
   result = eval(formula.join('')).toFixed(2);
   return result;
 }
 
 // validation function to define results screen (simple check if formula letter exists within the container)
+//TODO what also needs to be handled is that if user by mistake puts "AA" for example it will accept that - user can only input "A" as the element.
 export function validateFormula(widget) {
   const letters = widget.formula.match(/([A-Z])/g);
   if (!widget.formula || !letters) return true;

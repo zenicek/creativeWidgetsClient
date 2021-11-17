@@ -9,7 +9,6 @@ export function Slider({ id, index, moveElement }) {
   //needs to be a copy - immutability
   const element = { ...findElement(id) };
 
-  //TODO once you create editable other fields - here you can update other values
   const handleSlideChange = value => {
     element.value = Number(value);
     updateElement(id, element);
