@@ -1,7 +1,7 @@
 import './Value.css';
 import { useContext, useRef } from 'react';
 import { IndividualWidget } from '../../../Utils/Contexts';
-import { elementTypes } from '../Elements.types';
+import { ElementArranger } from '../Elements.types';
 import { useDrag, useDrop } from 'react-dnd';
 
 export function ValueInput({ id, index, moveElement }) {
@@ -17,7 +17,7 @@ export function ValueInput({ id, index, moveElement }) {
   const ref = useRef(null);
   //DND within the elements (need to check if this can be placed outside of the element)
   const [{ handlerId }, drop] = useDrop({
-    accept: elementTypes,
+    accept: ElementArranger,
     collect(monitor) {
       return {
         handlerId: monitor.getHandlerId(),
@@ -49,7 +49,7 @@ export function ValueInput({ id, index, moveElement }) {
   });
 
   const [{ isDragging }, drag] = useDrag({
-    type: 'ValueInput',
+    type: 'ElementArranger',
     item: () => {
       return { id, index };
     },

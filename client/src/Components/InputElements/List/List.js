@@ -2,7 +2,7 @@ import { useContext, useState, useRef } from 'react';
 import { IndividualWidget } from '../../../Utils/Contexts';
 import './List.css';
 import Select from 'react-select';
-import { elementTypes } from '../Elements.types';
+import { ElementArranger } from '../Elements.types';
 import { useDrag, useDrop } from 'react-dnd';
 
 export function List({ id, index, moveElement }) {
@@ -19,7 +19,7 @@ export function List({ id, index, moveElement }) {
   //DND within the elements (need to check if this can be placed outside of the element)
   const ref = useRef(null);
   const [{ handlerId }, drop] = useDrop({
-    accept: elementTypes,
+    accept: ElementArranger,
     collect(monitor) {
       return {
         handlerId: monitor.getHandlerId(),
@@ -51,7 +51,7 @@ export function List({ id, index, moveElement }) {
   });
 
   const [{ isDragging }, drag] = useDrag({
-    type: 'Slider',
+    type: 'ElementArranger',
     item: () => {
       return { id, index };
     },

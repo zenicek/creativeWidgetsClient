@@ -2,13 +2,14 @@ import './Text.css';
 import { useContext, useRef } from 'react';
 import { IndividualWidget } from '../../../Utils/Contexts';
 import { useDrag, useDrop } from 'react-dnd';
-import { elementTypes } from '../Elements.types';
+import { ElementArranger } from '../Elements.types';
 
 export function Text({ id, index, moveElement }) {
   const { findElement } = useContext(IndividualWidget);
+  const element = { ...findElement(id) };
   const ref = useRef(null);
   const [{ handlerId }, drop] = useDrop({
-    accept: elementTypes,
+    accept: ElementArranger,
     collect(monitor) {
       return {
         handlerId: monitor.getHandlerId(),
@@ -55,7 +56,7 @@ export function Text({ id, index, moveElement }) {
   });
 
   const [{ isDragging }, drag] = useDrag({
-    type: 'Text',
+    type: 'ElementArranger',
     item: () => {
       return { id, index };
     },
@@ -64,7 +65,6 @@ export function Text({ id, index, moveElement }) {
     }),
   });
 
-  const element = { ...findElement(id) };
   drag(drop(ref));
   return (
     <h3

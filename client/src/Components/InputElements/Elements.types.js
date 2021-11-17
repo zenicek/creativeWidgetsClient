@@ -8,3 +8,5 @@ export const elementTypes = [
   'Button',
   'Image',
 ];
+
+export const ElementArranger = ['ElementArranger'];

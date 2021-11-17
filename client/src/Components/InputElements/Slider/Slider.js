@@ -1,7 +1,7 @@
 import './Slider.css';
 import { useContext, useRef } from 'react';
 import { IndividualWidget } from '../../../Utils/Contexts';
-import { elementTypes } from '../Elements.types';
+import { ElementArranger } from '../Elements.types';
 import { useDrag, useDrop } from 'react-dnd';
 
 export function Slider({ id, index, moveElement }) {
@@ -28,7 +28,7 @@ export function Slider({ id, index, moveElement }) {
   //DND within the elements (need to check if this can be placed outside of the element)
   const ref = useRef(null);
   const [{ handlerId }, drop] = useDrop({
-    accept: elementTypes,
+    accept: ElementArranger,
     collect(monitor) {
       return {
         handlerId: monitor.getHandlerId(),
@@ -60,7 +60,7 @@ export function Slider({ id, index, moveElement }) {
   });
 
   const [{ isDragging }, drag] = useDrag({
-    type: 'Slider',
+    type: 'ElementArranger',
     item: () => {
       return { id, index };
     },
@@ -68,7 +68,8 @@ export function Slider({ id, index, moveElement }) {
       isDragging: monitor.isDragging(),
     }),
   });
-  drag(drop(ref));
+  // drag(drop(ref));
+  //TODO Slider rearranges but doesnt slide in the edit. need to redo or target it differently
   return (
     <div
       className="slider-ctn"
