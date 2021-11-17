@@ -33,6 +33,7 @@ export function Slider({ id, index, moveElement }) {
   );
   drag(drop(ref));
   //TODO Slider rearranges but doesnt slide in the edit. need to redo or target it differently
+  //TODO check out rc-slider npm package and potentially use that since it has all the marks etc nicely done...
   return (
     <div
       className="slider-ctn"
