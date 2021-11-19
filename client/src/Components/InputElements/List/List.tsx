@@ -3,21 +3,24 @@ import { IndividualWidget } from '../../../Utils/Contexts';
 import './List.css';
 import Select from 'react-select';
 import { useArrangeElement } from '../../../Utils/CustomHooks';
+import InputProps from '../InputProps';
 
-interface Props {
-  id: number;
-  index: number;
-  moveElement: () => void;
+interface Option {
+  id: string;
+  label: any;
+  value: number;
+  offValue: number;
+  selected: boolean;
 }
 
-export const List: React.FC<Props> = ({ id, index, moveElement }) => {
+export const List: React.FC<InputProps> = ({ id, index, moveElement }) => {
   const { findElement, updateElement } = useContext(IndividualWidget);
   const element = { ...findElement(id) };
   const [selectedOption, setSelectedOption] = useState(element.value);
 
-  const handleChange = (e) => {
-    element.value = e.value;
-    setSelectedOption(e.value);
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    element.value = e.target.value;
+    setSelectedOption(e.target.value);
     updateElement(id, element);
   };
 
@@ -44,7 +47,7 @@ export const List: React.FC<Props> = ({ id, index, moveElement }) => {
           options={element.list}
           onChange={(e) => handleChange(e)}
           value={element.list.filter(
-            (option) => option.value === selectedOption
+            (option: Option) => option.value === selectedOption
           )}
         />
       </div>

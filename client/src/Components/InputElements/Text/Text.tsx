@@ -2,8 +2,9 @@ import './Text.css';
 import { useContext, useRef } from 'react';
 import { IndividualWidget } from '../../../Utils/Contexts';
 import { useArrangeElement } from '../../../Utils/CustomHooks';
+import InputProps from '../InputProps';
 
-export function Text({ id, index, moveElement }) {
+export const Text: React.FC<InputProps> = ({ id, index, moveElement }) => {
   const { findElement } = useContext(IndividualWidget);
   const element = { ...findElement(id) };
   const ref = useRef(null);
@@ -24,4 +25,4 @@ export function Text({ id, index, moveElement }) {
       {element.elementDescription}
     </h3>
   );
-}
+};

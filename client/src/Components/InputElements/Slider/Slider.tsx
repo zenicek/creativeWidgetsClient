@@ -1,15 +1,16 @@
 import './Slider.css';
-import { useContext, useRef } from 'react';
+import React, { useContext, useRef } from 'react';
 import { IndividualWidget } from '../../../Utils/Contexts';
 import { useArrangeElement } from '../../../Utils/CustomHooks';
+import InputProps from '../InputProps';
 
-export function Slider({ id, index, moveElement }) {
+export const Slider: React.FC<InputProps> = ({ id, index, moveElement }) => {
   const { updateElement, findElement } = useContext(IndividualWidget);
 
   //needs to be a copy - immutability
   const element = { ...findElement(id) };
 
-  const handleSlideChange = value => {
+  const handleSlideChange = (value: string) => {
     element.value = Number(value);
     updateElement(id, element);
   };
@@ -52,11 +53,11 @@ export function Slider({ id, index, moveElement }) {
           max={element.max}
           step={element.step}
           value={element.value}
-          onChange={e => handleSlideChange(e.target.value)}
+          onChange={(e) => handleSlideChange(e.target.value)}
           list="tickmarks"
         ></input>
         <datalist id="tickmarks">{marks()}</datalist>
       </div>
     </div>
   );
-}
+};
