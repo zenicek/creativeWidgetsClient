@@ -8,7 +8,7 @@ export function ValueInput({ id, index, moveElement }) {
 
   const element = { ...findElement(id) };
 
-  const handleInputChange = value => {
+  const handleInputChange = (value) => {
     element.value = value;
     updateElement(id, element);
   };
@@ -25,23 +25,23 @@ export function ValueInput({ id, index, moveElement }) {
 
   return (
     <div
-      className="input-ctn"
+      className='input-ctn'
       ref={ref}
       style={{ opacity: isDragging ? 0.5 : 1 }}
       data-handler-id={handlerId}
     >
-      <label className="label" htmlFor="widget-input">
+      <label className='label' htmlFor='widget-input'>
         {element.elementDescription}
       </label>
       <div>
         <input
-          type="text"
-          pattern="[0-9]*"
-          className="input"
-          id="widget-input"
-          placeholder="Number"
+          type='text'
+          pattern='[0-9]*'
+          className='input'
+          id='widget-input'
+          placeholder='Number'
           value={element.value === null ? '' : element.value}
-          onChange={e => handleInputChange(e.target.value)}
+          onChange={(e) => handleInputChange(e.target.value)}
         ></input>
       </div>
     </div>

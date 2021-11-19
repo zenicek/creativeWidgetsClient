@@ -4,11 +4,11 @@ import { WidgetList } from './WidgetList/Widget.list';
 
 export function Dashboard() {
   return (
-    <div className="dashboard-ctn">
-      <div id="side-menu-ctn">
+    <div className='dashboard-ctn'>
+      <div id='side-menu-ctn'>
         <SideMenu />
       </div>
-      <div id="widgets-ctn">
+      <div id='widgets-ctn'>
         <WidgetList />
       </div>
     </div>
