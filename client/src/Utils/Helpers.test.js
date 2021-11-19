@@ -11,7 +11,18 @@ describe('calculateResult function', () => {
       { elementLetter: 'E', value: 1 },
     ],
   };
+  const invalidWidget = {
+    formula: 'A+B-C',
+    elements: [
+      { elementLetter: 'A', value: 5 },
+      { elementLetter: 'C', value: 1 },
+    ],
+  };
   test('calculates values from formula correctly', () => {
     expect(calculateResult(exampleWidget)).toBe(5);
+  });
+
+  test('return null if not provided with values', () => {
+    expect(calculateResult(invalidWidget)).toBe(null);
   });
 });
