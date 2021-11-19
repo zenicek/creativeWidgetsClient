@@ -21,7 +21,7 @@ export function ResultsSiderbar() {
     updateFormula(formula.toUpperCase());
   };
 
-  const renderError = () => {
+  const RenderError = () => {
     if (isValid) return <></>;
     else return <p className='error'>{genErrorMessage(widget)}</p>;
   };
@@ -47,7 +47,7 @@ export function ResultsSiderbar() {
           value={widget.formula}
           onChange={(e) => handleFormula(e.target.value)}
         ></textarea>
-        {renderError()}
+        <RenderError />
         <InputToggle
           description={
             widget.resultValueDesc

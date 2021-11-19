@@ -14,12 +14,12 @@ interface InputValues {
 
 export function calculateResult(widget: Widget): number {
   const parser = new Parser();
-  const userExpression = parser.parse(widget.formula);
+  const userExpression = parser.parse(widget.formula.toLowerCase());
 
   const inputValues: InputValues = {};
 
   widget.elements.forEach((el: Element) => {
-    inputValues[el.elementLetter] = el.value;
+    inputValues[el.elementLetter.toLowerCase()] = el.value;
   });
 
   return userExpression.evaluate(inputValues);
@@ -28,15 +28,20 @@ export function calculateResult(widget: Widget): number {
 // validation function to define results screen (simple check if formula letter exists within the container)
 export function isValidFormula(widget: Widget): boolean {
   const lettersInFormula = widget.formula.match(/([A-Z])+/g);
-  if (!widget.formula || !lettersInFormula) return true;
-  if (lettersInFormula.some((letter: string) => letter.length !== 1))
+  if (!widget.formula || !lettersInFormula) {
+    return true;
+  }
+  if (lettersInFormula.some((letter: string) => letter.length !== 1)) {
     return false;
+  }
 
   const lettersInWidget = widget.elements.map(
     (el: Element) => el.elementLetter
   );
   for (const letter of lettersInFormula) {
-    if (!lettersInWidget.includes(letter)) return false;
+    if (!lettersInWidget.includes(letter)) {
+      return false;
+    }
   }
   return true;
 }
