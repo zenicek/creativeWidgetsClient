@@ -3,18 +3,16 @@ import { Element } from '../Types/Element';
 import { Parser } from 'expr-eval';
 
 //function creates a next alphabetical identifier for elements
-export function nextChar(char: string) {
+export function nextChar(char: string): string {
   return String.fromCharCode(char.charCodeAt(0) + 1);
 }
 
-//function will replace all letters with values from relevant elements and then evaluates the expression and gets the result of the calculation - Due to time constrains I will use eval() and later on I will create a proper parser to make sure it handles everything correctly
-//TODO currently function will take and replace only first index.. but the element might be refered to multiple times in a formula.. this needs to be handled.
-
+// calculate result from user's formula
 interface InputValues {
   [key: string]: number;
 }
 
-export function calculateResult(widget: Widget) {
+export function calculateResult(widget: Widget): number {
   const parser = new Parser();
   const userExpression = parser.parse(widget.formula);
 
@@ -25,53 +23,34 @@ export function calculateResult(widget: Widget) {
   });
 
   return userExpression.evaluate(inputValues);
-  // let result = 0;
-  // let formula = widget.formula.split(''); // string[]
-  // if (formula.length === 0) return result;
-  // if (validateFormula(widget) !== true)
-  //   return 'Not a valid formula, please edit';
-  // const letters = widget.formula.match(/([A-Z])/g);
-  // letters.forEach((letter: any) => {
-  //   let val: number;
-  //   if (
-  //     widget.elements.some((el: Element) => {
-  //       if (el.elementLetter === letter) {
-  //         val = el.value;
-  //         return true;
-  //       }
-  //       return false;
-  //     })
-  //   ) {
-  //     formula[formula.indexOf(letter)] = Number(val);
-  //   }
-  // });
-  // //I KNOW I KNOW please dont judge, deadlines are tight
-  // //TODO fixed float for now, but later users will be able to define decimal points
-  // result = eval(formula.join('')).toFixed(2);
-  // return result;
 }
 
 // validation function to define results screen (simple check if formula letter exists within the container)
-//TODO what also needs to be handled is that if user by mistake puts "AA" for example it will accept that - user can only input "A" as the element.
-export function validateFormula(widget: any) {
-  const letters = widget.formula.match(/([A-Z])/g);
-  if (!widget.formula || !letters) return true;
-  let result;
-  const errorLetters: any = [];
-  if (letters && widget) {
-    result = letters
-      .map((letter: any) => {
-        if (!widget.elements.some((el: any) => el.elementLetter === letter)) {
-          errorLetters.push(letter);
-          return false;
-        } else return true;
-      })
-      .every((el: any) => el === true);
+export function isValidFormula(widget: Widget): boolean {
+  const lettersInFormula = widget.formula.match(/([A-Z])+/g);
+  if (!widget.formula || !lettersInFormula) return true;
+  if (lettersInFormula.some((letter: string) => letter.length !== 1))
+    return false;
+
+  const lettersInWidget = widget.elements.map(
+    (el: Element) => el.elementLetter
+  );
+  for (const letter of lettersInFormula) {
+    if (!lettersInWidget.includes(letter)) return false;
   }
-  if (result) return result;
-  return `Elements with letter "${[...errorLetters]}" don't exist`;
-  //
+  return true;
 }
 
-//TODO this is the function to properly handle the formula expression
-//function expressionParser(expression) {}
+export function genErrorMessage(widget: Widget): string {
+  const lettersInFormula = widget.formula.match(/([A-Z])+/g);
+  const lettersInWidget = widget.elements.map(
+    (el: Element) => el.elementLetter
+  );
+  const errorLetters: string[] = [];
+
+  for (const letter of lettersInFormula!) {
+    if (!lettersInWidget.includes(letter)) errorLetters.push(letter);
+  }
+
+  return `Elements with letter "${[...errorLetters]}" don't exist`;
+}
