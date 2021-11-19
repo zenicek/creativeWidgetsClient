@@ -1,6 +1,6 @@
 import { Widget } from '../Types/Widget';
 import { Element } from '../Types/Element';
-import Parser from 'expr-eval';
+import { Parser } from 'expr-eval';
 
 //function creates a next alphabetical identifier for elements
 export function nextChar(char: string) {
@@ -10,7 +10,21 @@ export function nextChar(char: string) {
 //function will replace all letters with values from relevant elements and then evaluates the expression and gets the result of the calculation - Due to time constrains I will use eval() and later on I will create a proper parser to make sure it handles everything correctly
 //TODO currently function will take and replace only first index.. but the element might be refered to multiple times in a formula.. this needs to be handled.
 
+interface InputValues {
+  [key: string]: number;
+}
+
 export function calculateResult(widget: Widget) {
+  const parser = new Parser();
+  const userExpression = parser.parse(widget.formula);
+
+  const inputValues: InputValues = {};
+
+  widget.elements.forEach((el: Element) => {
+    inputValues[el.elementLetter] = el.value;
+  });
+
+  return userExpression.evaluate(inputValues);
   // let result = 0;
   // let formula = widget.formula.split(''); // string[]
   // if (formula.length === 0) return result;
