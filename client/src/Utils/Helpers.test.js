@@ -1,7 +1,7 @@
-import { calculateResult } from './Helpers';
+import { calculateResult, hasValidFormula } from './Helpers';
 import { exampleWidget, invalidFormulaWidget } from '../../Mocks';
 
-const invalidWidget = describe('calculateResult function', () => {
+describe('calculateResult function', () => {
   test('calculates values from formula correctly', () => {
     expect(calculateResult(exampleWidget)).toBe(5);
   });
@@ -11,4 +11,12 @@ const invalidWidget = describe('calculateResult function', () => {
   });
 });
 
-describe('hasValidFormula function', () => {});
+describe('hasValidFormula function', () => {
+  test('evaluates correctly if widget has a valid forumula', () => {
+    expect(hasValidFormula(exampleWidget)).toBe(true);
+  });
+
+  test('evaluates correctly if widget has invalid formula', () => {
+    expect(hasValidFormula(invalidFormulaWidget)).toBe(false);
+  });
+});
