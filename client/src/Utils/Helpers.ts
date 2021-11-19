@@ -12,7 +12,7 @@ interface InputValues {
   [key: string]: number;
 }
 
-export function calculateResult(widget: Widget): number {
+export function calculateResult(widget: Widget): number | null {
   const parser = new Parser();
   const userExpression = parser.parse(widget.formula.toLowerCase());
 
@@ -22,7 +22,13 @@ export function calculateResult(widget: Widget): number {
     inputValues[el.elementLetter.toLowerCase()] = el.value;
   });
 
-  return userExpression.evaluate(inputValues);
+  let result: number;
+  try {
+    result = userExpression.evaluate(inputValues);
+  } catch (e) {
+    return null;
+  }
+  return result;
 }
 
 // validation function to define results screen (simple check if formula letter exists within the container)
