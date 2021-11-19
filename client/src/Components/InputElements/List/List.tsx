@@ -1,15 +1,21 @@
-import { useContext, useState, useRef } from 'react';
+import React, { useContext, useState, useRef } from 'react';
 import { IndividualWidget } from '../../../Utils/Contexts';
 import './List.css';
 import Select from 'react-select';
 import { useArrangeElement } from '../../../Utils/CustomHooks';
 
-export function List({ id, index, moveElement }) {
+interface Props {
+  id: number;
+  index: number;
+  moveElement: () => void;
+}
+
+export const List: React.FC<Props> = ({ id, index, moveElement }) => {
   const { findElement, updateElement } = useContext(IndividualWidget);
   const element = { ...findElement(id) };
   const [selectedOption, setSelectedOption] = useState(element.value);
 
-  const handleChange = e => {
+  const handleChange = (e) => {
     element.value = e.value;
     setSelectedOption(e.value);
     updateElement(id, element);
@@ -36,10 +42,12 @@ export function List({ id, index, moveElement }) {
       <div>
         <Select
           options={element.list}
-          onChange={e => handleChange(e)}
-          value={element.list.filter(option => option.value === selectedOption)}
+          onChange={(e) => handleChange(e)}
+          value={element.list.filter(
+            (option) => option.value === selectedOption
+          )}
         />
       </div>
     </div>
   );
-}
+};
