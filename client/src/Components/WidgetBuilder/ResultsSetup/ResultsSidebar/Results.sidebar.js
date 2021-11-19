@@ -1,7 +1,7 @@
 import './Results.sidebar.css';
 import { useContext } from 'react';
 import { IndividualWidget } from '../../../../Utils/Contexts';
-import { isValidFormula, genErrorMessage } from '../../../../Utils/Helpers';
+import { hasValidFormula, genErrorMessage } from '../../../../Utils/Helpers';
 import { useState, useEffect } from 'react';
 import { InputToggle } from '../ElementSetup/ElementSetupOptions/Input.toggle';
 
@@ -9,10 +9,10 @@ export function ResultsSiderbar() {
   const { updateFormula, widget, updateResultDesc, updateResultValueDesc } =
     useContext(IndividualWidget);
 
-  const [isValid, setIsValid] = useState(isValidFormula(widget));
+  const [isValid, setIsValid] = useState(hasValidFormula(widget));
 
   useEffect(() => {
-    setIsValid(isValidFormula(widget));
+    setIsValid(hasValidFormula(widget));
   }, [widget]);
 
   //TODO formula to the results array since users should be able to display multiple results - after the mvp presentation

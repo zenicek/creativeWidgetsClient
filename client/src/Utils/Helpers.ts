@@ -32,7 +32,7 @@ export function calculateResult(widget: Widget): number | null {
 }
 
 // validation function to define results screen (simple check if formula letter exists within the container)
-export function isValidFormula(widget: Widget): boolean {
+export function hasValidFormula(widget: Widget): boolean {
   const lettersInFormula = widget.formula.match(/([A-Z])+/g);
   if (!widget.formula || !lettersInFormula) {
     return true;
