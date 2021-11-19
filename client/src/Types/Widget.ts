@@ -1,5 +1,6 @@
 import { Element } from './Element';
 export interface Widget {
+  _id: string;
   name: string;
   formula: string;
   width: number;
