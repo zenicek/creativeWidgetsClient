@@ -3,7 +3,7 @@ import { ReactComponent as DashIcon } from '../Icons/dashboard-icon.svg';
 import { ReactComponent as SettIcon } from '../Icons/settings-icon.svg';
 import { ReactComponent as PayIcon } from '../Icons/payment-icon.svg';
 
-export function SideMenu() {
+export const SideMenu: React.FC = () => {
   return (
     <div className='side-menu-wrapper-ctn'>
       <h1>Creative Widgets</h1>
@@ -13,19 +13,19 @@ export function SideMenu() {
       <ul>
         <li className='menu-item-ctn'>
           <a className='menu-link' href='/'>
-            <div><DashIcon/></div>
+            <div><DashIcon /></div>
             <span>Dashboard</span>
           </a>
         </li>
         <li className='menu-item-ctn'>
           <a className='menu-link' href='/'>
-            <div><SettIcon/></div>
+            <div><SettIcon /></div>
             Settings
           </a>
         </li>
         <li className='menu-item-ctn'>
           <a className='menu-link' href='/'>
-            <div><PayIcon/></div>
+            <div><PayIcon /></div>
             Payment
           </a>
         </li>
