@@ -1,9 +1,15 @@
+import { RefObject } from 'react';
 import { useDrag, useDrop } from 'react-dnd';
 import { ElementArranger } from '../Components/InputElements/Elements.types';
 
 //this is a custom hook logic to rearrange elements in the container
 //TODO refactor this possibly for nice effects etc.. and be able to drop next to the existing element and shrink it to half
-export function useArrangeElement(ref, id, index, moveElement) {
+export function useArrangeElement(
+  ref: RefObject<HTMLElement>,
+  id: string,
+  index: number,
+  moveElement: (dragIndex: number, hoverIndex: number) => null
+) {
   const [{ handlerId }, drop] = useDrop({
     accept: ElementArranger,
     collect(monitor) {
@@ -11,7 +17,8 @@ export function useArrangeElement(ref, id, index, moveElement) {
         handlerId: monitor.getHandlerId(),
       };
     },
-    hover(item, monitor) {
+    // ANY HERE! NO IDEA HOW TO IMPLEMENT REACT-DND TYPES!!!
+    hover(item: any, monitor) {
       if (!ref.current) {
         return;
       }
@@ -29,7 +36,8 @@ export function useArrangeElement(ref, id, index, moveElement) {
       // Determine mouse position
       const clientOffset = monitor.getClientOffset();
       // Get pixels to the top
-      const hoverClientY = clientOffset.y - hoverBoundingRect.top;
+      // ! HERENO IDEA HOW TO IMPLEMENT REACT-DND TYPES!!!
+      const hoverClientY = clientOffset!.y - hoverBoundingRect.top;
       // Only perform the move when the mouse has crossed half of the items height
       // When dragging downwards, only move when the cursor is below 50%
       // When dragging upwards, only move when the cursor is above 50%
@@ -55,7 +63,7 @@ export function useArrangeElement(ref, id, index, moveElement) {
     item: () => {
       return { id, index };
     },
-    collect: monitor => ({
+    collect: (monitor) => ({
       isDragging: monitor.isDragging(),
     }),
   });
