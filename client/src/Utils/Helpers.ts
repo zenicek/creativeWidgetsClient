@@ -19,7 +19,7 @@ export function calculateResult(widget: Widget): number | null {
   const inputValues: InputValues = {};
 
   widget.elements.forEach((el: Element) => {
-    inputValues[el.elementLetter.toLowerCase()] = el.value;
+    inputValues[el.elementLetter.toLowerCase()] = Number(el.value);
   });
 
   let result: number;
