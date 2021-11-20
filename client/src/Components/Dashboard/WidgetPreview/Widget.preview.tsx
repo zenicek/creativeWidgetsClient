@@ -9,8 +9,8 @@ interface Props {
 export const WidgetPreview: React.FC<Props> = ({ widget }) => {
   return (
     <div className="widget-pv-ctn">
-      <div className="img-prv-ctn">{widget ? <CalcIcon /> : '+'}</div>
-      <span>{widget ? widget.name : 'New widget'}</span>
+      <div className="img-prv-ctn" role="widget-or-calc">{widget ? <CalcIcon /> : '+'}</div>
+      <span role="widget-or-new">{widget ? widget.name : 'New widget'}</span>
     </div>
   );
 }
