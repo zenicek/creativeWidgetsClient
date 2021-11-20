@@ -1,5 +1,5 @@
 export default interface Props {
   id: string;
   index: number;
-  moveElement: () => void;
+  moveElement: (dragIndex: number, hoverIndex: number) => null;
 }

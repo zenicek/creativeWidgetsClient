@@ -7,11 +7,12 @@ import { HTML5Backend } from 'react-dnd-html5-backend';
 import { WidgetsContext } from './Utils/Contexts';
 import { useState, useEffect } from 'react';
 import { getAllWidgets } from './Utils/ApiService';
+import { Widget } from './Types/Widget';
 
 function App() {
-  const [widgets, setWidgets] = useState([]);
+  const [widgets, setWidgets] = useState<Widget[]>([]);
   useEffect(() => {
-    getAllWidgets().then(res => {
+    getAllWidgets().then((res) => {
       setWidgets([...res]);
     });
   }, []);
@@ -19,11 +20,11 @@ function App() {
   return (
     <DndProvider backend={HTML5Backend}>
       <WidgetsContext.Provider value={{ widgets, setWidgets }}>
-        <div className="App">
+        <div className='App'>
           <Routes>
-            <Route path="/" element={<Dashboard />} />
-            <Route path="/new-widget" element={<WidgetBuilder />} />
-            <Route path="/edit/:id" element={<WidgetBuilder />} />
+            <Route path='/' element={<Dashboard />} />
+            <Route path='/new-widget' element={<WidgetBuilder />} />
+            <Route path='/edit/:id' element={<WidgetBuilder />} />
           </Routes>
         </div>
       </WidgetsContext.Provider>

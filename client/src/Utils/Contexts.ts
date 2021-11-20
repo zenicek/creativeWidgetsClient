@@ -1,6 +1,18 @@
 import { createContext } from 'react';
+import { Widget } from '../Types/Widget';
 
-export const WidgetsContext = createContext();
+interface WidgetsContextInterface {
+  widgets: Widget[];
+  setWidgets: React.Dispatch<React.SetStateAction<Widget[]>>;
+}
+
+export const WidgetsContext = createContext<WidgetsContextInterface | null>(
+  null
+);
+
+interface IndividualWidgetInterface {}
+
+export const IndividualWidget = createContext(null);
 
 //initial context value
 export const WidgetContext = {
@@ -39,5 +51,3 @@ export const InputMetas = {
     elementDescription: 'Text',
   },
 };
-
-export const IndividualWidget = createContext();
