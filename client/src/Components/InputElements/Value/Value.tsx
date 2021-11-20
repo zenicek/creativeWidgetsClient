@@ -11,18 +11,18 @@ export const ValueInput: React.FC<InputProps> = ({
   moveElement,
 }) => {
   const individualWidgetContext = useContext(IndividualWidget);
-  let element: Element;
+  const element = useRef<Element | null>(null);
 
   useEffect(() => {
     if (individualWidgetContext?.findElement) {
-      element = { ...individualWidgetContext.findElement(id) };
+      element.current = { ...individualWidgetContext.findElement(id) };
     }
   }, []);
 
   const handleInputChange = (value: string) => {
-    if (element && individualWidgetContext) {
-      element.value = value;
-      individualWidgetContext.updateElement(id, element);
+    if (element.current && individualWidgetContext) {
+      element.current.value = value;
+      individualWidgetContext.updateElement(id, element.current);
     }
   };
 
@@ -37,11 +37,11 @@ export const ValueInput: React.FC<InputProps> = ({
   drag(drop(ref));
 
   const RenderWidgetValue = () => {
-    if (element) {
+    if (element.current) {
       return (
         <>
           <label className='label' htmlFor='widget-input'>
-            {element.elementDescription}
+            {element.current.elementDescription}
           </label>
           <div>
             <input
@@ -50,7 +50,9 @@ export const ValueInput: React.FC<InputProps> = ({
               className='input'
               id='widget-input'
               placeholder='Number'
-              value={element.value === null ? '' : element.value}
+              value={
+                element.current.value === null ? '' : element.current.value
+              }
               onChange={(e) => handleInputChange(e.target.value)}
             ></input>
           </div>
