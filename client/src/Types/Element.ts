@@ -3,11 +3,11 @@ export interface Element {
   elementIndex: number;
   elementLetter: string;
   elementDescription: string;
-  value: number;
-  min: number;
-  max: number;
-  step: number;
-  list: [
+  value: number | string;
+  min?: number;
+  max?: number;
+  step?: number;
+  list?: [
     {
       id: string;
       label: any;

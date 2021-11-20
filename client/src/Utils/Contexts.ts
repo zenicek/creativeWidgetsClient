@@ -1,4 +1,5 @@
 import { createContext } from 'react';
+import { IndividualWidgetInterface } from '../Types/IndividualWidgetInterface';
 import { Widget } from '../Types/Widget';
 
 interface WidgetsContextInterface {
@@ -10,9 +11,9 @@ export const WidgetsContext = createContext<WidgetsContextInterface | null>(
   null
 );
 
-interface IndividualWidgetInterface {}
-
-export const IndividualWidget = createContext(null);
+export const IndividualWidget = createContext<IndividualWidgetInterface | null>(
+  null
+);
 
 //initial context value
 export const WidgetContext = {
