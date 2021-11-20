@@ -2,7 +2,8 @@ import { WidgetPreview } from "./Widget.preview";
 import { render, screen } from '@testing-library/react';
 
 test('should render WidgetPreview', () => {
-    render(<WidgetPreview/>);
+    const widget = render(<WidgetPreview/>);
+    expect(widget);
 })
 
 test('should render widget-pv-ctn', () => {
