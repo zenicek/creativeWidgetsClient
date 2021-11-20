@@ -1,10 +1,9 @@
 import React, { useContext, useState, useRef, useEffect } from 'react';
-import { IndividualWidget } from '../../../Utils/Contexts';
+import { useIndividualWidgetContext } from '../../../Utils/Contexts';
 import './List.css';
 import Select from 'react-select';
 import { useArrangeElement } from '../../../Utils/CustomHooks';
 import InputProps from '../InputProps';
-import { Element } from '../../../Types/Element';
 
 interface Option {
   id: string;
@@ -15,24 +14,15 @@ interface Option {
 }
 
 export const List: React.FC<InputProps> = ({ id, index, moveElement }) => {
-  const individualWidgetContext = useContext(IndividualWidget);
-  const element = useRef<Element | null>(null);
-  const [selectedOption, setSelectedOption] = useState<number | string | null>(
-    null
-  );
-
-  useEffect(() => {
-    if (individualWidgetContext?.findElement) {
-      element.current = { ...individualWidgetContext.findElement(id) };
-      setSelectedOption(element.current.value);
-    }
-  }, []);
+  const { findElement, updateElement } = useIndividualWidgetContext();
+  const element = { ...findElement(id) };
+  const [selectedOption, setSelectedOption] = useState(element.value);
 
   const handleChange = (e: Option | null) => {
-    if (e && element.current && individualWidgetContext?.updateElement) {
-      element.current.value = e.value;
+    if (e) {
+      element.value = e.value;
       setSelectedOption(e.value);
-      individualWidgetContext.updateElement(id, element.current);
+      updateElement(id, element);
     }
   };
 
@@ -47,17 +37,15 @@ export const List: React.FC<InputProps> = ({ id, index, moveElement }) => {
   drag(drop(ref));
 
   const RenderedWidgetList = () => {
-    if (element.current?.list) {
+    if (element.list) {
       return (
         <>
-          <label htmlFor='widget-list'>
-            {element.current.elementDescription}
-          </label>
+          <label htmlFor='widget-list'>{element.elementDescription}</label>
           <div>
             <Select
-              options={element.current.list}
+              options={element.list}
               onChange={(e) => handleChange(e)}
-              value={element.current.list.filter(
+              value={element.list.filter(
                 (option: Option) => option.value === selectedOption
               )}
             />
