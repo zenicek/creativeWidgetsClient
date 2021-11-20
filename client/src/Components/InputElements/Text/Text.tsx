@@ -7,11 +7,11 @@ import { Element } from '../../../Types/Element';
 
 export const Text: React.FC<InputProps> = ({ id, index, moveElement }) => {
   const individualWidgetContext = useContext(IndividualWidget);
-  let element: Element;
+  const element = useRef<Element | null>(null);
 
   useEffect(() => {
     if (individualWidgetContext?.findElement) {
-      element = { ...individualWidgetContext.findElement(id) };
+      element.current = { ...individualWidgetContext.findElement(id) };
     }
   }, []);
 
@@ -24,7 +24,7 @@ export const Text: React.FC<InputProps> = ({ id, index, moveElement }) => {
   );
 
   const renderDesc = () => {
-    if (element) return element.elementDescription;
+    if (element.current) return element.current.elementDescription;
     else return '';
   };
 
