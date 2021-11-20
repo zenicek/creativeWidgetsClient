@@ -16,25 +16,23 @@ interface Option {
 
 export const List: React.FC<InputProps> = ({ id, index, moveElement }) => {
   const individualWidgetContext = useContext(IndividualWidget);
-  let element: Element;
+  const element = useRef<Element | null>(null);
   const [selectedOption, setSelectedOption] = useState<number | string | null>(
     null
   );
 
   useEffect(() => {
     if (individualWidgetContext?.findElement) {
-      element = { ...individualWidgetContext.findElement(id) };
-      setSelectedOption(element.value);
+      element.current = { ...individualWidgetContext.findElement(id) };
+      setSelectedOption(element.current.value);
     }
   }, []);
 
   const handleChange = (e: Option | null) => {
-    if (e) {
-      element.value = e.value;
+    if (e && element.current && individualWidgetContext?.updateElement) {
+      element.current.value = e.value;
       setSelectedOption(e.value);
-    }
-    if (individualWidgetContext?.updateElement) {
-      individualWidgetContext.updateElement(id, element);
+      individualWidgetContext.updateElement(id, element.current);
     }
   };
 
@@ -49,15 +47,17 @@ export const List: React.FC<InputProps> = ({ id, index, moveElement }) => {
   drag(drop(ref));
 
   const RenderedWidgetList = () => {
-    if (element?.list) {
+    if (element.current?.list) {
       return (
         <>
-          <label htmlFor='widget-list'>{element.elementDescription}</label>
+          <label htmlFor='widget-list'>
+            {element.current.elementDescription}
+          </label>
           <div>
             <Select
-              options={element.list}
+              options={element.current.list}
               onChange={(e) => handleChange(e)}
-              value={element.list.filter(
+              value={element.current.list.filter(
                 (option: Option) => option.value === selectedOption
               )}
             />

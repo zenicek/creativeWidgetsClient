@@ -7,28 +7,26 @@ import { Element } from '../../../Types/Element';
 
 export const Slider: React.FC<InputProps> = ({ id, index, moveElement }) => {
   const individualWidgetContext = useContext(IndividualWidget);
-  //needs to be a copy - immutability
-  // const element = { ...findElement(id) };
-  let element: Element;
+  const element = useRef<Element | null>(null);
 
   useEffect(() => {
     if (individualWidgetContext?.findElement) {
-      element = { ...individualWidgetContext.findElement(id) };
+      element.current = { ...individualWidgetContext.findElement(id) };
     }
   }, []);
 
   const handleSlideChange = (value: string) => {
-    if (element && individualWidgetContext) {
-      element.value = Number(value);
-      individualWidgetContext.updateElement(id, element);
+    if (element.current && individualWidgetContext) {
+      element.current.value = Number(value);
+      individualWidgetContext.updateElement(id, element.current);
     }
   };
 
   //this creates slider marks (TODO: refactor a make nice if have time)
   const marks = () => {
     const options = [];
-    if (element?.min && element?.max) {
-      for (let i = element.min; i <= element.max; i++) {
+    if (element.current?.min && element.current?.max) {
+      for (let i = element.current.min; i <= element.current.max; i++) {
         options.push(
           <option key={i} value={i} label={i % 2 ? '' : String(i)}></option>
         );
@@ -50,20 +48,20 @@ export const Slider: React.FC<InputProps> = ({ id, index, moveElement }) => {
   //TODO check out rc-slider npm package and potentially use that since it has all the marks etc nicely done...
 
   const RenderWidgetSlider = () => {
-    if (element) {
+    if (element.current) {
       return (
         <>
           <label>
-            {element.elementDescription} - {element.value}
+            {element.current.elementDescription} - {element.current.value}
           </label>
           <div>
             <input
               type='range'
               id='slider'
-              min={element.min}
-              max={element.max}
-              step={element.step}
-              value={element.value}
+              min={element.current.min}
+              max={element.current.max}
+              step={element.current.step}
+              value={element.current.value}
               onChange={(e) => handleSlideChange(e.target.value)}
               list='tickmarks'
             ></input>
