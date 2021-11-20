@@ -1,21 +1,29 @@
 import './Value.css';
-import { useContext, useRef } from 'react';
+import { useContext, useRef, useEffect } from 'react';
 import { IndividualWidget } from '../../../Utils/Contexts';
 import { useArrangeElement } from '../../../Utils/CustomHooks';
 import InputProps from '../InputProps';
+import { Element } from '../../../Types/Element';
 
 export const ValueInput: React.FC<InputProps> = ({
   id,
   index,
   moveElement,
 }) => {
-  const { updateElement, findElement } = useContext(IndividualWidget);
+  const individualWidgetContext = useContext(IndividualWidget);
+  let element: Element;
 
-  const element = { ...findElement(id) };
+  useEffect(() => {
+    if (individualWidgetContext?.findElement) {
+      element = { ...individualWidgetContext.findElement(id) };
+    }
+  }, []);
 
   const handleInputChange = (value: string) => {
-    element.value = value;
-    updateElement(id, element);
+    if (element && individualWidgetContext) {
+      element.value = value;
+      individualWidgetContext.updateElement(id, element);
+    }
   };
 
   //DND
@@ -28,27 +36,39 @@ export const ValueInput: React.FC<InputProps> = ({
   );
   drag(drop(ref));
 
+  const RenderWidgetValue = () => {
+    if (element) {
+      return (
+        <>
+          <label className='label' htmlFor='widget-input'>
+            {element.elementDescription}
+          </label>
+          <div>
+            <input
+              type='text'
+              pattern='[0-9]*'
+              className='input'
+              id='widget-input'
+              placeholder='Number'
+              value={element.value === null ? '' : element.value}
+              onChange={(e) => handleInputChange(e.target.value)}
+            ></input>
+          </div>
+        </>
+      );
+    } else {
+      return <></>;
+    }
+  };
+
   return (
     <div
-      className="input-ctn"
+      className='input-ctn'
       ref={ref}
       style={{ opacity: isDragging ? 0.5 : 1 }}
       data-handler-id={handlerId}
     >
-      <label className="label" htmlFor="widget-input">
-        {element.elementDescription}
-      </label>
-      <div>
-        <input
-          type="text"
-          pattern="[0-9]*"
-          className="input"
-          id="widget-input"
-          placeholder="Number"
-          value={element.value === null ? '' : element.value}
-          onChange={(e) => handleInputChange(e.target.value)}
-        ></input>
-      </div>
+      <RenderWidgetValue />
     </div>
   );
 };
