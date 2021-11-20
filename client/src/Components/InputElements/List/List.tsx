@@ -15,9 +15,7 @@ interface Option {
 }
 
 export const List: React.FC<InputProps> = ({ id, index, moveElement }) => {
-  // const { findElement, updateElement } = useContext(IndividualWidget);
   const individualWidgetContext = useContext(IndividualWidget);
-  // const element = { ...findElement(id) };
   let element: Element;
   const [selectedOption, setSelectedOption] = useState<number | string | null>(
     null
