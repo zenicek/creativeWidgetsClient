@@ -25,10 +25,10 @@ export function calculateResult(widget: Widget): number | null {
   let result: number;
   try {
     result = userExpression.evaluate(inputValues);
+    return result;
   } catch (e) {
     return null;
   }
-  return result;
 }
 
 // validation function to define results screen (simple check if formula letter exists within the container)

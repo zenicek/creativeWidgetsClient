@@ -1,4 +1,4 @@
-import React, { useContext, useState, useRef, useEffect } from 'react';
+import React, { useState, useRef } from 'react';
 import { useIndividualWidgetContext } from '../../../Utils/Contexts';
 import './List.css';
 import Select from 'react-select';
@@ -19,7 +19,7 @@ export const List: React.FC<InputProps> = ({ id, index, moveElement }) => {
   const [selectedOption, setSelectedOption] = useState(element.value);
 
   const handleChange = (e: Option | null) => {
-    if (e) {
+    if (e && element) {
       element.value = e.value;
       setSelectedOption(e.value);
       updateElement(id, element);
@@ -44,7 +44,7 @@ export const List: React.FC<InputProps> = ({ id, index, moveElement }) => {
           <div>
             <Select
               options={element.list}
-              onChange={(e) => handleChange(e)}
+              onChange={handleChange}
               value={element.list.filter(
                 (option: Option) => option.value === selectedOption
               )}

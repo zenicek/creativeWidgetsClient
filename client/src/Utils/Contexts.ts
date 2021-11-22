@@ -1,5 +1,7 @@
 import { createContext, useContext } from 'react';
+import { Element } from '../Types/Element';
 import { IndividualWidgetInterface } from '../Types/IndividualWidgetInterface';
+import { Result } from '../Types/Result';
 import { Widget } from '../Types/Widget';
 
 interface WidgetsContextInterface {
@@ -30,14 +32,15 @@ export function useIndividualWidgetContext() {
 
 //initial context value
 export const WidgetContext = {
-  elements: [],
+  _id: '',
+  elements: [] as Element[],
   formula: '',
   name: 'default calculator',
   lastLetter: '@',
   width: 720,
   resultDescription: 'Result description placeholder',
   resultValueDesc: 'USD',
-  result: [],
+  result: [] as Result[],
 };
 
 export const InputMetas = {
