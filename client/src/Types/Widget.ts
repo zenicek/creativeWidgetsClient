@@ -1,7 +1,7 @@
 import { Element } from './Element';
 import { Result } from './Result';
 export interface Widget {
-  _id: string;
+  _id?: string;
   name: string;
   formula: string;
   width: number;

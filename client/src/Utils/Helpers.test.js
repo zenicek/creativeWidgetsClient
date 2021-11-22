@@ -1,9 +1,9 @@
 import { calculateResult, genErrorMessage, hasValidFormula } from './Helpers';
-import { exampleWidget, invalidFormulaWidget } from '../../Mocks';
+import { exampleFormulaWidget, invalidFormulaWidget } from '../../Mocks';
 
 describe('calculateResult function', () => {
   test('calculates values from formula correctly', () => {
-    expect(calculateResult(exampleWidget)).toBe(5);
+    expect(calculateResult(exampleFormulaWidget)).toBe(5);
   });
 
   test('return null if not provided with values', () => {
@@ -13,7 +13,7 @@ describe('calculateResult function', () => {
 
 describe('hasValidFormula function', () => {
   test('evaluates correctly if widget has a valid forumula', () => {
-    expect(hasValidFormula(exampleWidget)).toBe(true);
+    expect(hasValidFormula(exampleFormulaWidget)).toBe(true);
   });
 
   test('evaluates correctly if widget has invalid formula', () => {

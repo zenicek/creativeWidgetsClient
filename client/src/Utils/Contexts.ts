@@ -32,7 +32,6 @@ export function useIndividualWidgetContext() {
 
 //initial context value
 export const WidgetContext = {
-  _id: '',
   elements: [] as Element[],
   formula: '',
   name: 'default calculator',
