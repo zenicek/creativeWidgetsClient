@@ -44,7 +44,7 @@ export const List: React.FC<InputProps> = ({ id, index, moveElement }) => {
           <div>
             <Select
               options={element.list}
-              onChange={(e) => handleChange(e)}
+              onChange={handleChange}
               value={element.list.filter(
                 (option: Option) => option.value === selectedOption
               )}

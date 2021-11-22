@@ -18,9 +18,9 @@ export function ElementSetup({ id }) {
     element.step = step;
     updateElement(id, element);
   };
-  const handleListSetup = option => {
+  const handleListSetup = (option) => {
     const updatedOptionList = [
-      ...element.list.map(el => {
+      ...element.list.map((el) => {
         if (el.id === option.id) {
           return { ...option };
         } else {
@@ -32,7 +32,7 @@ export function ElementSetup({ id }) {
     updateElement(id, element);
   };
 
-  const updateElementDescription = value => {
+  const updateElementDescription = (value) => {
     element.elementDescription = value;
     updateElement(id, element);
   };
@@ -47,8 +47,8 @@ export function ElementSetup({ id }) {
     updateElement(id, element);
   };
 
-  const removeListOption = optionId => {
-    element.list = element.list.filter(el => el.id !== optionId);
+  const removeListOption = (optionId) => {
+    element.list = element.list.filter((el) => el.id !== optionId);
     updateElement(id, element);
   };
 
@@ -64,7 +64,7 @@ export function ElementSetup({ id }) {
       );
     }
     if (element.elementType === 'List') {
-      const list = element.list.map(option => {
+      const list = element.list.map((option) => {
         return (
           <ListItemSetup
             key={option.id}
@@ -76,7 +76,7 @@ export function ElementSetup({ id }) {
       });
       return (
         <div>
-          <button id="add-item" onClick={() => addListOption()}>
+          <button id='add-item' onClick={addListOption}>
             Add Item
           </button>
           {list}
@@ -86,11 +86,11 @@ export function ElementSetup({ id }) {
   };
 
   return (
-    <div className="element-setup-ctn">
-      <div id="letter-ctn">
+    <div className='element-setup-ctn'>
+      <div id='letter-ctn'>
         {element.elementLetter !== 'false' ? element.elementLetter : ''}
       </div>
-      <div className="description-ctn">
+      <div className='description-ctn'>
         {' '}
         <InputToggle
           description={element.elementDescription}
