@@ -1,6 +1,3 @@
-// should be able to input text
-// should update element on change
-// should only accept numbers
 import React from 'react';
 import { ValueInput } from './Value';
 import { InitialContext } from '../../../Utils/InitialContext';
@@ -11,7 +8,7 @@ import { apiWidget } from '../../../../Mocks';
 import { DndProvider } from 'react-dnd';
 import { HTML5Backend } from 'react-dnd-html5-backend';
 
-test('value input component is being rendered', async () => {
+test('value input component is being rendered and changed on input', async () => {
   const setWidgetMock = jest.fn();
   const useStateMock = (useState) => [useState, setWidgetMock];
   jest.spyOn(React, 'useState').mockImplementation(useStateMock);
@@ -32,6 +29,3 @@ test('value input component is being rendered', async () => {
   await userEvent.type(inputEl, '543');
   expect(inputEl.value).toBe('543');
 });
-
-// test('value should update on input', () => {
-// });
