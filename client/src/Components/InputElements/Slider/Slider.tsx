@@ -1,32 +1,23 @@
 import './Slider.css';
-import React, { useContext, useRef, useEffect } from 'react';
-import { IndividualWidget } from '../../../Utils/Contexts';
+import React, { useRef } from 'react';
+import { useIndividualWidgetContext } from '../../../Utils/Contexts';
 import { useArrangeElement } from '../../../Utils/CustomHooks';
 import InputProps from '../InputProps';
-import { Element } from '../../../Types/Element';
 
 export const Slider: React.FC<InputProps> = ({ id, index, moveElement }) => {
-  const individualWidgetContext = useContext(IndividualWidget);
-  const element = useRef<Element | null>(null);
-
-  useEffect(() => {
-    if (individualWidgetContext?.findElement) {
-      element.current = { ...individualWidgetContext.findElement(id) };
-    }
-  }, []);
+  const { findElement, updateElement } = useIndividualWidgetContext();
+  const element = { ...findElement(id) };
 
   const handleSlideChange = (value: string) => {
-    if (element.current && individualWidgetContext) {
-      element.current.value = Number(value);
-      individualWidgetContext.updateElement(id, element.current);
-    }
+    element.value = Number(value);
+    updateElement(id, element);
   };
 
   //this creates slider marks (TODO: refactor a make nice if have time)
   const marks = () => {
     const options = [];
-    if (element.current?.min && element.current?.max) {
-      for (let i = element.current.min; i <= element.current.max; i++) {
+    if (element.min && element.max) {
+      for (let i = element.min; i <= element.max; i++) {
         options.push(
           <option key={i} value={i} label={i % 2 ? '' : String(i)}></option>
         );
@@ -48,20 +39,20 @@ export const Slider: React.FC<InputProps> = ({ id, index, moveElement }) => {
   //TODO check out rc-slider npm package and potentially use that since it has all the marks etc nicely done...
 
   const RenderWidgetSlider = () => {
-    if (element.current) {
+    if (element) {
       return (
         <>
           <label>
-            {element.current.elementDescription} - {element.current.value}
+            {element.elementDescription} - {element.value}
           </label>
           <div>
             <input
               type='range'
               id='slider'
-              min={element.current.min}
-              max={element.current.max}
-              step={element.current.step}
-              value={element.current.value}
+              min={element.min}
+              max={element.max}
+              step={element.step}
+              value={element.value}
               onChange={(e) => handleSlideChange(e.target.value)}
               list='tickmarks'
             ></input>
