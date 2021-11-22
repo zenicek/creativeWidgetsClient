@@ -11,13 +11,20 @@ export const WidgetsContext = createContext<WidgetsContextInterface | null>(
   null
 );
 
+export function useWidgetsContext() {
+  const context = useContext(WidgetsContext);
+  if (!context) throw new Error('widgets context provider not present.');
+  return context;
+}
+
 export const IndividualWidget = createContext<IndividualWidgetInterface | null>(
   null
 );
 
 export function useIndividualWidgetContext() {
   const context = useContext(IndividualWidget);
-  if (!context) throw new Error('No Provider!!!');
+  if (!context)
+    throw new Error('individual widget context provider not present.');
   return context;
 }
 
