@@ -12,19 +12,19 @@ export const SideMenu: React.FC = () => {
       </a>
       <ul>
         <li className='menu-item-ctn'>
-          <a className='menu-link' href='/'>
+          <a className='menu-link' href='/' role="dash-link">
             <div><DashIcon /></div>
             <span>Dashboard</span>
           </a>
         </li>
         <li className='menu-item-ctn'>
-          <a className='menu-link' href='/'>
+          <a className='menu-link' href='/' role="settings-link">
             <div><SettIcon /></div>
             Settings
           </a>
         </li>
         <li className='menu-item-ctn'>
-          <a className='menu-link' href='/'>
+          <a className='menu-link' href='/' role="payment-link">
             <div><PayIcon /></div>
             Payment
           </a>
