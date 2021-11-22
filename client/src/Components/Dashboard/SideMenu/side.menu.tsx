@@ -7,7 +7,7 @@ export const SideMenu: React.FC = () => {
   return (
     <div className='side-menu-wrapper-ctn'>
       <h1>Creative Widgets</h1>
-      <a id='new-widget-btn' href='/new-widget'>
+      <a id='new-widget-btn' href='/new-widget' role="new-widget-btn">
         +
       </a>
       <ul>
