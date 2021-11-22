@@ -1,4 +1,3 @@
-import { exportAllDeclaration } from '@babel/types';
 import { render, screen } from '@testing-library/react';
 import { SideMenu } from './side.menu';
 
