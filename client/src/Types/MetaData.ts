@@ -5,5 +5,13 @@ export interface MetaData {
   min?: number;
   max?: number;
   step?: number;
-  list?: [];
+  list?: [
+    {
+      id: string;
+      label: any;
+      value: number;
+      offValue: number;
+      selected: boolean;
+    }
+  ];
 }

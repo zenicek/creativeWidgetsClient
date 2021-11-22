@@ -1,9 +1,11 @@
 export interface Element {
+  id?: string;
+  _id?: string;
   elementType: string;
-  elementIndex: number;
+  elementIndex?: number;
   elementLetter: string;
   elementDescription: string;
-  value: number | string;
+  value?: number | string;
   min?: number;
   max?: number;
   step?: number;
