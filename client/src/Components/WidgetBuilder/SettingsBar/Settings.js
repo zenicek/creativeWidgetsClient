@@ -55,6 +55,7 @@ export function SettingsBar({ results }) {
       <div className='settings-wrapper-ctn'>
         <div className='settings-option-ctn'>
           <input
+            id='toggle-mode'
             type='checkbox'
             name='def-results'
             value={results.loadResultsPage}
