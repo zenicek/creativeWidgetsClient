@@ -27,7 +27,7 @@ export function WidgetList() {
   return (
     <ul className='widget-list-ctn'>
       <li key='newWidget'>
-        <Link to='/new-widget' role="widget-preview-link">
+        <Link to='/new-widget' role='widget-preview-link'>
           <WidgetPreview />
         </Link>
       </li>
