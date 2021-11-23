@@ -38,30 +38,6 @@ export const Slider: React.FC<InputProps> = ({ id, index, moveElement }) => {
   //TODO Slider rearranges but doesnt slide in the edit. need to redo or target it differently
   //TODO check out rc-slider npm package and potentially use that since it has all the marks etc nicely done...
 
-  const RenderWidgetSlider = () => {
-    if (element) {
-      return (
-        <>
-          <label>
-            {element.elementDescription} - {element.value}
-          </label>
-          <div>
-            <input
-              type='range'
-              id='slider'
-              min={element.min}
-              max={element.max}
-              step={element.step}
-              value={element.value}
-              onChange={(e) => handleSlideChange(e.target.value)}
-              list='tickmarks'
-            ></input>
-            <datalist id='tickmarks'>{marks()}</datalist>
-          </div>
-        </>
-      );
-    } else return <></>;
-  };
   return (
     <div
       className='slider-ctn'
@@ -69,7 +45,22 @@ export const Slider: React.FC<InputProps> = ({ id, index, moveElement }) => {
       style={{ opacity: isDragging ? 0.5 : 1 }}
       data-handler-id={handlerId}
     >
-      <RenderWidgetSlider />
+      <label>
+        {element.elementDescription} - {element.value}
+      </label>
+      <div>
+        <input
+          type='range'
+          id='slider'
+          min={element.min}
+          max={element.max}
+          step={element.step}
+          value={element.value}
+          onChange={(e) => handleSlideChange(e.target.value)}
+          list='tickmarks'
+        ></input>
+        <datalist id='tickmarks'>{marks()}</datalist>
+      </div>
     </div>
   );
 };
