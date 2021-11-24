@@ -1,6 +1,6 @@
 import { render, screen } from '@testing-library/react';
 import { Dashboard } from './Dashboard';
-import { BrowserRouter } from 'react-router-dom';
+import { BrowserRouter, MemoryRouter } from 'react-router-dom';
 
 describe('Dashboard tests', () => {
     test('should render Dashboard', () => {
@@ -23,5 +23,15 @@ describe('Dashboard tests', () => {
         render(<BrowserRouter><Dashboard /></BrowserRouter>);
         const dashSideMenu = screen.getByRole('dash-widgets-ctn');
         expect(dashSideMenu).toBeEnabled(true);
+    })
+
+    test('app should render sideMenu component', () => {
+        render(<Dashboard />, { wrapper: MemoryRouter });
+        expect(screen.getByRole('payment-link')).toBeInTheDocument();
+    })
+
+    test('app should render widgetList component', () => {
+        render(<Dashboard />, { wrapper: MemoryRouter });
+        expect(screen.getByRole('widget-preview-link')).toBeInTheDocument();
     })
 })
