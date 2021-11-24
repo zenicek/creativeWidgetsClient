@@ -33,7 +33,7 @@ export function WidgetBuilder() {
 
   return (
     <IndividualWidget.Provider value={context}>
-      <div className="widget-builder-ctn">
+      <div className="widget-builder-ctn" role="widget-builder">
         <SettingsBar results={{ loadResultsPage, setLoadResultsPage }} />
         <div className="build-ctn">
           {loadResultsPage ? (
