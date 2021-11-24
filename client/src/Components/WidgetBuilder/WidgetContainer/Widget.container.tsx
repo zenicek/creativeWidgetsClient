@@ -35,13 +35,14 @@ export const WidgetContainer: React.FC<{ loadResults: boolean }> = ({
           ],
         })
       );
+      return null;
     },
     [widget.elements, arrangeElements]
   );
 
   const elementsList = [...widget.elements].map((el, index) => {
     const Element = elements[el.elementType];
-    if (Element) {
+    if (Element && el.id) {
       return (
         <Element
           id={el._id ? el._id : el.id}
