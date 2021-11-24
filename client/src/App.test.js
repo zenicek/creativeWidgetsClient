@@ -1,6 +1,8 @@
 import App from "./App"
-import { render, screen } from '@testing-library/react';
+import { queryByAttribute, render, screen } from '@testing-library/react';
 import { BrowserRouter, MemoryRouter } from "react-router-dom";
+import { WidgetContainer } from "./Components/WidgetBuilder/WidgetContainer/Widget.container";
+import { WidgetBuilder } from "./Components/WidgetBuilder/Widget.builder";
 
 describe('App tests', () => {
     test('should render App component', () => {
@@ -18,8 +20,4 @@ describe('App tests', () => {
         expect(screen.getByRole('dash-side-menu')).toBeInTheDocument();
     })
 
-    /* test('should render widget-builder-ctn with link', () => {
-        render(<App />, { wrapper: MemoryRouter });
-        expect(screen.getByRole('widget-builder')).toBeInTheDocument();
-    }) */
 })
