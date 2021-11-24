@@ -18,4 +18,8 @@ describe('App tests', () => {
         expect(screen.getByRole('dash-side-menu')).toBeInTheDocument();
     })
 
+    /* test('should render widget-builder-ctn with link', () => {
+        render(<App />, { wrapper: MemoryRouter });
+        expect(screen.getByRole('widget-builder')).toBeInTheDocument();
+    }) */
 })
