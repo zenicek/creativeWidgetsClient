@@ -1,6 +1,6 @@
 import { render, screen } from '@testing-library/react';
 import { WidgetList } from './Widget.list';
-import { BrowserRouter } from 'react-router-dom';
+import { BrowserRouter, MemoryRouter } from 'react-router-dom';
 
 describe('WidgetLists tests', () => {
     test('should render WidgetList', () => {
@@ -17,5 +17,15 @@ describe('WidgetLists tests', () => {
         render(<BrowserRouter><WidgetList /></BrowserRouter>);
         const widgetPrevLink = screen.getByRole('widget-preview-link');
         expect(widgetPrevLink).toBeEnabled(true);
+    })
+
+    test('app should render widgetPreview widget-or-calc link', () => {
+        render(<WidgetList />, { wrapper: MemoryRouter });
+        expect(screen.getByRole('widget-or-calc')).toBeInTheDocument();
+    })
+
+    test('app should render widgetPreview widget-or-new link', () => {
+        render(<WidgetList />, { wrapper: MemoryRouter });
+        expect(screen.getByRole('widget-or-new')).toBeInTheDocument();
     })
 })
