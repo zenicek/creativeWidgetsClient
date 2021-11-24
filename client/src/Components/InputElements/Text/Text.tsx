@@ -2,7 +2,7 @@ import './Text.css';
 import { useRef } from 'react';
 import { useIndividualWidgetContext } from '../../../Utils/Contexts';
 import { useArrangeElement } from '../../../Utils/CustomHooks';
-import InputProps from '../InputProps';
+import InputProps from '../../../Types/InputProps';
 
 export const Text: React.FC<InputProps> = ({ id, index, moveElement }) => {
   const { findElement } = useIndividualWidgetContext();

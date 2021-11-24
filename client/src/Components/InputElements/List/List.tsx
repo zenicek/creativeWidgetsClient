@@ -3,23 +3,16 @@ import { useIndividualWidgetContext } from '../../../Utils/Contexts';
 import './List.css';
 import Select from 'react-select';
 import { useArrangeElement } from '../../../Utils/CustomHooks';
-import InputProps from '../InputProps';
-
-interface Option {
-  id: string;
-  label: any;
-  value: number;
-  offValue: number;
-  selected: boolean;
-}
+import InputProps from '../../../Types/InputProps';
+import Option from '../../../Types/Option';
 
 export const List: React.FC<InputProps> = ({ id, index, moveElement }) => {
   const { findElement, updateElement } = useIndividualWidgetContext();
   const element = { ...findElement(id) };
   const [selectedOption, setSelectedOption] = useState(element.value);
 
-  const handleChange = (e: Option | null) => {
-    if (e && element) {
+  const handleChange = (e: { value: number | string | null } | null) => {
+    if (e?.value && element) {
       element.value = e.value;
       setSelectedOption(e.value);
       updateElement(id, element);
@@ -40,7 +33,7 @@ export const List: React.FC<InputProps> = ({ id, index, moveElement }) => {
     if (element.list) {
       return (
         <>
-          <label htmlFor='widget-list'>{element.elementDescription}</label>
+          <label htmlFor="widget-list">{element.elementDescription}</label>
           <div>
             <Select
               options={element.list}
@@ -57,7 +50,7 @@ export const List: React.FC<InputProps> = ({ id, index, moveElement }) => {
 
   return (
     <div
-      className='input-ctn'
+      className="input-ctn"
       ref={ref}
       style={{ opacity: isDragging ? 0.5 : 1 }}
       data-handler-id={handlerId}

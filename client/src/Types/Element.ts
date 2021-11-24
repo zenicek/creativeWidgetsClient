@@ -1,3 +1,5 @@
+import Option from './Option';
+
 export interface Element {
   id?: string;
   _id?: string;
@@ -9,13 +11,5 @@ export interface Element {
   min?: number;
   max?: number;
   step?: number;
-  list?: [
-    {
-      id: string;
-      label: any;
-      value: number;
-      offValue: number;
-      selected: boolean;
-    }
-  ];
+  list?: Option[];
 }

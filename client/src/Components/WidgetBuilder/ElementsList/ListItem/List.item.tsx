@@ -2,13 +2,19 @@ import './List.item.css';
 import { useDrag } from 'react-dnd';
 import { InputMetas } from '../../../../Utils/Contexts';
 
-export function ListItem({ icon, text, elementName }) {
+interface ItemProps {
+  icon: string;
+  text: string;
+  elementName: string;
+}
+
+export const ListItem: React.FC<ItemProps> = ({ icon, text, elementName }) => {
   const [{ isDragging }, drag] = useDrag(() => ({
     type: elementName,
     item: {
       meta: InputMetas[elementName],
     },
-    collect: monitor => ({
+    collect: (monitor) => ({
       isDragging: !!monitor.isDragging(),
     }),
   }));
@@ -18,4 +24,4 @@ export function ListItem({ icon, text, elementName }) {
       <span className="option-text">{text}</span>
     </div>
   );
-}
+};

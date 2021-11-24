@@ -2,7 +2,7 @@ import './Value.css';
 import { useRef } from 'react';
 import { useIndividualWidgetContext } from '../../../Utils/Contexts';
 import { useArrangeElement } from '../../../Utils/CustomHooks';
-import InputProps from '../InputProps';
+import InputProps from '../../../Types/InputProps';
 
 export const ValueInput: React.FC<InputProps> = ({
   id,
@@ -29,21 +29,21 @@ export const ValueInput: React.FC<InputProps> = ({
 
   return (
     <div
-      className='input-ctn'
+      className="input-ctn"
       ref={ref}
       style={{ opacity: isDragging ? 0.5 : 1 }}
       data-handler-id={handlerId}
     >
-      <label className='label' htmlFor='widget-input'>
+      <label className="label" htmlFor="widget-input">
         {element.elementDescription}
       </label>
       <div>
         <input
-          type='text'
-          pattern='[0-9]*'
-          className='input'
-          id='widget-input'
-          placeholder='Number'
+          type="text"
+          pattern="[0-9]*"
+          className="input"
+          id="widget-input"
+          placeholder="Number"
           value={element.value}
           onChange={(e) => {
             e.preventDefault();

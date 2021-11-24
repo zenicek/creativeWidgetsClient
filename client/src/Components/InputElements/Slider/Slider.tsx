@@ -2,7 +2,7 @@ import './Slider.css';
 import React, { useRef } from 'react';
 import { useIndividualWidgetContext } from '../../../Utils/Contexts';
 import { useArrangeElement } from '../../../Utils/CustomHooks';
-import InputProps from '../InputProps';
+import InputProps from '../../../Types/InputProps';
 
 export const Slider: React.FC<InputProps> = ({ id, index, moveElement }) => {
   const { findElement, updateElement } = useIndividualWidgetContext();
@@ -40,7 +40,7 @@ export const Slider: React.FC<InputProps> = ({ id, index, moveElement }) => {
 
   return (
     <div
-      className='slider-ctn'
+      className="slider-ctn"
       ref={ref}
       style={{ opacity: isDragging ? 0.5 : 1 }}
       data-handler-id={handlerId}
@@ -50,16 +50,16 @@ export const Slider: React.FC<InputProps> = ({ id, index, moveElement }) => {
       </label>
       <div>
         <input
-          type='range'
-          id='slider'
+          type="range"
+          id="slider"
           min={element.min}
           max={element.max}
           step={element.step}
           value={element.value}
           onChange={(e) => handleSlideChange(e.target.value)}
-          list='tickmarks'
+          list="tickmarks"
         ></input>
-        <datalist id='tickmarks'>{marks()}</datalist>
+        <datalist id="tickmarks">{marks()}</datalist>
       </div>
     </div>
   );

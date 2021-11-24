@@ -41,8 +41,10 @@ export const WidgetContext = {
   resultValueDesc: 'USD',
   result: [] as Result[],
 };
-
-export const InputMetas = {
+interface InputMetasInterface {
+  [key: string]: {};
+}
+export const InputMetas: InputMetasInterface = {
   Slider: {
     elementType: 'Slider',
     elementDescription: 'Slider',

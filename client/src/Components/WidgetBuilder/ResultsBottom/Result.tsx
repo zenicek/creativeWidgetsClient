@@ -1,10 +1,9 @@
 import './Result.css';
 import { calculateResult } from '../../../Utils/Helpers';
-import { useContext } from 'react';
-import { IndividualWidget } from '../../../Utils/Contexts';
+import { useIndividualWidgetContext } from '../../../Utils/Contexts';
 
-export function Result() {
-  const { widget } = useContext(IndividualWidget);
+export const Result: React.FC = () => {
+  const { widget } = useIndividualWidgetContext();
 
   const getResults = () => {
     try {
@@ -25,4 +24,4 @@ export function Result() {
       </p>
     </div>
   );
-}
+};

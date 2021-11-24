@@ -1,19 +1,28 @@
-import { elementTypes } from '../../InputElements/Elements.types';
 import { useDrop } from 'react-dnd';
+import { useCallback } from 'react';
 import './Widget.container.css';
-import { useCallback, useContext } from 'react';
-import { IndividualWidget } from '../../../Utils/Contexts';
+import update from 'immutability-helper';
+import { useIndividualWidgetContext } from '../../../Utils/Contexts';
+import { elementTypes } from '../../InputElements/Elements.types';
 import { elements } from '../ElementsList/ElemsLookup';
 import { ElementSetup } from '../ResultsSetup/ElementSetup/Element.setup';
 import { Result } from '../ResultsBottom/Result';
-import update from 'immutability-helper';
 
-export function WidgetContainer({ loadResults }) {
-  const { widget, addElement, arrangeElements } = useContext(IndividualWidget);
+export const WidgetContainer: React.FC<{ loadResults: boolean }> = ({
+  loadResults,
+}) => {
+  const { widget, addElement, arrangeElements } = useIndividualWidgetContext();
   //function gets all the elements from the context and converts to element lookup
-  const elementSetupList = [...widget.elements].map(el => (
-    <ElementSetup id={el._id ? el._id : el.id} key={el._id ? el._id : el.id} />
-  ));
+  const elementSetupList = [...widget.elements].map((el) => {
+    if (el.id) {
+      return (
+        <ElementSetup
+          id={el._id ? el._id : el.id}
+          key={el._id ? el._id : el.id}
+        />
+      );
+    }
+  });
 
   const moveElement = useCallback(
     (dragIndex, hoverIndex) => {
@@ -47,7 +56,7 @@ export function WidgetContainer({ loadResults }) {
 
   const [, drop] = useDrop({
     accept: elementTypes,
-    drop: item => {
+    drop: (item: any) => {
       if (item.meta) addElement(item.meta);
     },
   });
@@ -66,4 +75,4 @@ export function WidgetContainer({ loadResults }) {
       )}
     </div>
   );
-}
+};
