@@ -4,8 +4,8 @@ import { BrowserRouter, MemoryRouter } from 'react-router-dom';
 
 describe('WidgetLists tests', () => {
     test('should render WidgetList', () => {
-        render(<BrowserRouter><WidgetList /></BrowserRouter>);
-        screen.debug();
+        const widget = render(<BrowserRouter><WidgetList /></BrowserRouter>);
+        expect(widget).toBeTruthy();
     })
 
     test('should render widget-list-ctn', () => {

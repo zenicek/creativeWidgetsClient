@@ -3,8 +3,8 @@ import { render, screen } from '@testing-library/react';
 
 describe('WidgetPreview tests', () => {
     test('should render WidgetPreview', () => {
-        render(<WidgetPreview/>);
-        screen.debug();
+        const preview = render(<WidgetPreview/>);
+        expect(preview).toBeTruthy();
     })
 
     test('should render widget-pv-ctn', () => {

@@ -1,13 +1,11 @@
 import App from "./App"
-import { queryByAttribute, render, screen } from '@testing-library/react';
+import { render, screen } from '@testing-library/react';
 import { BrowserRouter, MemoryRouter } from "react-router-dom";
-import { WidgetContainer } from "./Components/WidgetBuilder/WidgetContainer/Widget.container";
-import { WidgetBuilder } from "./Components/WidgetBuilder/Widget.builder";
 
 describe('App tests', () => {
     test('should render App component', () => {
-        render(<BrowserRouter><App /></BrowserRouter>);
-        screen.debug();
+        const app = render(<BrowserRouter><App /></BrowserRouter>);
+        expect(app).toBeTruthy();
     })
 
     test('should render App div', () => {

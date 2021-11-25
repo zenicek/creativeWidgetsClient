@@ -4,8 +4,8 @@ import { BrowserRouter, MemoryRouter } from 'react-router-dom';
 
 describe('Dashboard tests', () => {
     test('should render Dashboard', () => {
-        render(<BrowserRouter><Dashboard /></BrowserRouter>);
-        screen.debug();
+        const dashboard = render(<BrowserRouter><Dashboard /></BrowserRouter>);
+        expect(dashboard).toBeTruthy();
     })
 
     test('should render dashboard-ctn', () => {

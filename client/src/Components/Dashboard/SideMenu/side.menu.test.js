@@ -3,8 +3,8 @@ import { SideMenu } from './side.menu';
 
 describe('SideMenu tests', () => {
     test('should render SideMenu', () => {
-        render(<SideMenu />);
-        screen.debug();
+        const sideMenu = render(<SideMenu />);
+        expect(sideMenu).toBeTruthy();
     })
 
     test('should render side-menu-wrapper-ctn', () => {
