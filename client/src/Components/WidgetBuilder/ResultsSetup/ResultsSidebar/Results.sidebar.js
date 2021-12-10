@@ -1,7 +1,7 @@
 import './Results.sidebar.css';
 import { useContext } from 'react';
 import { IndividualWidget } from '../../../../Utils/Contexts';
-import { validateFormula } from '../../../../Utils/Helpers';
+import { hasValidFormula, genErrorMessage } from '../../../../Utils/Helpers';
 import { useState, useEffect } from 'react';
 import { InputToggle } from '../ElementSetup/ElementSetupOptions/Input.toggle';
 
@@ -9,11 +9,16 @@ export function ResultsSiderbar() {
   const { updateFormula, widget, updateResultDesc, updateResultValueDesc } =
     useContext(IndividualWidget);
 
-  const [formulaError, setformulaError] = useState(validateFormula(widget));
+  const [isValid, setIsValid] = useState(hasValidFormula(widget));
 
   useEffect(() => {
-    setformulaError(validateFormula(widget));
+    setIsValid(hasValidFormula(widget));
   }, [widget]);
+
+  const RenderError = () => {
+    if (isValid) return <></>;
+    else return <p className="error">{genErrorMessage(widget)}</p>;
+  };
 
   //TODO formula to the results array since users should be able to display multiple results - after the mvp presentation
   const handleFormula = formula => {
@@ -41,7 +46,7 @@ export function ResultsSiderbar() {
           value={widget.formula}
           onChange={e => handleFormula(e.target.value)}
         ></textarea>
-        <p className="error">{formulaError}</p>
+        <RenderError />
         <InputToggle
           description={
             widget.resultValueDesc
