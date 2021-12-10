@@ -44,5 +44,5 @@ Creative Widgets are running on the below stack
 
 ## Developer
 
-[Eugen Nikolajev]: https://github.com/zenicek
+[Eugen]: https://github.com/zenicek	"Eugen Nikolajev"
 
