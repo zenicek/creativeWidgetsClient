@@ -1,5 +1,15 @@
-# creativeWdigets
+# Creative Widgets
 
-Widget program that helps you to create interactive widgets and engage with your readers even more
+Creative Widgets is an app that allows website owners to create custom and versatile widgets for their website without any knowledge of coding and increase the engagement of the readers.
 
-for server changes see https://github.com/zenicek/creativeWidgetsServer
+## Screenshots
+
+![image-20211210162531620](C:\Users\zenik\AppData\Roaming\Typora\typora-user-images\image-20211210162531620.png)
+
+![image-20211210162615502](C:\Users\zenik\AppData\Roaming\Typora\typora-user-images\image-20211210162615502.png)
+
+![image-20211210162639863](C:\Users\zenik\AppData\Roaming\Typora\typora-user-images\image-20211210162639863.png)
+
+
+
+For server part of Creative Widgets visit https://github.com/zenicek/creativeWidgetsServer
