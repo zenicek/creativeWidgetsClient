@@ -41,8 +41,3 @@ Creative Widgets are running on the below stack
 ### Front-end
 
 - React
-
-## Developer
-
-[Eugen]: https://github.com/zenicek	"Eugen Nikolajev"
-
