@@ -1,8 +1,21 @@
+import App from "./App"
 import { render, screen } from '@testing-library/react';
-import App from './App';
+import { BrowserRouter, MemoryRouter } from "react-router-dom";
 
-test('renders learn react link', () => {
-  render(<App />);
-  const linkElement = screen.getByText(/learn react/i);
-  expect(linkElement).toBeInTheDocument();
-});
+describe('App tests', () => {
+    test('should render App component', () => {
+        const app = render(<BrowserRouter><App /></BrowserRouter>);
+        expect(app).toBeTruthy();
+    })
+
+    test('should render App div', () => {
+        const { container } = render(<BrowserRouter><App /></BrowserRouter>);
+        expect(container.firstChild.classList.contains('App')).toBe(true);
+    })
+
+    test('app should render dashboard component', () => {
+        render(<App />, { wrapper: MemoryRouter });
+        expect(screen.getByRole('dash-side-menu')).toBeInTheDocument();
+    })
+
+})
