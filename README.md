@@ -1,3 +1,5 @@
+![CW-logo](./images/CW-logo.jpg)
+
 # Creative Widgets
 
 Creative Widgets is an app that allows website owners to create custom and versatile widgets for their website without any knowledge of coding and increase the engagement of the readers.
