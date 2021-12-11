@@ -1,4 +1,4 @@
-​																							![cw-logo](./images/CW-logo.JPG)
+​ ![cw-logo](./images/CW-logo.JPG)
 
 # Creative Widgets
 
