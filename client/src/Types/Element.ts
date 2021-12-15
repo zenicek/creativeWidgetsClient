@@ -3,13 +3,38 @@ import Option from './Option';
 export interface Element {
   id?: string;
   _id?: string;
-  elementType: string;
-  elementIndex?: number;
-  elementLetter: string;
-  elementDescription: string;
-  value?: number | string;
-  min?: number;
-  max?: number;
-  step?: number;
-  list?: Option[];
+  type: string;
+  letter?: string;
+  description: string;
 }
+
+export interface SliderInterface extends Element {
+  __kind: 'Slider';
+  value: number | string;
+  min: number;
+  max: number;
+  step: number;
+}
+
+export interface ListInterface extends Element {
+  __kind: 'List';
+  list: Option[];
+  value: number | string;
+}
+
+export interface ValueInputInterface extends Element {
+  __kind: 'ValueInput';
+  value: number | string;
+}
+
+export interface TextInterface extends Element {
+  __kind: 'Text';
+}
+
+export type Kind = 'Text' | 'List' | 'ValueInput' | 'Slider';
+
+export type Elements =
+  | SliderInterface
+  | ListInterface
+  | ValueInputInterface
+  | TextInterface;

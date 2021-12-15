@@ -1,6 +1,6 @@
-import { Element } from './Element';
+import { Element, Elements } from './Element';
 import { Result } from './Result';
-export interface Widget {
+export interface Calculator {
   _id?: string;
   name: string;
   formula: string;
@@ -8,6 +8,6 @@ export interface Widget {
   lastLetter: string;
   resultDescription: string;
   resultValueDesc: string;
-  result: Result[]; //this will be used later when added new feature to have more results
-  elements: Element[];
+  results: Result[]; //this will be used later when added new feature to have more results
+  elements: Elements[];
 }

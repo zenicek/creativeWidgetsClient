@@ -2,11 +2,11 @@ import { createContext, useContext } from 'react';
 import { Element } from '../Types/Element';
 import { IndividualWidgetInterface } from '../Types/IndividualWidgetInterface';
 import { Result } from '../Types/Result';
-import { Widget } from '../Types/Widget';
+import { Calculator } from '../Types/Widget';
 
 interface WidgetsContextInterface {
-  widgets: Widget[];
-  setWidgets: React.Dispatch<React.SetStateAction<Widget[]>>;
+  widgets: Calculator[];
+  setWidgets: React.Dispatch<React.SetStateAction<Calculator[]>>;
 }
 
 export const WidgetsContext = createContext<WidgetsContextInterface | null>(
@@ -31,15 +31,15 @@ export function useIndividualWidgetContext() {
 }
 
 //initial context value
-export const WidgetContext = {
-  elements: [] as Element[],
+export const WidgetContext: Calculator = {
+  elements: [],
   formula: '',
   name: 'default calculator',
   lastLetter: '@',
   width: 720,
   resultDescription: 'Result description placeholder',
   resultValueDesc: 'USD',
-  result: [] as Result[],
+  results: [],
 };
 interface InputMetasInterface {
   [key: string]: {};

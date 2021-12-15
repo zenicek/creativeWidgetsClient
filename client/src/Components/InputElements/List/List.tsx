@@ -5,10 +5,19 @@ import Select, { SingleValue } from 'react-select';
 import { useArrangeElement } from '../../../Utils/CustomHooks';
 import InputProps from '../../../Types/InputProps';
 import Option from '../../../Types/Option';
+import { Elements } from '../../../Types/Element';
 
 export const List: React.FC<InputProps> = ({ id, index, moveElement }) => {
   const { findElement, updateElement } = useIndividualWidgetContext();
-  const element = { ...findElement(id) };
+
+  const findListElement = (element: Elements) => {
+    if (element && element.__kind === 'List') {
+      return element;
+    }
+    throw new Error('The list was promised to be always here!');
+  };
+  const element = { ...findListElement(findElement(id)) };
+
   const [selectedOption, setSelectedOption] = useState(element.value);
 
   const handleChange = (e: SingleValue<Option> | null) => {
@@ -33,7 +42,7 @@ export const List: React.FC<InputProps> = ({ id, index, moveElement }) => {
     if (element.list) {
       return (
         <>
-          <label htmlFor="widget-list">{element.elementDescription}</label>
+          <label htmlFor="widget-list">{element.description}</label>
           <div>
             <Select
               options={element.list}

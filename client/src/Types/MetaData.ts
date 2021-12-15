@@ -1,6 +1,7 @@
 export interface MetaData {
-  elementType: string;
-  elementDescription: string;
+  __kind: string;
+  type: string;
+  description: string;
   value?: string | number;
   min?: number;
   max?: number;

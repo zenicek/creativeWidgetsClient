@@ -3,10 +3,18 @@ import React, { useRef } from 'react';
 import { useIndividualWidgetContext } from '../../../Utils/Contexts';
 import { useArrangeElement } from '../../../Utils/CustomHooks';
 import InputProps from '../../../Types/InputProps';
+import { Elements } from '../../../Types/Element';
 
 export const Slider: React.FC<InputProps> = ({ id, index, moveElement }) => {
   const { findElement, updateElement } = useIndividualWidgetContext();
-  const element = { ...findElement(id) };
+
+  const findSliderElement = (element: Elements) => {
+    if (element && element.__kind === 'Slider') {
+      return element;
+    }
+    throw new Error('The slider was promised to be always here!');
+  };
+  const element = { ...findSliderElement(findElement(id)) };
 
   const handleSlideChange = (value: string) => {
     element.value = Number(value);
@@ -46,7 +54,7 @@ export const Slider: React.FC<InputProps> = ({ id, index, moveElement }) => {
       data-handler-id={handlerId}
     >
       <label>
-        {element.elementDescription} - {element.value}
+        {element.description} - {element.value}
       </label>
       <div>
         <input
@@ -56,7 +64,7 @@ export const Slider: React.FC<InputProps> = ({ id, index, moveElement }) => {
           max={element.max}
           step={element.step}
           value={element.value}
-          onChange={(e) => handleSlideChange(e.target.value)}
+          onChange={e => handleSlideChange(e.target.value)}
           list="tickmarks"
         ></input>
         <datalist id="tickmarks">{marks()}</datalist>

@@ -1,31 +1,28 @@
 import { nanoid } from 'nanoid';
 import { nextChar } from './Helpers';
 import { MetaData } from '../Types/MetaData';
-import { Element } from '../Types/Element';
-import { Widget } from '../Types/Widget';
+import { Element, Elements } from '../Types/Element';
+import { Calculator } from '../Types/Widget';
 
 export const InitialContext = (
-  widget: Widget,
-  setWidget: React.Dispatch<React.SetStateAction<Widget>>
+  widget: Calculator,
+  setWidget: React.Dispatch<React.SetStateAction<Calculator>>
 ) => {
   return {
     widget,
     setWidget,
     //add element metadata
-    addElement: (meta: MetaData) => {
+    addElement: (meta: Elements) => {
       const element = {
         ...meta,
         id: nanoid(),
-        elementLetter:
-          meta.elementType !== 'Text' ? nextChar(widget.lastLetter) : '',
+        elementLetter: meta.type !== 'Text' ? nextChar(widget.lastLetter) : '',
       };
       setWidget({
         ...widget,
         elements: [...widget.elements, { ...element }],
         lastLetter:
-          meta.elementType !== 'Text'
-            ? element.elementLetter
-            : widget.lastLetter,
+          meta.type !== 'Text' ? element.elementLetter : widget.lastLetter,
       });
     },
     //update specific element in the elements list
@@ -39,7 +36,7 @@ export const InitialContext = (
       }
     },
     //function to rearrange elements on the dnd within the container
-    arrangeElements: (elements: Element[]) => {
+    arrangeElements: (elements: Elements[]) => {
       setWidget({ ...widget, elements: [...elements] });
     },
     //to find element in the array

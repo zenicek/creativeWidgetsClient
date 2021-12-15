@@ -3,6 +3,7 @@ import { useRef } from 'react';
 import { useIndividualWidgetContext } from '../../../Utils/Contexts';
 import { useArrangeElement } from '../../../Utils/CustomHooks';
 import InputProps from '../../../Types/InputProps';
+import { Elements } from '../../../Types/Element';
 
 export const ValueInput: React.FC<InputProps> = ({
   id,
@@ -10,7 +11,14 @@ export const ValueInput: React.FC<InputProps> = ({
   moveElement,
 }) => {
   const { findElement, updateElement } = useIndividualWidgetContext();
-  const element = { ...findElement(id) };
+
+  const findValueElement = (element: Elements) => {
+    if (element && element.__kind === 'ValueInput') {
+      return element;
+    }
+    throw new Error('The value input was promised to be always here!');
+  };
+  const element = { ...findValueElement(findElement(id)) };
 
   const handleInputChange = (value: string) => {
     element.value = value;
@@ -35,7 +43,7 @@ export const ValueInput: React.FC<InputProps> = ({
       data-handler-id={handlerId}
     >
       <label className="label" htmlFor="widget-input">
-        {element.elementDescription}
+        {element.description}
       </label>
       <div>
         <input
@@ -45,7 +53,7 @@ export const ValueInput: React.FC<InputProps> = ({
           id="widget-input"
           placeholder="Number"
           value={element.value}
-          onChange={(e) => {
+          onChange={e => {
             e.preventDefault();
             handleInputChange(e.target.value);
           }}

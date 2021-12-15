@@ -1,7 +1,7 @@
 export default interface Option {
   id: string;
-  label: any;
-  value: number | undefined;
+  label: string;
+  value: number | null;
   offValue: number | null;
   selected: boolean;
 }
