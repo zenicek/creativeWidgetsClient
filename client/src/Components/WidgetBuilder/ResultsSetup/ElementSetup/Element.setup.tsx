@@ -5,26 +5,35 @@ import { ListItemSetup } from './ElementSetupOptions/List.option';
 import { InputToggle } from './ElementSetupOptions/Input.toggle';
 import { nanoid } from 'nanoid';
 import Option from '../../../../Types/Option';
+import { Elements } from '../../../../Types/Element';
 
 export const ElementSetup: React.FC<{ id: string }> = ({ id }) => {
   const { updateElement, findElement } = useIndividualWidgetContext();
 
-  const element = { ...findElement(id) };
+  const findValueElement = (element: Elements | undefined) => {
+    if (
+      (element && element.__kind === 'Slider') ||
+      (element && element.__kind === 'List')
+    ) {
+      return element;
+    }
+    throw new Error('The value input was promised to be always here!');
+  };
+  const element = { ...findValueElement(findElement(id)) };
 
-  const handleSliderSetup = (
-    range: (number | undefined)[],
-    step: number | undefined
-  ) => {
-    const [min, max] = range;
-    element.min = min;
-    element.max = max;
-    element.step = step;
-    updateElement(id, element);
+  const handleSliderSetup = (range: number[], step: number) => {
+    if (element.__kind === 'Slider') {
+      const [min, max] = range;
+      element.min = min;
+      element.max = max;
+      element.step = step;
+      updateElement(id, element);
+    }
   };
 
   const handleListSetup = (option: Option) => {
-    if (element.list) {
-      const updatedOptionList = element.list.map((el) => {
+    if (element.__kind === 'List' && element.list) {
+      const updatedOptionList = element.list.map(el => {
         if (el.id === option.id) {
           return { ...option };
         } else {
@@ -37,16 +46,16 @@ export const ElementSetup: React.FC<{ id: string }> = ({ id }) => {
   };
 
   const updateElementDescription = (value: string) => {
-    element.elementDescription = value;
+    element.description = value;
     updateElement(id, element);
   };
 
   const addListOption = () => {
-    if (element.list) {
+    if (element.__kind === 'List' && element.list) {
       const option = {
         id: nanoid(),
         label: '',
-        value: undefined,
+        value: '',
         offValue: null,
         selected: false,
       };
@@ -56,7 +65,7 @@ export const ElementSetup: React.FC<{ id: string }> = ({ id }) => {
   };
 
   const removeListOption = (optionId: Option['id']) => {
-    if (element.list) {
+    if (element.__kind === 'List' && element.list) {
       element.list = element.list.filter((el: Option) => el.id !== optionId);
       updateElement(id, element);
     }
@@ -64,7 +73,7 @@ export const ElementSetup: React.FC<{ id: string }> = ({ id }) => {
 
   // Maria: this is a component, take it out to refactor
   const optionElement = () => {
-    if (element.elementType === 'Slider') {
+    if (element.type === 'Slider' && element.__kind === 'Slider') {
       return (
         <SliderOptions
           min={element.min}
@@ -74,7 +83,7 @@ export const ElementSetup: React.FC<{ id: string }> = ({ id }) => {
         />
       );
     }
-    if (element.elementType === 'List') {
+    if (element.type === 'List' && element.__kind === 'List') {
       const list = element.list?.map((option: Option) => {
         return (
           <ListItemSetup
@@ -99,12 +108,12 @@ export const ElementSetup: React.FC<{ id: string }> = ({ id }) => {
   return (
     <div className="element-setup-ctn">
       <div id="letter-ctn">
-        {element.elementLetter !== 'false' ? element.elementLetter : ''}
+        {element.letter !== 'false' ? element.letter : ''}
       </div>
       <div className="description-ctn">
         {' '}
         <InputToggle
-          description={element.elementDescription}
+          description={element.description}
           updateWidget={updateElementDescription}
         />
       </div>

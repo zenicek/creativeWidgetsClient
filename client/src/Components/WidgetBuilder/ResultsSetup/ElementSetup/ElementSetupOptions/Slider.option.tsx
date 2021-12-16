@@ -1,13 +1,10 @@
 import './Slider.option.css';
 
 interface Props {
-  handleSliderSetup: (
-    range: (number | undefined)[],
-    step: number | undefined
-  ) => void;
-  min: number | undefined;
-  max: number | undefined;
-  step: number | undefined;
+  handleSliderSetup: (range: number[], step: number) => void;
+  min: number;
+  max: number;
+  step: number;
 }
 
 export const SliderOptions: React.FC<Props> = ({
@@ -42,7 +39,7 @@ export const SliderOptions: React.FC<Props> = ({
         type="num"
         pattern="[0-9]*"
         value={range[0]}
-        onChange={(e) => handleRangeInput({ from: e.target.value })}
+        onChange={e => handleRangeInput({ from: e.target.value })}
       ></input>
       <div className="settings-desc-ctn">TO</div>
       <input
@@ -50,7 +47,7 @@ export const SliderOptions: React.FC<Props> = ({
         type="num"
         pattern="[0-9]*"
         value={range[1]}
-        onChange={(e) => handleRangeInput({ to: e.target.value })}
+        onChange={e => handleRangeInput({ to: e.target.value })}
       ></input>
       <div className="settings-desc-ctn">STEP</div>
       <input
@@ -59,7 +56,7 @@ export const SliderOptions: React.FC<Props> = ({
         step="0.1"
         value={stepValue}
         min="0"
-        onChange={(e) => handleRangeInput({ stepVal: e.target.value })}
+        onChange={e => handleRangeInput({ stepVal: e.target.value })}
       ></input>
     </div>
   );

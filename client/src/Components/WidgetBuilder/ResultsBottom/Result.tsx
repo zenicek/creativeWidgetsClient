@@ -7,7 +7,7 @@ export const Result: React.FC = () => {
 
   const getResults = () => {
     try {
-      return calculateResult(widget);
+      if (widget.formula.length > 1) return calculateResult(widget);
     } catch (e) {
       //log for now but make sure validation is solid once parser is done
       return console.log(e);

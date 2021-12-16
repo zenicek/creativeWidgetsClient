@@ -12,7 +12,7 @@ export const ValueInput: React.FC<InputProps> = ({
 }) => {
   const { findElement, updateElement } = useIndividualWidgetContext();
 
-  const findValueElement = (element: Elements) => {
+  const findValueElement = (element: Elements | undefined) => {
     if (element && element.__kind === 'ValueInput') {
       return element;
     }

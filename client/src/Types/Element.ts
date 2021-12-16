@@ -29,6 +29,7 @@ export interface ValueInputInterface extends Element {
 
 export interface TextInterface extends Element {
   __kind: 'Text';
+  value: '';
 }
 
 export type Kind = 'Text' | 'List' | 'ValueInput' | 'Slider';

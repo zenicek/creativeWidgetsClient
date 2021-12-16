@@ -11,20 +11,20 @@ import { Calculator } from './Types/Widget';
 
 function App() {
   const [widgets, setWidgets] = useState<Calculator[]>([]);
-  useEffect(() => {
-    getAllWidgets().then((res) => {
-      setWidgets([...res]);
-    });
-  }, []);
+  // useEffect(() => {
+  //   getAllWidgets().then((res) => {
+  //     setWidgets([...res]);
+  //   });
+  // }, []);
 
   return (
     <DndProvider backend={HTML5Backend}>
       <WidgetsContext.Provider value={{ widgets, setWidgets }}>
-        <div className='App'>
+        <div className="App">
           <Routes>
-            <Route path='/' element={<Dashboard />} />
-            <Route path='/new-widget' element={<WidgetBuilder />} />
-            <Route path='/edit/:id' element={<WidgetBuilder />} />
+            <Route path="/" element={<Dashboard />} />
+            <Route path="/new-widget" element={<WidgetBuilder />} />
+            <Route path="/edit/:id" element={<WidgetBuilder />} />
           </Routes>
         </div>
       </WidgetsContext.Provider>

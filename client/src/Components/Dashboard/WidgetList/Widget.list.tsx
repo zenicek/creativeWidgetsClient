@@ -3,14 +3,14 @@ import { WidgetPreview } from '../WidgetPreview/Widget.preview';
 import { Link } from 'react-router-dom';
 import { useContext } from 'react';
 import { WidgetsContext } from '../../../Utils/Contexts';
-import { Widget } from '../../../Types/Widget';
+import { Calculator } from '../../../Types/Widget';
 
 export function WidgetList() {
   const widgetsContext = useContext(WidgetsContext);
 
   const renderWidgets = () => {
     if (widgetsContext?.widgets) {
-      return widgetsContext.widgets.map((widget: Widget) => {
+      return widgetsContext.widgets.map((widget: Calculator) => {
         return (
           <li key={widget._id}>
             <Link to={`/edit/${widget._id}`}>
@@ -25,9 +25,9 @@ export function WidgetList() {
   };
 
   return (
-    <ul className='widget-list-ctn'>
-      <li key='newWidget'>
-        <Link to='/new-widget' role='widget-preview-link'>
+    <ul className="widget-list-ctn">
+      <li key="newWidget">
+        <Link to="/new-widget" role="widget-preview-link">
           <WidgetPreview />
         </Link>
       </li>

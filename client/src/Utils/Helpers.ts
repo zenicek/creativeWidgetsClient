@@ -1,5 +1,4 @@
-import { Widget } from '../Types/Widget';
-import { Element } from '../Types/Element';
+import { Calculator } from '../Types/Widget';
 import { Parser } from 'expr-eval';
 
 //function creates a next alphabetical identifier for elements
@@ -12,15 +11,16 @@ interface InputValues {
   [key: string]: number;
 }
 
-export function calculateResult(widget: Widget): number | null {
+export function calculateResult(widget: Calculator): number | null {
   const parser = new Parser();
   const userExpression = parser.parse(widget.formula.toLowerCase());
-
   const inputValues: InputValues = {};
+  console.log(userExpression);
 
-  widget.elements.forEach((el: Element) => {
-    inputValues[el.elementLetter.toLowerCase()] = Number(el.value);
+  widget.elements.forEach(el => {
+    inputValues[el.letter.toLowerCase()] = Number(el.value);
   });
+  console.log(inputValues);
 
   let result: number;
   try {
@@ -32,7 +32,7 @@ export function calculateResult(widget: Widget): number | null {
 }
 
 // validation function to define results screen (simple check if formula letter exists within the container)
-export function hasValidFormula(widget: Widget): boolean {
+export function hasValidFormula(widget: Calculator): boolean {
   const lettersInFormula = widget.formula.match(/([A-Z])+/g);
   if (!widget.formula || !lettersInFormula) {
     return true;
@@ -41,9 +41,7 @@ export function hasValidFormula(widget: Widget): boolean {
     return false;
   }
 
-  const lettersInWidget = widget.elements.map(
-    (el: Element) => el.elementLetter
-  );
+  const lettersInWidget = widget.elements.map(el => el.letter);
   for (const letter of lettersInFormula) {
     if (!lettersInWidget.includes(letter)) {
       return false;
@@ -52,11 +50,9 @@ export function hasValidFormula(widget: Widget): boolean {
   return true;
 }
 
-export function genErrorMessage(widget: Widget): string {
+export function genErrorMessage(widget: Calculator): string {
   const lettersInFormula = widget.formula.match(/([A-Z])+/g);
-  const lettersInWidget = widget.elements.map(
-    (el: Element) => el.elementLetter
-  );
+  const lettersInWidget = widget.elements.map(el => el.letter);
   const errorLetters: string[] = [];
 
   for (const letter of lettersInFormula!) {

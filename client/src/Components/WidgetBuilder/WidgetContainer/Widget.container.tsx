@@ -13,7 +13,7 @@ export const WidgetContainer: React.FC<{ loadResults: boolean }> = ({
 }) => {
   const { widget, addElement, arrangeElements } = useIndividualWidgetContext();
   //function gets all the elements from the context and converts to element lookup
-  const elementSetupList = [...widget.elements].map((el) => {
+  const elementSetupList = [...widget.elements].map(el => {
     if (el.id) {
       return (
         <ElementSetup
@@ -41,7 +41,7 @@ export const WidgetContainer: React.FC<{ loadResults: boolean }> = ({
   );
 
   const elementsList = [...widget.elements].map((el, index) => {
-    const Element = elements[el.elementType];
+    const Element = elements[el.type];
     if (Element && el.id) {
       return (
         <Element
