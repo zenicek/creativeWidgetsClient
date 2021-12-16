@@ -7,10 +7,10 @@ import { HTML5Backend } from 'react-dnd-html5-backend';
 import { WidgetsContext } from './Utils/Contexts';
 import { useState, useEffect } from 'react';
 import { getAllWidgets } from './Utils/ApiService';
-import { Widget } from './Types/Widget';
+import { Calculator } from './Types/Widget';
 
 function App() {
-  const [widgets, setWidgets] = useState<Widget[]>([]);
+  const [widgets, setWidgets] = useState<Calculator[]>([]);
   useEffect(() => {
     getAllWidgets().then((res) => {
       setWidgets([...res]);
