@@ -20,7 +20,6 @@ export function calculateResult(widget: Calculator): number | null {
   widget.elements.forEach(el => {
     inputValues[el.letter.toLowerCase()] = Number(el.value);
   });
-  console.log(inputValues);
 
   let result: number;
   try {

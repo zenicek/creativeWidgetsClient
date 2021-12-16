@@ -44,26 +44,26 @@ interface InputMetasInterface {
 }
 export const InputMetas: InputMetasInterface = {
   Slider: {
-    elementType: 'Slider',
-    elementDescription: 'Slider',
+    type: 'Slider',
+    description: 'Slider',
     value: 0,
     min: 0,
     max: 10,
     step: 1,
   },
   ValueInput: {
-    elementType: 'ValueInput',
-    elementDescription: 'Input',
+    type: 'ValueInput',
+    description: 'Input',
     value: '',
   },
   List: {
-    elementType: 'List',
-    elementDescription: 'List',
+    type: 'List',
+    description: 'List',
     value: '',
     list: [],
   },
   Text: {
-    elementType: 'Text',
-    elementDescription: 'Text',
+    type: 'Text',
+    description: 'Text',
   },
 };

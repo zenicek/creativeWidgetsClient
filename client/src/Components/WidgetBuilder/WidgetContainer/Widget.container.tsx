@@ -7,6 +7,7 @@ import { elementTypes } from '../../InputElements/Elements.types';
 import { elements } from '../ElementsList/ElemsLookup';
 import { ElementSetup } from '../ResultsSetup/ElementSetup/Element.setup';
 import { Result } from '../ResultsBottom/Result';
+import { Elements } from '../../../Types/Element';
 
 export const WidgetContainer: React.FC<{ loadResults: boolean }> = ({
   loadResults,
@@ -57,7 +58,7 @@ export const WidgetContainer: React.FC<{ loadResults: boolean }> = ({
 
   const [, drop] = useDrop({
     accept: elementTypes,
-    drop: (item: any) => {
+    drop: (item: { meta: Elements }) => {
       if (item.meta) addElement(item.meta);
     },
   });

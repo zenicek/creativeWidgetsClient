@@ -3,7 +3,6 @@ import { useRef } from 'react';
 import { useIndividualWidgetContext } from '../../../Utils/Contexts';
 import { useArrangeElement } from '../../../Utils/CustomHooks';
 import InputProps from '../../../Types/InputProps';
-import { Elements } from '../../../Types/Element';
 
 export const ValueInput: React.FC<InputProps> = ({
   id,
@@ -12,13 +11,15 @@ export const ValueInput: React.FC<InputProps> = ({
 }) => {
   const { findElement, updateElement } = useIndividualWidgetContext();
 
-  const findValueElement = (element: Elements | undefined) => {
+  const findValueElement = (id: string) => {
+    const element = findElement(id);
     if (element && element.__kind === 'ValueInput') {
       return element;
     }
     throw new Error('The value input was promised to be always here!');
   };
-  const element = { ...findValueElement(findElement(id)) };
+
+  const element = { ...findValueElement(id) };
 
   const handleInputChange = (value: string) => {
     element.value = value;

@@ -9,8 +9,8 @@ interface Lookup {
   [key: string]: React.FC<InputProps>;
 }
 export const elements: Lookup = {
-  ValueInput: ValueInput,
-  Slider: Slider,
-  List: List,
-  Text: Text,
+  ValueInput,
+  Slider,
+  List,
+  Text,
 };
