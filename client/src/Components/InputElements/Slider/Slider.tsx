@@ -8,7 +8,7 @@ import { Elements } from '../../../Types/Element';
 export const Slider: React.FC<InputProps> = ({ id, index, moveElement }) => {
   const { findElement, updateElement } = useIndividualWidgetContext();
 
-  const findSliderElement = (element: Elements) => {
+  const findSliderElement = (element: Elements | undefined) => {
     if (element && element.__kind === 'Slider') {
       return element;
     }

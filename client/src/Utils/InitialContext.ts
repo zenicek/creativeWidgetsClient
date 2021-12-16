@@ -1,7 +1,6 @@
 import { nanoid } from 'nanoid';
 import { nextChar } from './Helpers';
-import { MetaData } from '../Types/MetaData';
-import { Element, Elements } from '../Types/Element';
+import { Elements } from '../Types/Element';
 import { Calculator } from '../Types/Widget';
 
 export const InitialContext = (
@@ -16,19 +15,18 @@ export const InitialContext = (
       const element = {
         ...meta,
         id: nanoid(),
-        elementLetter: meta.type !== 'Text' ? nextChar(widget.lastLetter) : '',
+        letter: meta.type !== 'Text' ? nextChar(widget.lastLetter) : '',
       };
       setWidget({
         ...widget,
         elements: [...widget.elements, { ...element }],
-        lastLetter:
-          meta.type !== 'Text' ? element.elementLetter : widget.lastLetter,
+        lastLetter: meta.type !== 'Text' ? element.letter : widget.lastLetter,
       });
     },
     //update specific element in the elements list
-    updateElement: (id: string, element: Element | undefined) => {
+    updateElement: (id: string, element: Elements) => {
       if (element) {
-        const updatedEls = widget.elements.map((el: any) => {
+        const updatedEls = widget.elements.map(el => {
           if (el._id === id || el.id === id) return { ...element };
           else return el;
         });
@@ -41,7 +39,7 @@ export const InitialContext = (
     },
     //to find element in the array
     findElement: (id: string) => {
-      return widget.elements.find((el: any) =>
+      return widget.elements.find(el =>
         el._id ? el._id === id : el.id === id
       );
     },

@@ -10,7 +10,7 @@ import { Elements } from '../../../Types/Element';
 export const List: React.FC<InputProps> = ({ id, index, moveElement }) => {
   const { findElement, updateElement } = useIndividualWidgetContext();
 
-  const findListElement = (element: Elements) => {
+  const findListElement = (element: Elements | undefined) => {
     if (element && element.__kind === 'List') {
       return element;
     }

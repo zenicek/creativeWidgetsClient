@@ -1,10 +1,10 @@
 import Option from './Option';
 
-export interface Element {
+interface Element {
   id?: string;
   _id?: string;
   type: string;
-  letter?: string;
+  letter: string;
   description: string;
 }
 

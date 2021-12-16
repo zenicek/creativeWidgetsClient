@@ -1,7 +1,5 @@
 import { createContext, useContext } from 'react';
-import { Element } from '../Types/Element';
 import { IndividualWidgetInterface } from '../Types/IndividualWidgetInterface';
-import { Result } from '../Types/Result';
 import { Calculator } from '../Types/Widget';
 
 interface WidgetsContextInterface {

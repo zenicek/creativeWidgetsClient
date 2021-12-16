@@ -9,7 +9,7 @@ export const Text: React.FC<InputProps> = ({ id, index, moveElement }) => {
   const { findElement } = useIndividualWidgetContext();
 
   //TODO: see if you can use __kind to find exactly the type without copying this code in all elements
-  const findTextElement = (element: Elements) => {
+  const findTextElement = (element: Elements | undefined) => {
     if (element && element.__kind === 'Text') {
       return element;
     }
