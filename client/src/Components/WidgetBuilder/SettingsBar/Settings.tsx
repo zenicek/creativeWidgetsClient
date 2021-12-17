@@ -1,12 +1,13 @@
 import './Settings.css';
-import {
-  useIndividualWidgetContext,
-  useWidgetsContext,
-} from '../../../Utils/Contexts';
+import { useWidgetsContext } from '../../../Utils/Contexts';
 import { createWidget, updateWidget } from '../../../Utils/ApiService';
 import { useNavigate, useParams } from 'react-router-dom';
 import { ReactComponent as RemoveIcon } from '../ElementsList/Icons/SvgIcons/remove.svg';
 import { removeWidget } from '../../../Utils/ApiService';
+import { useAppSelector } from '../../../Utils/CustomHooks';
+import { bindActionCreators } from 'redux';
+import { actionCreators } from '../../../States';
+import { useDispatch } from 'react-redux';
 
 interface Props {
   results: {
@@ -15,16 +16,19 @@ interface Props {
   };
 }
 export const SettingsBar: React.FC<Props> = ({ results }) => {
-  const { widget, setWidget } = useIndividualWidgetContext();
+  const widget = useAppSelector(state => state.calculator);
+
+  const { setCalculator } = bindActionCreators(actionCreators, useDispatch());
+
   const { widgets, setWidgets } = useWidgetsContext();
   const { id } = useParams();
   const navigation = useNavigate();
   const handleNameChange = (name: string) => {
-    setWidget({ ...widget, name: name });
+    setCalculator({ ...widget, name: name });
   };
 
   const handleWidthChange = (width: number) => {
-    setWidget({ ...widget, width: width });
+    setCalculator({ ...widget, width: width });
     //TODO need to add validations in case its too big
   };
 
@@ -32,7 +36,7 @@ export const SettingsBar: React.FC<Props> = ({ results }) => {
     if (id) {
       removeWidget(id).then(() => {
         navigation('/');
-        setWidgets([...widgets.filter((widget) => widget._id !== id)]);
+        setWidgets([...widgets.filter(widget => widget._id !== id)]);
       });
     }
   };
@@ -41,7 +45,7 @@ export const SettingsBar: React.FC<Props> = ({ results }) => {
     //I am assigning the nanoid on the front end which is being replaced on the backend the below is removing any front end IDs
     const cleanWidget = {
       ...widget,
-      elements: widget.elements.map((el) => {
+      elements: widget.elements.map(el => {
         const elCopy = { ...el };
         if (elCopy.id) {
           delete elCopy.id;
@@ -51,7 +55,7 @@ export const SettingsBar: React.FC<Props> = ({ results }) => {
     };
     //TODO handle if user modifies the widget URL and ID is invalid
     if (!id) {
-      createWidget(cleanWidget).then((res) => {
+      createWidget(cleanWidget).then(res => {
         navigation('/edit/' + res._id);
       });
     } else if (cleanWidget._id) {
@@ -93,7 +97,7 @@ export const SettingsBar: React.FC<Props> = ({ results }) => {
             type="number"
             className="settings-input"
             value={widget.width}
-            onChange={(e) => handleWidthChange(Number(e.target.value))}
+            onChange={e => handleWidthChange(Number(e.target.value))}
           ></input>
         </div>
         {'|'}
@@ -103,7 +107,7 @@ export const SettingsBar: React.FC<Props> = ({ results }) => {
             type="text"
             className="settings-input name-input"
             value={widget.name}
-            onChange={(e) => handleNameChange(e.target.value)}
+            onChange={e => handleNameChange(e.target.value)}
           ></input>
         </div>
         {'|'}

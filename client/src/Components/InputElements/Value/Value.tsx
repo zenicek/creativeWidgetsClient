@@ -1,28 +1,33 @@
 import './Value.css';
 import { useRef } from 'react';
-import { useIndividualWidgetContext } from '../../../Utils/Contexts';
-import { useArrangeElement } from '../../../Utils/CustomHooks';
+import { useAppSelector, useArrangeElement } from '../../../Utils/CustomHooks';
 import InputProps from '../../../Types/InputProps';
-
+import { bindActionCreators } from 'redux';
+import { actionCreators } from '../../../States';
+import { useDispatch } from 'react-redux';
 export const ValueInput: React.FC<InputProps> = ({
   id,
   index,
   moveElement,
 }) => {
-  const { findElement, updateElement } = useIndividualWidgetContext();
+  const { updateElement } = bindActionCreators(actionCreators, useDispatch());
+  const widget = useAppSelector(state => state.calculator);
 
   const findValueElement = (id: string) => {
-    const element = findElement(id);
+    const element = widget.elements.find(el => el._id === id || el.id === id);
     if (element && element.__kind === 'ValueInput') {
       return element;
     }
-    throw new Error('The value input was promised to be always here!');
+    // throw new Error('The value input was promised to be always here!');
   };
 
   const element = { ...findValueElement(id) };
+  console.log(element);
+  console.log(widget);
 
   const handleInputChange = (value: string) => {
     element.value = value;
+    //@ts-ignore
     updateElement(id, element);
   };
 

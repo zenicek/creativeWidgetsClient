@@ -1,12 +1,16 @@
 import './Results.sidebar.css';
-import { useIndividualWidgetContext } from '../../../../Utils/Contexts';
 import { hasValidFormula, genErrorMessage } from '../../../../Utils/Helpers';
 import { useState, useEffect } from 'react';
 import { InputToggle } from '../ElementSetup/ElementSetupOptions/Input.toggle';
+import { useAppSelector } from '../../../../Utils/CustomHooks';
+import { bindActionCreators } from 'redux';
+import { actionCreators } from '../../../../States';
+import { useDispatch } from 'react-redux';
 
 export function ResultsSiderbar() {
-  const { updateFormula, widget, updateResultDesc, updateResultValueDesc } =
-    useIndividualWidgetContext();
+  const widget = useAppSelector(state => state.calculator);
+  const { updateFormula, updateResultDesc, updateResultValueDesc } =
+    bindActionCreators(actionCreators, useDispatch());
 
   const [isValid, setIsValid] = useState(hasValidFormula(widget));
 
@@ -45,7 +49,7 @@ export function ResultsSiderbar() {
           rows={2}
           id="formula-input"
           value={widget.formula}
-          onChange={(e) => handleFormula(e.target.value)}
+          onChange={e => handleFormula(e.target.value)}
         ></textarea>
         <RenderError />
         <InputToggle

@@ -1,10 +1,9 @@
 import './Result.css';
 import { calculateResult } from '../../../Utils/Helpers';
-import { useIndividualWidgetContext } from '../../../Utils/Contexts';
+import { useAppSelector } from '../../../Utils/CustomHooks';
 
 export const Result: React.FC = () => {
-  const { widget } = useIndividualWidgetContext();
-
+  const widget = useAppSelector(state => state.calculator);
   const getResults = () => {
     try {
       if (widget.formula.length > 1) return calculateResult(widget);

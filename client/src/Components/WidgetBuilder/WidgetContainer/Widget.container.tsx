@@ -2,17 +2,24 @@ import { useDrop } from 'react-dnd';
 import { useCallback } from 'react';
 import './Widget.container.css';
 import update from 'immutability-helper';
-import { useIndividualWidgetContext } from '../../../Utils/Contexts';
 import { elementTypes } from '../../InputElements/Elements.types';
 import { elements } from '../ElementsList/ElemsLookup';
 import { ElementSetup } from '../ResultsSetup/ElementSetup/Element.setup';
 import { Result } from '../ResultsBottom/Result';
 import { Elements } from '../../../Types/Element';
+import { useAppSelector } from '../../../Utils/CustomHooks';
+import { bindActionCreators } from 'redux';
+import { actionCreators } from '../../../States';
+import { useDispatch } from 'react-redux';
 
 export const WidgetContainer: React.FC<{ loadResults: boolean }> = ({
   loadResults,
 }) => {
-  const { widget, addElement, arrangeElements } = useIndividualWidgetContext();
+  const widget = useAppSelector(state => state.calculator);
+  const { addElement, arrangeElements } = bindActionCreators(
+    actionCreators,
+    useDispatch()
+  );
   //function gets all the elements from the context and converts to element lookup
   const elementSetupList = [...widget.elements].map(el => {
     if (el.id) {
