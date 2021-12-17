@@ -9,7 +9,7 @@ export const Slider: React.FC<InputProps> = ({ id, index, moveElement }) => {
   const { findElement, updateElement } = useIndividualWidgetContext();
 
   const findSliderElement = (element: Elements | undefined) => {
-    if (element && element.__kind === 'Slider') {
+    if (element && element.type === 'Slider') {
       return element;
     }
     throw new Error('The slider was promised to be always here!');

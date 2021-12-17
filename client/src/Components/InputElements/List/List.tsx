@@ -11,7 +11,7 @@ export const List: React.FC<InputProps> = ({ id, index, moveElement }) => {
   const { findElement, updateElement } = useIndividualWidgetContext();
 
   const findListElement = (element: Elements | undefined) => {
-    if (element && element.__kind === 'List') {
+    if (element && element.type === 'List') {
       return element;
     }
     throw new Error('The list was promised to be always here!');

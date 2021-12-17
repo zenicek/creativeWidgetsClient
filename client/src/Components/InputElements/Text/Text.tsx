@@ -10,7 +10,7 @@ export const Text: React.FC<InputProps> = ({ id, index, moveElement }) => {
 
   //TODO: see if you can use __kind to find exactly the type without copying this code in all elements
   const findTextElement = (element: Elements | undefined) => {
-    if (element && element.__kind === 'Text') {
+    if (element && element.type === 'Text') {
       return element;
     }
     throw new Error('The text was promised to be always here!');

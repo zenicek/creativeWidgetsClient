@@ -12,8 +12,8 @@ export const ElementSetup: React.FC<{ id: string }> = ({ id }) => {
 
   const findValueElement = (element: Elements | undefined) => {
     if (
-      (element && element.__kind === 'Slider') ||
-      (element && element.__kind === 'List')
+      (element && element.type === 'Slider') ||
+      (element && element.type === 'List')
     ) {
       return element;
     }
@@ -22,7 +22,7 @@ export const ElementSetup: React.FC<{ id: string }> = ({ id }) => {
   const element = { ...findValueElement(findElement(id)) };
 
   const handleSliderSetup = (range: number[], step: number) => {
-    if (element.__kind === 'Slider') {
+    if (element.type === 'Slider') {
       const [min, max] = range;
       element.min = min;
       element.max = max;
@@ -32,7 +32,7 @@ export const ElementSetup: React.FC<{ id: string }> = ({ id }) => {
   };
 
   const handleListSetup = (option: Option) => {
-    if (element.__kind === 'List' && element.list) {
+    if (element.type === 'List' && element.list) {
       const updatedOptionList = element.list.map(el => {
         if (el.id === option.id) {
           return { ...option };
@@ -51,7 +51,7 @@ export const ElementSetup: React.FC<{ id: string }> = ({ id }) => {
   };
 
   const addListOption = () => {
-    if (element.__kind === 'List' && element.list) {
+    if (element.type === 'List' && element.list) {
       const option = {
         id: nanoid(),
         label: '',
@@ -65,7 +65,7 @@ export const ElementSetup: React.FC<{ id: string }> = ({ id }) => {
   };
 
   const removeListOption = (optionId: Option['id']) => {
-    if (element.__kind === 'List' && element.list) {
+    if (element.type === 'List' && element.list) {
       element.list = element.list.filter((el: Option) => el.id !== optionId);
       updateElement(id, element);
     }
@@ -73,7 +73,7 @@ export const ElementSetup: React.FC<{ id: string }> = ({ id }) => {
 
   // Maria: this is a component, take it out to refactor
   const optionElement = () => {
-    if (element.type === 'Slider' && element.__kind === 'Slider') {
+    if (element.type === 'Slider' && element.type === 'Slider') {
       return (
         <SliderOptions
           min={element.min}
@@ -83,7 +83,7 @@ export const ElementSetup: React.FC<{ id: string }> = ({ id }) => {
         />
       );
     }
-    if (element.type === 'List' && element.__kind === 'List') {
+    if (element.type === 'List' && element.type === 'List') {
       const list = element.list?.map((option: Option) => {
         return (
           <ListItemSetup
