@@ -1,28 +1,30 @@
 import './Value.css';
 import { useRef } from 'react';
-import { useAppSelector, useArrangeElement } from '../../../Utils/CustomHooks';
+import {
+  useArrangeElement,
+  useCalcElementHandler,
+} from '../../../Utils/CustomHooks';
 import InputProps from '../../../Types/InputProps';
-import { bindActionCreators } from 'redux';
-import { actionCreators } from '../../../States';
-import { useDispatch } from 'react-redux';
 export const ValueInput: React.FC<InputProps> = ({
   id,
   index,
   moveElement,
 }) => {
-  const { updateElement } = bindActionCreators(actionCreators, useDispatch());
-  const widget = useAppSelector(state => state.calculator);
+  // const { updateElement } = bindActionCreators(actionCreators, useDispatch());
+  // const widget = useAppSelector(state => state.calculator);
 
-  const findValueElement = (id: string) => {
-    const element = widget.elements.find(el => el._id === id || el.id === id);
-    //NOTE=> THE BELOW NEEDS TO BE CHANGED FROM __KIND TO TYPE SINCE RUNTIME DOESNT HAVE __KIND IT WILL ALWAYS THROW AN ERROR
-    if (element && element.type === 'ValueInput') {
-      return element;
-    }
-    throw new Error('The value input was promised to be always here!');
-  };
+  // const findValueElement = (id: string) => {
+  //   const element = widget.elements.find(el => el._id === id || el.id === id);
+  //   //NOTE=> THE BELOW NEEDS TO BE CHANGED FROM __KIND TO TYPE SINCE RUNTIME DOESNT HAVE __KIND IT WILL ALWAYS THROW AN ERROR
+  //   if (element && element.type === 'ValueInput') {
+  //     return element;
+  //   }
+  //   throw new Error('The value input was promised to be always here!');
+  // };
 
-  const element = { ...findValueElement(id) };
+  const { findElement, updateElement } = useCalcElementHandler();
+
+  const element = { ...findElement(id, 'ValueInput') };
 
   const handleInputChange = (value: string) => {
     element.value = value;

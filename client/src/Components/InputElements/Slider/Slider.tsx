@@ -1,20 +1,27 @@
 import './Slider.css';
 import React, { useRef } from 'react';
 import { useIndividualWidgetContext } from '../../../Utils/Contexts';
-import { useArrangeElement } from '../../../Utils/CustomHooks';
+import {
+  useArrangeElement,
+  useCalcElementHandler,
+} from '../../../Utils/CustomHooks';
 import InputProps from '../../../Types/InputProps';
 import { Elements } from '../../../Types/Element';
 
 export const Slider: React.FC<InputProps> = ({ id, index, moveElement }) => {
-  const { findElement, updateElement } = useIndividualWidgetContext();
+  // const { findElement, updateElement } = useIndividualWidgetContext();
 
-  const findSliderElement = (element: Elements | undefined) => {
-    if (element && element.type === 'Slider') {
-      return element;
-    }
-    throw new Error('The slider was promised to be always here!');
-  };
-  const element = { ...findSliderElement(findElement(id)) };
+  // const findSliderElement = (element: Elements | undefined) => {
+  //   if (element && element.type === 'Slider') {
+  //     return element;
+  //   }
+  //   throw new Error('The slider was promised to be always here!');
+  // };
+  // const element = { ...findSliderElement(findElement(id)) };
+
+  const { findElement, updateElement } = useCalcElementHandler();
+  // TODO this typeguard doesnt seem to work wtf?
+  const element = { ...findElement(id, 'Slider') };
 
   const handleSlideChange = (value: string) => {
     element.value = Number(value);

@@ -14,7 +14,6 @@ export const setCalculator = (calculator: Calculator) => {
 
 export const addElement = (element: Elements) => {
   return (dispatch: Dispatch<ReducerActions>) => {
-    console.log("I am adding element.")
     dispatch({
       type: CalcActions.ADD_ELEMENT,
       payload: { element },
@@ -24,7 +23,6 @@ export const addElement = (element: Elements) => {
 
 export const updateElement = (id: string, element: Elements) => {
   return (dispatch: Dispatch<ReducerActions>) => {
-    console.log("I am updating element.")
     dispatch({
       type: CalcActions.UPDATE_ELEMENT,
       payload: { id, element },
