@@ -1,6 +1,6 @@
 import './Result.css';
 import { calculateResult } from '../../../Utils/Helpers';
-import { useAppSelector } from '../../../Utils/CustomHooks';
+import { useAppSelector } from '../../../Utils/CustomHooks/';
 
 export const Result: React.FC = () => {
   const widget = useAppSelector(state => state.calculator);

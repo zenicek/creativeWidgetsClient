@@ -7,7 +7,7 @@ import { elements } from '../ElementsList/ElemsLookup';
 import { ElementSetup } from '../ResultsSetup/ElementSetup/Element.setup';
 import { Result } from '../ResultsBottom/Result';
 import { Elements } from '../../../Types/Element';
-import { useAppSelector } from '../../../Utils/CustomHooks';
+import { useAppSelector } from '../../../Utils/CustomHooks/CustomHooks';
 import { bindActionCreators } from 'redux';
 import { actionCreators } from '../../../States';
 import { useDispatch } from 'react-redux';

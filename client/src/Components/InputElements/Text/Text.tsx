@@ -1,7 +1,7 @@
 import './Text.css';
 import { useRef } from 'react';
 import { useIndividualWidgetContext } from '../../../Utils/Contexts';
-import { useArrangeElement } from '../../../Utils/CustomHooks';
+import { useArrangeElement } from '../../../Utils/CustomHooks/CustomHooks';
 import InputProps from '../../../Types/InputProps';
 import { Elements } from '../../../Types/Element';
 

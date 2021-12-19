@@ -33,6 +33,13 @@ export interface TextInterface extends Element {
 
 export type Kind = 'Text' | 'List' | 'ValueInput' | 'Slider';
 
+export enum ElementTypes {
+  Text = 'Text',
+  List = 'List',
+  ValueInput = 'ValueInput',
+  Slider = 'Slider',
+}
+
 export type Elements =
   | SliderInterface
   | ListInterface

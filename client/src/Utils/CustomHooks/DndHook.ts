@@ -1,11 +1,8 @@
 import { RefObject } from 'react';
 import { useDrag, useDrop } from 'react-dnd';
-import { ElementArranger } from '../Components/InputElements/Elements.types';
-import { useSelector, TypedUseSelectorHook, useDispatch } from 'react-redux';
-import { actionCreators, State } from '../States';
-import { bindActionCreators } from 'redux';
-import { Kind } from '../Types/Element';
-import { calculatorReducer } from '../States/Reducers/CalculatorReducer';
+import { ElementArranger } from '../../Components/InputElements/Elements.types';
+import { useSelector, TypedUseSelectorHook } from 'react-redux';
+import { State } from '../../States';
 
 //this is a custom hook logic to rearrange elements in the container
 //TODO refactor this possibly for nice effects etc.. and be able to drop next to the existing element and shrink it to half
@@ -75,38 +72,3 @@ export function useArrangeElement(
 
   return { drag, drop, isDragging, handlerId };
 }
-
-export const useAppSelector: TypedUseSelectorHook<State> = useSelector;
-
-export const useCalcElementHandler = () => {
-  const {
-    updateElement,
-    addElement,
-    updateFormula,
-    updateResultDesc,
-    updateResultValueDesc,
-  } = bindActionCreators(actionCreators, useDispatch());
-
-  const calculator = useAppSelector(state => state.calculator);
-
-  const findElement = (id: string, type: Kind) => {
-    const element = calculator.elements.find(
-      el => (el._id === id || el.id === id) && el.type === type
-    );
-    //TODO: CHECK HOW CAN YOU TYPEGUARD WHEN CALLING FIND ELEMENT TO RETURN SPECIFIC TYPE
-    if (element && element.type === 'ValueInput') return element;
-    if (element && element.type === 'Text') return element;
-    if (element && element.type === 'Slider' && type === 'Slider')
-      return element;
-    throw new Error('The element was promised to be always here!');
-  };
-
-  return {
-    updateResultValueDesc,
-    updateResultDesc,
-    addElement,
-    updateElement,
-    updateFormula,
-    findElement,
-  };
-};

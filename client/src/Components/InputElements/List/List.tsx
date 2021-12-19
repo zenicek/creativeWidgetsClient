@@ -2,7 +2,7 @@ import React, { useState, useRef } from 'react';
 import { useIndividualWidgetContext } from '../../../Utils/Contexts';
 import './List.css';
 import Select, { SingleValue } from 'react-select';
-import { useArrangeElement } from '../../../Utils/CustomHooks';
+import { useArrangeElement } from '../../../Utils/CustomHooks/CustomHooks';
 import InputProps from '../../../Types/InputProps';
 import Option from '../../../Types/Option';
 import { Elements } from '../../../Types/Element';
