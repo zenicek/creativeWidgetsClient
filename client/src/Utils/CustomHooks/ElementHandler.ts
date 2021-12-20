@@ -46,7 +46,9 @@ export const useCalcElementHandler = () => {
     if (element && element.type === 'List') return element;
     throw new Error('The List element was promised to be always here!');
   };
+  
   //The above specific version works, but its so long winded see if it can be changed to an easy one below with proper typeguards?
+  // TODO: In this instance we can do type casting which will be safe since its typeguarded.
   const findElement = (id: string, type: ElementTypes) => {
     const element = calculator.elements.find(
       el => el._id === id || el.id === id
@@ -54,7 +56,7 @@ export const useCalcElementHandler = () => {
     switch (type) {
       case ElementTypes.List: {
         return calculator.elements.find(
-          el => (el._id === id || el.id === id) && el.type === ElementTypes.List
+          el => (el._id === id || el.id === id) && el.type === ElementTypes.List as ListInterface
         );
       }
     }
