@@ -1,22 +1,14 @@
 import React, { useState, useRef } from 'react';
-import { useIndividualWidgetContext } from '../../../Utils/Contexts';
 import './List.css';
 import Select, { SingleValue } from 'react-select';
-import { useArrangeElement } from '../../../Utils/CustomHooks/CustomHooks';
+import { useArrangeElement } from '../../../Utils/CustomHooks/DndHook';
 import InputProps from '../../../Types/InputProps';
 import Option from '../../../Types/Option';
-import { Elements } from '../../../Types/Element';
+import { useCalcElementHandler } from '../../../Utils/CustomHooks';
 
 export const List: React.FC<InputProps> = ({ id, index, moveElement }) => {
-  const { findElement, updateElement } = useIndividualWidgetContext();
-
-  const findListElement = (element: Elements | undefined) => {
-    if (element && element.type === 'List') {
-      return element;
-    }
-    throw new Error('The list was promised to be always here!');
-  };
-  const element = { ...findListElement(findElement(id)) };
+  const { updateElement, findElement } = useCalcElementHandler();
+  const element = { ...findElement(id) };
 
   const [selectedOption, setSelectedOption] = useState(element.value);
 
@@ -39,7 +31,7 @@ export const List: React.FC<InputProps> = ({ id, index, moveElement }) => {
   drag(drop(ref));
 
   const RenderedWidgetList = () => {
-    if (element.list) {
+    if (element.type === 'List' && element.list) {
       return (
         <>
           <label htmlFor="widget-list">{element.description}</label>

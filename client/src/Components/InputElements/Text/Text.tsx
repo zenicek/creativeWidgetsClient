@@ -1,21 +1,12 @@
 import './Text.css';
 import { useRef } from 'react';
-import { useIndividualWidgetContext } from '../../../Utils/Contexts';
-import { useArrangeElement } from '../../../Utils/CustomHooks/CustomHooks';
+import { useArrangeElement } from '../../../Utils/CustomHooks/DndHook';
 import InputProps from '../../../Types/InputProps';
-import { Elements } from '../../../Types/Element';
+import { useCalcElementHandler } from '../../../Utils/CustomHooks';
 
 export const Text: React.FC<InputProps> = ({ id, index, moveElement }) => {
-  const { findElement } = useIndividualWidgetContext();
-
-  //TODO: see if you can use __kind to find exactly the type without copying this code in all elements
-  const findTextElement = (element: Elements | undefined) => {
-    if (element && element.type === 'Text') {
-      return element;
-    }
-    throw new Error('The text was promised to be always here!');
-  };
-  const element = { ...findTextElement(findElement(id)) };
+  const { findTextElement } = useCalcElementHandler();
+  const element = { ...findTextElement(id) };
 
   const ref = useRef(null);
   const { drag, drop, isDragging, handlerId } = useArrangeElement(

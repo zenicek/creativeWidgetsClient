@@ -7,19 +7,16 @@ import { elements } from '../ElementsList/ElemsLookup';
 import { ElementSetup } from '../ResultsSetup/ElementSetup/Element.setup';
 import { Result } from '../ResultsBottom/Result';
 import { Elements } from '../../../Types/Element';
-import { useAppSelector } from '../../../Utils/CustomHooks/CustomHooks';
-import { bindActionCreators } from 'redux';
-import { actionCreators } from '../../../States';
-import { useDispatch } from 'react-redux';
+import {
+  useAppSelector,
+  useCalcElementHandler,
+} from '../../../Utils/CustomHooks/';
 
 export const WidgetContainer: React.FC<{ loadResults: boolean }> = ({
   loadResults,
 }) => {
   const widget = useAppSelector(state => state.calculator);
-  const { addElement, arrangeElements } = bindActionCreators(
-    actionCreators,
-    useDispatch()
-  );
+  const { addElement, arrangeElements } = useCalcElementHandler();
   //function gets all the elements from the context and converts to element lookup
   const elementSetupList = [...widget.elements].map(el => {
     if (el.id) {

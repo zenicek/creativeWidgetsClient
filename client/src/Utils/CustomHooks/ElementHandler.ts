@@ -2,7 +2,6 @@ import { useDispatch } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { useAppSelector } from '.';
 import { actionCreators } from '../../States';
-import { ElementTypes } from '../../Types/Element';
 
 export const useCalcElementHandler = () => {
   const {
@@ -11,6 +10,7 @@ export const useCalcElementHandler = () => {
     updateFormula,
     updateResultDesc,
     updateResultValueDesc,
+    arrangeElements,
   } = bindActionCreators(actionCreators, useDispatch());
 
   const calculator = useAppSelector(state => state.calculator);
@@ -46,29 +46,27 @@ export const useCalcElementHandler = () => {
     if (element && element.type === 'List') return element;
     throw new Error('The List element was promised to be always here!');
   };
-  
-  //The above specific version works, but its so long winded see if it can be changed to an easy one below with proper typeguards?
-  // TODO: In this instance we can do type casting which will be safe since its typeguarded.
-  const findElement = (id: string, type: ElementTypes) => {
+
+  // The below is in case I am not sure which element I want to find, needs to typeguard where I am using it.
+  const findElement = (id: string) => {
     const element = calculator.elements.find(
       el => el._id === id || el.id === id
     );
-    switch (type) {
-      case ElementTypes.List: {
-        return element as ListInterface
-      }
-    }
+    if (element) return element;
+    throw new Error('The element was promised to be always here!');
   };
 
   return {
     updateResultValueDesc,
     updateResultDesc,
     addElement,
+    arrangeElements,
     updateElement,
     updateFormula,
     findSliderElement,
     findValueInputElement,
     findTextElement,
     findListElement,
+    findElement,
   };
 };

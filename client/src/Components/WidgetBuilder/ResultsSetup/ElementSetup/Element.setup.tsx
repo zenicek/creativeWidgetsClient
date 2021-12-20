@@ -1,25 +1,14 @@
 import './Element.setup.css';
-import { useIndividualWidgetContext } from '../../../../Utils/Contexts';
 import { SliderOptions } from './ElementSetupOptions/Slider.option';
 import { ListItemSetup } from './ElementSetupOptions/List.option';
 import { InputToggle } from './ElementSetupOptions/Input.toggle';
 import { nanoid } from 'nanoid';
 import Option from '../../../../Types/Option';
-import { Elements } from '../../../../Types/Element';
+import { useCalcElementHandler } from '../../../../Utils/CustomHooks';
 
 export const ElementSetup: React.FC<{ id: string }> = ({ id }) => {
-  const { updateElement, findElement } = useIndividualWidgetContext();
-
-  const findValueElement = (element: Elements | undefined) => {
-    if (
-      (element && element.type === 'Slider') ||
-      (element && element.type === 'List')
-    ) {
-      return element;
-    }
-    throw new Error('The value input was promised to be always here!');
-  };
-  const element = { ...findValueElement(findElement(id)) };
+  const { updateElement, findElement } = useCalcElementHandler();
+  const element = { ...findElement(id) };
 
   const handleSliderSetup = (range: number[], step: number) => {
     if (element.type === 'Slider') {
@@ -73,7 +62,7 @@ export const ElementSetup: React.FC<{ id: string }> = ({ id }) => {
 
   // Maria: this is a component, take it out to refactor
   const optionElement = () => {
-    if (element.type === 'Slider' && element.type === 'Slider') {
+    if (element.type === 'Slider') {
       return (
         <SliderOptions
           min={element.min}
@@ -83,8 +72,8 @@ export const ElementSetup: React.FC<{ id: string }> = ({ id }) => {
         />
       );
     }
-    if (element.type === 'List' && element.type === 'List') {
-      const list = element.list?.map((option: Option) => {
+    if (element.type === 'List') {
+      const list = element.list?.map(option => {
         return (
           <ListItemSetup
             key={option.id}

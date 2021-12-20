@@ -1,8 +1,6 @@
 import { RefObject } from 'react';
 import { useDrag, useDrop } from 'react-dnd';
 import { ElementArranger } from '../../Components/InputElements/Elements.types';
-import { useSelector, TypedUseSelectorHook } from 'react-redux';
-import { State } from '../../States';
 
 //this is a custom hook logic to rearrange elements in the container
 //TODO refactor this possibly for nice effects etc.. and be able to drop next to the existing element and shrink it to half
