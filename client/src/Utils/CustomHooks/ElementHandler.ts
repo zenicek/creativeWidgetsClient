@@ -55,9 +55,7 @@ export const useCalcElementHandler = () => {
     );
     switch (type) {
       case ElementTypes.List: {
-        return calculator.elements.find(
-          el => (el._id === id || el.id === id) && el.type === ElementTypes.List as ListInterface
-        );
+        return element as ListInterface
       }
     }
   };
