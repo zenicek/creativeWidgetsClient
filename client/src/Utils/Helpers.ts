@@ -15,7 +15,6 @@ export function calculateResult(widget: Calculator): number | null {
   const parser = new Parser();
   const userExpression = parser.parse(widget.formula.toLowerCase());
   const inputValues: InputValues = {};
-  console.log(userExpression);
 
   widget.elements.forEach(el => {
     inputValues[el.letter.toLowerCase()] = Number(el.value);
