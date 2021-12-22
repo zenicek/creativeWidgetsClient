@@ -3,6 +3,7 @@ import { Calculator } from '../../Types/Widget';
 export const CalculatorState: Calculator = {
   elements: [],
   formula: '',
+  type: 'Calculator',
   name: 'default calculator',
   lastLetter: '@',
   width: 720,
@@ -11,7 +12,11 @@ export const CalculatorState: Calculator = {
   results: [],
 };
 
-export const InputMetas = {
+interface InputMetasInterface {
+  [key: string]: {};
+}
+
+export const InputMetas: InputMetasInterface = {
   Slider: {
     type: 'Slider',
     description: 'Slider',

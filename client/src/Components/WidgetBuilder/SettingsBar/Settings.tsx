@@ -1,13 +1,16 @@
 import './Settings.css';
-import { useWidgetsContext } from '../../../Utils/Contexts';
-import { createWidget, updateWidget } from '../../../Utils/ApiService';
+import {
+  createWidget,
+  removeWidgetInDb,
+  updateWidget,
+} from '../../../Utils/ApiService';
 import { useNavigate, useParams } from 'react-router-dom';
 import { ReactComponent as RemoveIcon } from '../ElementsList/Icons/SvgIcons/remove.svg';
-import { removeWidget } from '../../../Utils/ApiService';
 import { useAppSelector } from '../../../Utils/CustomHooks';
 import { bindActionCreators } from 'redux';
-import { actionCreators } from '../../../States';
+import { actionCreators, widgetCreators } from '../../../States';
 import { useDispatch } from 'react-redux';
+import React, { ChangeEvent } from 'react';
 
 interface Props {
   results: {
@@ -18,25 +21,26 @@ interface Props {
 export const SettingsBar: React.FC<Props> = ({ results }) => {
   const widget = useAppSelector(state => state.calculator);
 
+  const { removeWidget } = bindActionCreators(widgetCreators, useDispatch());
   const { setCalculator } = bindActionCreators(actionCreators, useDispatch());
 
-  const { widgets, setWidgets } = useWidgetsContext();
   const { id } = useParams();
   const navigation = useNavigate();
-  const handleNameChange = (name: string) => {
-    setCalculator({ ...widget, name: name });
+
+  const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
+    if (e.target.name === 'width') {
+      //TODO need to add validations in case its too big
+      setCalculator({ ...widget, [e.target.name]: Number(e.target.value) });
+    } else {
+      setCalculator({ ...widget, [e.target.name]: e.target.value });
+    }
   };
 
-  const handleWidthChange = (width: number) => {
-    setCalculator({ ...widget, width: width });
-    //TODO need to add validations in case its too big
-  };
-
-  const handleRemove = (id: string | undefined) => {
+  const handleRemove = (id: string) => {
     if (id) {
-      removeWidget(id).then(() => {
+      removeWidgetInDb(id).then(() => {
         navigation('/');
-        setWidgets([...widgets.filter(widget => widget._id !== id)]);
+        removeWidget(id);
       });
     }
   };
@@ -46,11 +50,11 @@ export const SettingsBar: React.FC<Props> = ({ results }) => {
     const cleanWidget = {
       ...widget,
       elements: widget.elements.map(el => {
-        const elCopy = { ...el };
-        if (elCopy.id) {
-          delete elCopy.id;
+        if (el.id) {
+          const { id, ...element } = el;
+          return element;
         }
-        return elCopy;
+        return el;
       }),
     };
     //TODO handle if user modifies the widget URL and ID is invalid
@@ -95,9 +99,10 @@ export const SettingsBar: React.FC<Props> = ({ results }) => {
           </svg>
           <input
             type="number"
+            name="width"
             className="settings-input"
             value={widget.width}
-            onChange={e => handleWidthChange(Number(e.target.value))}
+            onChange={e => handleChange(e)}
           ></input>
         </div>
         {'|'}
@@ -105,9 +110,10 @@ export const SettingsBar: React.FC<Props> = ({ results }) => {
           Widget Name
           <input
             type="text"
+            name="name"
             className="settings-input name-input"
             value={widget.name}
-            onChange={e => handleNameChange(e.target.value)}
+            onChange={e => handleChange(e)}
           ></input>
         </div>
         {'|'}
@@ -118,7 +124,7 @@ export const SettingsBar: React.FC<Props> = ({ results }) => {
         </div>
         {'|'}
         <div className="settings-option-ctn">
-          <RemoveIcon onClick={() => handleRemove(id)} />
+          <RemoveIcon onClick={() => handleRemove(id ? id : '')} />
         </div>
       </div>
     </div>

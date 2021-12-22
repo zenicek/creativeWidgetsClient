@@ -1,16 +1,14 @@
 import './Widget.list.css';
 import { WidgetPreview } from '../WidgetPreview/Widget.preview';
 import { Link } from 'react-router-dom';
-import { useContext } from 'react';
-import { WidgetsContext } from '../../../Utils/Contexts';
-import { Calculator } from '../../../Types/Widget';
+import { useAppSelector } from '../../../Utils/CustomHooks';
 
 export function WidgetList() {
-  const widgetsContext = useContext(WidgetsContext);
+  const widgets = useAppSelector(state => state.widgets);
 
   const renderWidgets = () => {
-    if (widgetsContext?.widgets) {
-      return widgetsContext.widgets.map((widget: Calculator) => {
+    if (widgets) {
+      return widgets.map(widget => {
         return (
           <li key={widget._id}>
             <Link to={`/edit/${widget._id}`}>

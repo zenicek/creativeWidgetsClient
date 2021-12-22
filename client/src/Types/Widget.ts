@@ -2,6 +2,7 @@ import { Elements } from './Element';
 import { Result } from './Result';
 export interface Calculator {
   _id?: string;
+  type: 'Calculator';
   name: string;
   formula: string;
   width: number;

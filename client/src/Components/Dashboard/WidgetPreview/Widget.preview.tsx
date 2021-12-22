@@ -1,9 +1,9 @@
 import './Widget.preview.css';
 import { ReactComponent as CalcIcon } from '../Icons/calculator-icon.svg';
-import { Calculator } from '../../../Types/Widget';
+import { AllWidgets } from '../../../Types/StateTypes/AllWidgets';
 
 interface Props {
-  widget?: Calculator;
+  widget?: AllWidgets;
 }
 
 export const WidgetPreview: React.FC<Props> = ({ widget }) => {

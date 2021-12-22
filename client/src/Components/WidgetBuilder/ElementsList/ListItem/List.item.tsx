@@ -1,6 +1,6 @@
 import './List.item.css';
 import { useDrag } from 'react-dnd';
-import { InputMetas } from '../../../../Utils/Contexts';
+import { InputMetas } from '../../../../States';
 
 interface ItemProps {
   icon: string;
@@ -14,7 +14,7 @@ export const ListItem: React.FC<ItemProps> = ({ icon, text, elementName }) => {
     item: {
       meta: InputMetas[elementName],
     },
-    collect: (monitor) => ({
+    collect: monitor => ({
       isDragging: !!monitor.isDragging(),
     }),
   }));

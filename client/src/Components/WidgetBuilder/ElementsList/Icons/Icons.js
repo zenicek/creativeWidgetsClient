@@ -6,7 +6,6 @@ import checkbox from './SvgIcons/checkbox-icon.svg';
 import radio from './SvgIcons/radio-icon.svg';
 import button from './SvgIcons/button-icon.svg';
 import image from './SvgIcons/image-icon.svg';
-//import calculation from './SvgIcons/calculation-icon.svg';
 
 const elems = [
   {

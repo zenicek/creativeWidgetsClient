@@ -32,7 +32,7 @@ export function createWidget(widget: Calculator): Promise<Calculator> {
   });
 }
 
-export function removeWidget(id: string): Promise<Calculator> {
+export function removeWidgetInDb(id: string): Promise<Calculator> {
   return fetchApi<Calculator>(`/widget/${id}`, {
     method: 'DELETE',
   });
