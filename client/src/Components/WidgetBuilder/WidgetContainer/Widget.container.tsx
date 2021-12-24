@@ -11,6 +11,7 @@ import {
   useAppSelector,
   useCalcElementHandler,
 } from '../../../Utils/CustomHooks/';
+import { useDroppable } from '@dnd-kit/core';
 
 export const WidgetContainer: React.FC<{ loadResults: boolean }> = ({
   loadResults,
@@ -60,18 +61,23 @@ export const WidgetContainer: React.FC<{ loadResults: boolean }> = ({
     return null;
   });
 
-  const [, drop] = useDrop({
-    accept: elementTypes,
-    drop: (item: { meta: Elements }) => {
-      if (item.meta) addElement(item.meta);
-    },
+  // const [, drop] = useDrop({
+  //   accept: elementTypes,
+  //   drop: (item: { meta: Elements }) => {
+  //     if (item.meta) addElement(item.meta);
+  //   },
+  // });
+
+  const { setNodeRef } = useDroppable({
+    id: 'droppable-ctn',
+    data: { accepts: elementTypes },
   });
   return (
     <div
       className="widget-builder-main-ctn"
       style={{ width: `${widget.width}px` }}
     >
-      <div ref={drop} className="widget-dnd-ctn">
+      <div ref={setNodeRef} className="widget-dnd-ctn">
         {!loadResults ? elementsList : elementSetupList}
       </div>
       {!loadResults && (
