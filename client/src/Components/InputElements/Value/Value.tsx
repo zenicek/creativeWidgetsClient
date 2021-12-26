@@ -1,9 +1,6 @@
 import './Value.css';
 import { useRef } from 'react';
-import {
-  useArrangeElement,
-  useCalcElementHandler,
-} from '../../../Utils/CustomHooks';
+import { useCalcElementHandler } from '../../../Utils/CustomHooks';
 import InputProps from '../../../Types/InputProps';
 export const ValueInput: React.FC<InputProps> = ({
   id,
@@ -20,22 +17,17 @@ export const ValueInput: React.FC<InputProps> = ({
   };
 
   //DND
-  const ref = useRef(null);
-  const { drag, drop, isDragging, handlerId } = useArrangeElement(
-    ref,
-    id,
-    index,
-    moveElement
-  );
-  drag(drop(ref));
+  // const ref = useRef(null);
+  // const { drag, drop, isDragging, handlerId } = useArrangeElement(
+  //   ref,
+  //   id,
+  //   index,
+  //   moveElement
+  // );
+  // drag(drop(ref));
 
   return (
-    <div
-      className="input-ctn"
-      ref={ref}
-      style={{ opacity: isDragging ? 0.5 : 1 }}
-      data-handler-id={handlerId}
-    >
+    <div className="input-ctn">
       <label className="label" htmlFor="widget-input">
         {element.description}
       </label>

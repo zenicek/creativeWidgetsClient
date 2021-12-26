@@ -1,5 +1,4 @@
 import './List.item.css';
-import { useDrag } from 'react-dnd';
 import { InputMetas } from '../../../../States';
 import { useDraggable } from '@dnd-kit/core';
 
@@ -10,19 +9,8 @@ interface ItemProps {
 }
 
 export const ListItem: React.FC<ItemProps> = ({ icon, text, elementName }) => {
-  // const [{ isDragging }, drag] = useDrag(() => ({
-  //   type: elementName,
-  //   item: {
-  //     meta: InputMetas[elementName],
-  //   },
-  //   collect: monitor => ({
-  //     isDragging: !!monitor.isDragging(),
-  //   }),
-  // }));
-
   const { setNodeRef, isDragging, listeners, attributes } = useDraggable({
-    id: 'draggable',
-    data: { type: elementName },
+    id: elementName,
   });
   return (
     <div

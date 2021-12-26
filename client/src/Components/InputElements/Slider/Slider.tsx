@@ -1,10 +1,7 @@
 import './Slider.css';
 import React, { useRef } from 'react';
 import InputProps from '../../../Types/InputProps';
-import {
-  useArrangeElement,
-  useCalcElementHandler,
-} from '../../../Utils/CustomHooks';
+import { useCalcElementHandler } from '../../../Utils/CustomHooks';
 
 export const Slider: React.FC<InputProps> = ({ id, index, moveElement }) => {
   const { findSliderElement, updateElement } = useCalcElementHandler();
@@ -29,24 +26,19 @@ export const Slider: React.FC<InputProps> = ({ id, index, moveElement }) => {
   };
 
   //DND
-  const ref = useRef(null);
-  const { drag, drop, isDragging, handlerId } = useArrangeElement(
-    ref,
-    id,
-    index,
-    moveElement
-  );
-  drag(drop(ref));
+  // const ref = useRef(null);
+  // const { drag, drop, isDragging, handlerId } = useArrangeElement(
+  //   ref,
+  //   id,
+  //   index,
+  //   moveElement
+  // );
+  // drag(drop(ref));
   //TODO Slider rearranges but doesnt slide in the edit. need to redo or target it differently
   //TODO check out rc-slider npm package and potentially use that since it has all the marks etc nicely done...
 
   return (
-    <div
-      className="slider-ctn"
-      ref={ref}
-      style={{ opacity: isDragging ? 0.5 : 1 }}
-      data-handler-id={handlerId}
-    >
+    <div className="slider-ctn">
       <label>
         {element.description} - {element.value}
       </label>
