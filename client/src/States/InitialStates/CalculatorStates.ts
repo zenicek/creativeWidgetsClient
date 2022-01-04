@@ -1,9 +1,4 @@
-import {
-  ListInterface,
-  SliderInterface,
-  TextInterface,
-  ValueInputInterface,
-} from '../../Types/Element';
+import { Elements } from '../../Types/Element';
 import { Calculator } from '../../Types/Widget';
 
 export const CalculatorState: Calculator = {
@@ -19,10 +14,7 @@ export const CalculatorState: Calculator = {
 };
 
 interface InputMetasInterface {
-  Slider: SliderInterface;
-  ValueInput: ValueInputInterface;
-  List: ListInterface;
-  Text: TextInterface;
+  [key: string]: Elements;
 }
 
 export const InputMetas: InputMetasInterface = {

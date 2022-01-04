@@ -2,8 +2,6 @@ import './App.css';
 import { Dashboard } from './Components/Dashboard/Dashboard';
 import { Route, Routes } from 'react-router-dom';
 import { WidgetBuilder } from './Components/WidgetBuilder/Widget.builder';
-// import { DndProvider } from 'react-dnd';
-// import { HTML5Backend } from 'react-dnd-html5-backend';
 import { DndContext, DragEndEvent } from '@dnd-kit/core';
 import { elementTypes } from './Components/InputElements/Elements.types';
 import { useCalcElementHandler } from './Utils/CustomHooks';
@@ -15,7 +13,6 @@ function App() {
 
   const handleDragEnd = (e: DragEndEvent) => {
     if (elementTypes.includes(e.active.id) && e.over?.id === 'droppable-ctn')
-      //@ts-ignore => this is hating it because of the dynamic search... discriminated union again
       addElement(InputMetas[e.active.id]);
   };
 
